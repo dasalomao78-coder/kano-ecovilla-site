@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kano Ecovilla — Ecossistema Solarpunk</title>
+  
+  <!-- SEO Meta Tags -->
+  <meta name="description" content="Kano Ecovilla: O Ecossistema Solarpunk. Um sistema operacional vivo para a habitação humana no Brasil, integrando permacultura, bioconstrução e inteligência artificial.">
+  <meta name="keywords" content="Kano Ecovilla, Solarpunk, Ecovila, Permacultura, Bioconstrução, Inteligência Artificial, Sustentabilidade, Brasil">
+  <meta name="author" content="Kano Ecovilla">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+  
+  <!-- Estilos Globais -->
+  <link rel="stylesheet" href="./index.css">
+</head>
+<body>
+
+  <!-- Custom Cursor -->
+  <div id="custom-cursor">
+    <div class="cursor-hexagon"></div>
+  </div>
+
+  <!-- Partículas de Luz Solar -->
+  <div id="particles-container"></div>
+
+  <!-- Cipó/Folha Flutuante (Parallax) -->
+  <div id="parallax-leaf-container">
+    <img src="./folha.png" alt="Folha Flutuante" id="parallax-leaf">
+  </div>
+
+  <!-- Header / Navigation -->
+  <header id="main-header">
+    <div class="header-container">
+      <a href="#hero" class="logo-link">
+        <svg class="logo-svg" viewBox="0 0 100 100">
+          <!-- Hexágono externo dourado -->
+          <polygon points="50,5 90,27.5 90,72.5 50,95 10,72.5 10,27.5" fill="none" stroke="var(--solar-gold)" stroke-width="4"/>
+          <!-- Símbolo orgânico interno - Folha estilizada em circuito -->
+          <path d="M50,20 C65,35 65,55 50,80 C35,55 35,35 50,20 Z" fill="none" stroke="var(--forest-green)" stroke-width="4"/>
+          <!-- Linhas de circuito ligando à folha -->
+          <line x1="50" y1="20" x2="50" y2="8" stroke="var(--neon-green)" stroke-width="2"/>
+          <line x1="50" y1="80" x2="50" y2="92" stroke="var(--neon-green)" stroke-width="2"/>
+          <circle cx="50" cy="20" r="3" fill="var(--neon-green)"/>
+          <circle cx="50" cy="80" r="3" fill="var(--neon-green)"/>
+        </svg>
+        <span class="logo-text">Kano</span>
+      </a>
+
+      <nav id="navbar">
+        <ul class="nav-menu">
+          <li><a href="#system" data-i18n="nav.system">O Modelo</a></li>
+          <li><a href="#ethics" data-i18n="nav.ethics">Ética</a></li>
+          <li><a href="#masterplan" data-i18n="nav.masterplan">Masterplan</a></li>
+          <li><a href="#living" data-i18n="nav.zones">Vivências</a></li>
+          <li><a href="#tech" data-i18n="nav.tech">Tecnologia</a></li>
+          <li><a href="#governance" data-i18n="nav.governance">Governança</a></li>
+          <li><a href="#economy" data-i18n="nav.economy">Economia</a></li>
+          <li><a href="#school" data-i18n="nav.school">Escola</a></li>
+          <li><a href="#team" data-i18n="nav.team">Arquitetos</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-actions">
+        <!-- Seletor de Idiomas -->
+        <button id="lang-toggle" class="btn-lang" aria-label="Alterar idioma">
+          <span class="lang-text">EN</span>
+          <svg class="lang-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/>
+            <line x1="2" y1="12" x2="22" y2="12"/>
+            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+          </svg>
+        </button>
+        <a href="#cta-section" class="btn btn-primary btn-nav" data-i18n="nav.cta">Quero Morar</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- SEÇÃO 1: HERO -->
+  <section id="hero" class="fullscreen-section">
+    <div class="hero-bg" style="background-image: url('./Imagem da ecovilla de cima.jpg');"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content text-center reveal">
+      <h1 class="hero-title" data-i18n="hero.title">Kano Ecovilla</h1>
+      <p class="hero-subtitle" data-i18n="hero.subtitle">O Ecossistema Solarpunk: Um Modelo Vivo para o Futuro da Habitação Humana.</p>
+      <div class="hero-buttons">
+        <a href="#system" class="btn btn-primary" data-i18n="hero.ctaPrimary">Conheça o Projeto</a>
+        <a href="#cta-section" class="btn btn-secondary" data-i18n="hero.ctaSecondary">Quero Morar</a>
+      </div>
+    </div>
+    <div class="scroll-indicator">
+      <span data-i18n="hero.scroll">Rolar para explorar</span>
+      <svg class="scroll-arrow" viewBox="0 0 24 24">
+        <!-- Ícone de folha apontando para baixo -->
+        <path d="M12,2 C12,2 6,8 6,14 C6,17.3 8.7,20 12,20 C15.3,20 18,17.3 18,14 C18,8 12,2 12,2 Z" fill="none" stroke="var(--solar-gold)" stroke-width="2"/>
+        <path d="M12,6 L12,16" stroke="var(--solar-gold)" stroke-width="2" stroke-linecap="round"/>
+        <path d="M9,13 L12,16 L15,13" fill="none" stroke="var(--solar-gold)" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- SEÇÃO 2: ENTENDA O MODELO -->
+  <section id="system" class="section-padding">
+    <div class="container text-center">
+      <h2 class="section-title reveal" data-i18n="system.title">Entenda o Modelo</h2>
+      <p class="section-subtitle reveal" data-i18n="system.subtitle">Assista à apresentação completa da Kano Ecovilla e compreenda nosso protocolo de regeneração e habitação consciente.</p>
+
+      <div class="video-wrapper reveal">
+        <div class="video-player-container">
+          <video id="model-video" class="solarpunk-video" controls poster="./Imagem da ecovilla de cima.jpg" playsinline>
+            <source src="./Kano_Ecovilla__O_Solarpunk.mp4" type="video/mp4">
+            Seu navegador não suporta a exibição de vídeos HTML5.
+          </video>
+        </div>
+      </div>
+
+      <div class="quote-container reveal">
+        <blockquote class="system-quote">
+          <p>"<span data-i18n="system.quote">A IA como ferramenta de libertação humana e regeneração ambiental.</span>"</p>
+        </blockquote>
+      </div>
+    </div>
+  </section>
+
+  <!-- SEÇÃO 3: CÓDIGO DE ÉTICA -->
+  <section id="ethics" class="section-padding accent-bg">
+    <div class="container">
+      <div class="text-center">
+        <h2 class="section-title reveal" data-i18n="ethics.title">Código de Ética</h2>
+        <p class="section-subtitle reveal" data-i18n="ethics.subtitle">Nossos princípios fundamentais de coexistência, regeneração e infraestrutura.</p>
+      </div>
+
+      <div class="ethics-grid grid-3 reveal">
+        <!-- Card 1: Filosofia -->
+        <div class="ethics-card">
+          <div class="ethics-header">
+            <div class="ethics-icon">
+              <!-- Ícone de folha/coração -->
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+              </svg>
+            </div>
+            <h3 class="ethics-card-title" data-i18n="ethics.philosophyTitle">Filosofia de Vida</h3>
+          </div>
+          <p class="ethics-card-desc" data-i18n="ethics.philosophyDesc">Estilo de vida consciente e integrado com a natureza circundante.</p>
+          <ul class="ethics-list">
+            <li data-i18n="ethics.philosophyItem1">100% Vegana (respeito irrestrito a todas as formas de vida)</li>
+            <li data-i18n="ethics.philosophyItem2">Sem álcool comercial (foco em celebrações conscientes e lúcidas)</li>
+            <li data-i18n="ethics.philosophyItem3">Zero pets (preservação e proteção estrita da fauna local nativa)</li>
+          </ul>
+        </div>
+
+        <!-- Card 2: Sustentabilidade -->
+        <div class="ethics-card">
+          <div class="ethics-header">
+            <div class="ethics-icon">
+              <!-- Ícone de circuito solar -->
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="5"/>
+                <line x1="12" y1="1" x2="12" y2="3"/>
+                <line x1="12" y1="21" x2="12" y2="23"/>
+                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+                <line x1="1" y1="12" x2="3" y2="12"/>
+                <line x1="21" y1="12" x2="23" y2="12"/>
+                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+              </svg>
+            </div>
+            <h3 class="ethics-card-title" data-i18n="ethics.hardwareTitle">Hardware Sustentabilidade</h3>
+          </div>
+          <p class="ethics-card-desc" data-i18n="ethics.hardwareDesc">Infraestrutura ecológica ativa e fechamento de ciclos de recursos.</p>
+          <ul class="ethics-list">
+            <li data-i18n="ethics.hardwareItem1">Energia solar exclusiva (geração limpa descentralizada)</li>
+            <li data-i18n="ethics.hardwareItem2">Banheiros secos ecológicos com compostagem controlada</li>
+            <li data-i18n="ethics.hardwareItem3">Filtragem biológica de águas cinzas via círculos de bananeiras</li>
+            <li data-i18n="ethics.hardwareItem4">Uso obrigatório de produtos 100% biodegradáveis</li>
+          </ul>
+        </div>
+
+        <!-- Card 3: Propriedade -->
+        <div class="ethics-card">
+          <div class="ethics-header">
+            <div class="ethics-icon">
+              <!-- Ícone de chaves/stewardship -->
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                <circle cx="9" cy="7" r="4" />
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+              </svg>
+            </div>
+            <h3 class="ethics-card-title" data-i18n="ethics.propertyTitle">Arquitetura de Propriedade</h3>
+          </div>
+          <p class="ethics-card-desc" data-i18n="ethics.propertyDesc">Um novo modelo socioeconômico de posse e investimento coletivo.</p>
+          <ul class="ethics-list">
+            <li data-i18n="ethics.propertyItem1">Modelo de stewardship (gestão e custódia coletiva da terra)</li>
+            <li data-i18n="ethics.propertyItem2">Zero propriedade privada (a terra pertence ao ecossistema Kano)</li>
+            <li data-i18n="ethics.propertyItem3">100% do aluguel é revertido para melhorias e manutenção da vila</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SEÇÃO 4: MASTERPLAN RADIAL -->
+  <section id="masterplan" class="section-padding">
+    <div class="container">
+      <div class="text-center">
+        <h2 class="section-title reveal" data-i18n="masterplan.title">Sustentabilidade</h2>
+        <p class="section-subtitle reveal" data-i18n="masterplan.subtitle">O design geométrico concêntrico que otimiza o fluxo de energia, água e convivência social.</p>
+        <span class="pulse-text reveal" data-i18n="masterplan.instruction">Passe o mouse ou toque nos anéis para inspecionar os subsistemas do ecossistema.</span>
+      </div>
+
+      <div class="masterplan-layout reveal">
+        <!-- Mapa Interativo sobre Imagem Aérea -->
+        <div class="masterplan-visual" style="background-image: url('./masterplan_gerado.png'); background-size: cover; background-position: center; border-radius: 20px; box-shadow: var(--shadow-lg); overflow: hidden; position: relative; width: 100%; max-width: 500px; aspect-ratio: 1/1;">
+          
+          <!-- Overlay escuro para melhorar contraste até hover -->
+          <div class="masterplan-overlay" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(255,255,255,0.05); pointer-events: none; z-index: 2;"></div>
+          
+          <svg class="masterplan-svg" viewBox="0 0 500 500" style="position: relative; z-index: 3; width: 100%; height: 100%;">
+            <defs>
+              <radialGradient id="sun-glow" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="var(--solar-gold)" stop-opacity="0.9"/>
+                <stop offset="100%" stop-color="var(--solar-gold)" stop-opacity="0"/>
+              </radialGradient>
+            </defs>
+            
+            <!-- Anel Externo - Painéis Solares -->
+            <circle cx="250" cy="250" r="210" class="radial-ring" data-zone="zone1" fill="transparent" pointer-events="all"/>
+            <!-- Segundo Anel - Horta/Agrofloresta -->
+            <circle cx="250" cy="250" r="160" class="radial-ring" data-zone="zone2" fill="transparent" pointer-events="all"/>
+            <!-- Terceiro Anel - Moradores -->
+            <circle cx="250" cy="250" r="110" class="radial-ring" data-zone="zone3" fill="transparent" pointer-events="all"/>
+            <!-- Núcleo - Oca Comunitária -->
+            <circle cx="250" cy="250" r="50" class="radial-ring radial-core" data-zone="zone4" fill="transparent" pointer-events="all"/>
+            
+            <!-- Anexos Circulares (Escola da Natureza e Centro de Retiros) -->
+            <!-- Oeste: Escola -->
+            <g class="radial-satellite" data-zone="zone5">
+              <circle cx="80" cy="250" r="25" class="satellite-circle" fill="transparent" stroke="var(--solar-gold)" stroke-width="4"/>
+              <text x="80" y="255" class="satellite-text" text-anchor="middle" fill="var(--solar-gold)" font-weight="bold">E</text>
+            </g>
+            <!-- Leste: Retiros -->
+            <g class="radial-satellite" data-zone="zone6">
+              <circle cx="420" cy="250" r="25" class="satellite-circle" fill="transparent" stroke="var(--solar-gold)" stroke-width="4"/>
+              <text x="420" y="255" class="satellite-text" text-anchor="middle" fill="var(--solar-gold)" font-weight="bold">R</text>
+            </g>
+          </svg>
+        </div>
+
+        <!-- Painel Descritivo Dinâmico -->
+        <div class="masterplan-details">
+          <div id="masterplan-card" class="details-card">
+            <div class="tech-metric-header">
+              <span class="system-status">SYS_STATUS: ACTIVE</span>
+              <span class="system-data-code">CODE: KANO_OS_v2.5</span>
+            </div>
+            <h3 id="mp-title" data-i18n="masterplan.zones.zone4.title">Núcleo: Oca Principal</h3>
+            <div class="divider"></div>
+            <p id="mp-desc" data-i18n="masterplan.zones.zone4.desc">O coração social e administrativo da Kano. Um domo de bioconstrução majestoso para assembleias sociocráticas, refeições comunitárias, celebrações e a central de dados.</p>
+            <div class="radial-tech-metrics">
+              <div class="metric">
+                <span class="metric-label">SOLAR_OUTPUT</span>
+                <span class="metric-val text-neon">98.4%</span>
+              </div>
+              <div class="metric">
+                <span class="metric-label">WATER_RECYCLING</span>
+                <span class="metric-val text-neon">100%</span>
+              </div>
+              <div class="metric">
+                <span class="metric-label">BIOMASS_INDEX</span>
+                <span class="metric-val">1.45</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SEÇÃO 5: ZONAS DE VIVÊNCIA -->
+  <section id="living" class="section-padding accent-bg">
+    <div class="container">
+      <div class="text-center">
+        <h2 class="section-title reveal" data-i18n="living.title">Zonas de Vivência</h2>
+        <p class="section-subtitle reveal" data-i18n="living.subtitle">Espaços projetados para coexistir, aprender e se regenerar.</p>
+      </div>
+
+      <div class="carousel-3d-container reveal">
+        <div class="carousel-3d">
+          <!-- Card 1: Núcleo Comunitário -->
+          <div class="carousel-card active" data-index="0">
+            <img src="./Casas da ecovilla.jfif" alt="Núcleo Comunitário Kano" class="carousel-img" loading="lazy">
+            <div class="carousel-body">
+              <div class="living-tag">ZONA 3 & 6/7</div>
+              <h3 class="living-card-title" data-i18n="living.coreTitle">Núcleo Comunitário</h3>
+              <p class="living-card-desc" data-i18n="living.coreDesc">Aluguel de quartos e chalés privativos totalmente integrados à Oca Principal.</p>
+            </div>
+          </div>
+
+          <!-- Card 2: Escola da Natureza -->
+          <div class="carousel-card next" data-index="1">
+            <img src="./escola_natureza.png" alt="Escola da Natureza" class="carousel-img" loading="lazy">
+            <div class="carousel-body">
+              <div class="living-tag">ZONA 4</div>
+              <h3 class="living-card-title" data-i18n="living.schoolTitle">Escola da Natureza</h3>
+              <p class="living-card-desc" data-i18n="living.schoolDesc">Um ecossistema de aprendizado dinâmico.</p>
+            </div>
+          </div>
+
+          <!-- Card 3: Centro de Retiros -->
+          <div class="carousel-card prev" data-index="2">
+            <img src="./centro_retiros.png" alt="Centro de Retiros" class="carousel-img" loading="lazy">
+            <div class="carousel-body">
+              <div class="living-tag">ZONA 5</div>
+              <h3 class="living-card-title" data-i18n="living.retreatTitle">Centro de Retiros</h3>
+              <p class="living-card-desc" data-i18n="living.retreatDesc">Nosso polo de turismo holístico regenerativo.</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="carousel-controls">
+          <button class="carousel-btn prev-btn">❮</button>
+          <button class="carousel-btn next-btn">❯</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SEÇÃO 6: PILHA TECNOLÓGICA -->
+  <section id="tech" class="section-padding">
+    <div class="container">
+      <div class="text-center">
+        <h2 class="section-title reveal" data-i18n="tech.title">Pilha Tecnológica: Ancestralidade & Inovação</h2>
+        <p class="section-subtitle reveal" data-i18n="tech.subtitle">Nossa infraestrutura combina bioconstrução milenar com automação descentralizada.</p>
+      </div>
+
+      <div class="tech-layout reveal">
+        <!-- Esquema visual Tech/Isometric representativo -->
+        <div class="tech-visual" style="background-image: url('./tech_isometric.png'); background-size: cover; background-position: center; border-radius: 20px; box-shadow: var(--shadow-lg); overflow: hidden; position: relative; width: 100%; max-width: 500px; aspect-ratio: 1/1; padding: 0;">
+          <div class="tech-overlay" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(255,255,255,0.03); pointer-events: none; z-index: 2;"></div>
+          
+          <svg class="tech-svg" viewBox="0 0 500 500" style="position: relative; z-index: 3; width: 100%; height: 100%;">
+            <!-- Linhas guia de corte tecnologico (dashed line interface) -->
+            <line x1="0" y1="166" x2="500" y2="166" stroke="rgba(140, 177, 99, 0.2)" stroke-width="2" stroke-dasharray="8,5"/>
+            <line x1="0" y1="333" x2="500" y2="333" stroke="rgba(140, 177, 99, 0.2)" stroke-width="2" stroke-dasharray="8,5"/>
+            
+            <!-- Camada 1: Energia/Automação (Superior) -->
+            <rect x="0" y="0" width="500" height="166" class="tech-svg-layer" data-target="0" fill="transparent" pointer-events="all"/>
+            <!-- Camada 2: Água/Sanitário (Meio) -->
+            <rect x="0" y="166" width="500" height="167" class="tech-svg-layer" data-target="1" fill="transparent" pointer-events="all"/>
+            <!-- Camada 3: Bioconstrução/Material (Base) -->
+            <rect x="0" y="333" width="500" height="167" class="tech-svg-layer active" data-target="2" fill="transparent" pointer-events="all"/>
+          </svg>
+        </div>
+
+        <div class="tech-info">
+          <!-- Bloco 1 -->
+          <div class="tech-info-block" data-index="0">
+            <div class="tech-block-header">
+              <div class="tech-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M18 10h-1.26A8 8 0 1 0 9 20h9a6 6 0 0 0 0-12z" />
+                </svg>
+              </div>
+              <h3 data-i18n="tech.layer1Title">Automação e Energia</h3>
+            </div>
+            <p data-i18n="tech.layer1Text">Painéis solares acoplados a baterias estacionárias. Horta vertical automatizada equipada com sensores de umidade, temperatura e nutrientes, regulada de forma autônoma via IA.</p>
+          </div>
+
+          <!-- Bloco 2 -->
+          <div class="tech-info-block" data-index="1">
+            <div class="tech-block-header">
+              <div class="tech-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z" />
+                </svg>
+              </div>
+              <h3 data-i18n="tech.layer2Title">Saneamento Ecológico</h3>
+            </div>
+            <p data-i18n="tech.layer2Text">Sistemas fechados de esgoto. Banheiros secos higiênicos que convertem resíduos em adubo orgânico rico através de compostagem termofílica acelerada por ar forçado.</p>
+          </div>
+
+          <!-- Bloco 3 active -->
+          <div class="tech-info-block active" data-index="2">
+            <div class="tech-block-header">
+              <div class="tech-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                  <circle cx="12" cy="7" r="4" />
+                </svg>
+              </div>
+              <h3 data-i18n="tech.layer3Title">Materiais Locais & Técnicas Ancestrais</h3>
+            </div>
+            <p data-i18n="tech.layer3Text">Uso intensivo de terra local obtida na terraplenagem (adobe, taipa, cob) e bambu colhido e tratado na região, reduzindo a pegada de transporte a quase zero.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SEÇÃO 7: GOVERNANÇA HÍBRIDA -->
+  <section id="governance" class="section-padding accent-bg">
+    <div class="container">
+      <div class="text-center">
+        <h2 class="section-title reveal" data-i18n="governance.title">Governança Híbrida</h2>
+        <p class="section-subtitle reveal" data-i18n="governance.subtitle">O Motor de Decisão: A união sinérgica entre a lógica de dados e a empatia humana.</p>
+      </div>
+
+      <div class="pipeline-container reveal">
+        <!-- Linha conectora de fundo -->
+        <div class="pipeline-flow-line">
+          <div class="pipeline-progress"></div>
+        </div>
+
+        <div class="pipeline-steps">
+          <!-- Etapa 1 -->
+          <div class="pipeline-step active" data-step="1">
+            <div class="step-hexagon-wrapper">
+              <div class="step-hexagon-border">
+                <div class="step-hexagon-inner">
+                  <img src="./gov_step1.png" alt="Entrada de Dados" class="step-icon">
+                </div>
+              </div>
+            </div>
+            <div class="step-body">
+              <h3 data-i18n="governance.step1.title">1. Entrada de Dados</h3>
+              <p data-i18n="governance.step1.desc">A IA processa continuamente métricas ambientais (volume de água, consumo de energia, níveis de compostagem e umidade da terra) e sugere propostas operacionais.</p>
+            </div>
+          </div>
+
+          <!-- Etapa 2 -->
+          <div class="pipeline-step" data-step="2">
+            <div class="step-hexagon-wrapper">
+              <div class="step-hexagon-border">
+                <div class="step-hexagon-inner">
+                  <img src="./gov_step2.png" alt="Filtro Sociocrático" class="step-icon">
+                </div>
+              </div>
+            </div>
+            <div class="step-body">
+              <h3 data-i18n="governance.step2.title">2. Filtro Sociocrático</h3>
+              <p data-i18n="governance.step2.desc">Círculos de moradores (com mandatos rotativos de 3 a 4 meses definidos por sorteio) analisam a viabilidade social e física da proposta sugerida pela inteligência artificial.</p>
+            </div>
+          </div>
+
+          <!-- Etapa 3 -->
+          <div class="pipeline-step" data-step="3">
+            <div class="step-hexagon-wrapper veto-step">
+              <div class="step-hexagon-border">
+                <div class="step-hexagon-inner">
+                  <img src="./gov_step3.png" alt="Veto de Humanidade" class="step-icon">
+                </div>
+              </div>
+            </div>
+            <div class="step-body">
+              <h3 data-i18n="governance.step3.title">3. Veto de Humanidade</h3>
+              <p data-i18n="governance.step3.desc">Os moradores aplicam lentes éticas e emocionais. A comunidade detém poder de veto absoluto e inquestionável se a sugestão da IA ferir a cultura, o bem-estar ou o espírito da Kano.</p>
+            </div>
+          </div>
+
+          <!-- Etapa 4 -->
+          <div class="pipeline-step" data-step="4">
+            <div class="step-hexagon-wrapper">
+              <div class="step-hexagon-border">
+                <div class="step-hexagon-inner">
+                  <img src="./gov_step4.png" alt="Execução" class="step-icon">
+                </div>
+              </div>
+            </div>
+            <div class="step-body">
+              <h3 data-i18n="governance.step4.title">4. Execução</h3>
+              <p data-i18n="governance.step4.desc">A decisão final é integrada ao ecossistema. Ferramentas digitais e mutirões comunitários colocam o plano em prática, realimentando os sensores com novos dados.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SEÇÃO 8: ECONOMIA CIRCULAR -->
+  <section id="economy" class="section-padding">
+    <div class="container">
+      <div class="text-center">
+        <h2 class="section-title reveal" data-i18n="economy.title">Economia Circular</h2>
+        <p class="section-subtitle reveal" data-i18n="economy.subtitle">Um ciclo fechado de geração, circulação e reinvestimento de valor real.</p>
+      </div>
+
+      <div class="economy-diagram-container reveal">
+        <!-- Loop de Economia Circular (SVG com nós clicáveis) -->
+        <div class="economy-nodes-wrapper">
+          <!-- Nó 1: Turismo -->
+          <div class="economy-node-card e-node-1" data-node="node1">
+            <div class="economy-icon-container">
+              <img src="./eco_step1.png" alt="Turismo de Experiência" class="economy-icon">
+            </div>
+            <h3 data-i18n="economy.node1Title">Turismo de Experiência (Capital Externo)</h3>
+            <p data-i18n="economy.node1Text">Entrada de recursos através de retiros, imersões holísticas, cursos práticos de permacultura e venda de excedentes agroecológicos premium.</p>
+          </div>
+
+          <!-- Nó 2: Mercado Interno -->
+          <div class="economy-node-card e-node-2" data-node="node2">
+            <div class="economy-icon-container">
+              <img src="./eco_step2.png" alt="Mercado Central" class="economy-icon">
+            </div>
+            <h3 data-i18n="economy.node2Title">Mercado Central (Circulação Interna)</h3>
+            <p data-i18n="economy.node2Text">Troca livre de serviços e feira de comércio permanente fortalecendo a economia interna e os empreendimentos gerados pelos próprios moradores.</p>
+          </div>
+
+          <!-- Nó 3: Stewardship -->
+          <div class="economy-node-card e-node-3" data-node="node3">
+            <div class="economy-icon-container">
+              <img src="./eco_step3.png" alt="Modelo Stewardship" class="economy-icon">
+            </div>
+            <h3 data-i18n="economy.node3Text">Modelo Stewardship (Reinvestimento)</h3>
+            <p data-i18n="economy.node3Text">100% do saldo de moradias coletivas e superávits institucionais retornam ao fundo comum para financiar projetos científicos e infraestrutura ecológica.</p>
+          </div>
+          
+          <svg class="economy-arrows-svg" viewBox="0 0 600 600">
+            <!-- Setas conectando em ciclo -->
+            <!-- 1 -> 2 -->
+            <path d="M 300,100 A 200,200 0 0,1 473,400" fill="none" stroke="var(--solar-gold)" stroke-width="4" stroke-dasharray="10,5" class="flowing-arrow"/>
+            <!-- 2 -> 3 -->
+            <path d="M 473,400 A 200,200 0 0,1 127,400" fill="none" stroke="var(--circuit-blue)" stroke-width="4" stroke-dasharray="10,5" class="flowing-arrow"/>
+            <!-- 3 -> 1 -->
+            <path d="M 127,400 A 200,200 0 0,1 300,100" fill="none" stroke="var(--forest-green)" stroke-width="4" stroke-dasharray="10,5" class="flowing-arrow"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SEÇÃO 9: ESCOLA KANO -->
+  <section id="school" class="section-padding accent-bg">
+    <div class="container">
+      <div class="text-center">
+        <h2 class="section-title reveal" data-i18n="school.title">Escola Kano</h2>
+        <p class="section-subtitle reveal" data-i18n="school.subtitle">Treinando a próxima geração para habitar a Terra com sabedoria, ciência e arte.</p>
+      </div>
+
+      <div class="school-layout reveal">
+        <!-- Coluna Esquerda: Cartões 1 e 3 -->
+        <div class="school-left-col">
+          <!-- Quadrante 1 -->
+          <div class="school-card">
+            <div class="school-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
+                <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
+              </svg>
+            </div>
+            <h3 data-i18n="school.card1Title">Aprendizagem Adaptativa</h3>
+            <p data-i18n="school.card1Text">Um currículo livre construído com base nas afinidades e ritmos de cada criança, estimulando talentos natos e a liderança colaborativa.</p>
+          </div>
+
+          <!-- Quadrante 3 -->
+          <div class="school-card">
+            <div class="school-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 2L2 7l10 5 10-5-10-5z" />
+                <path d="M2 17l10 5 10-5" />
+                <path d="M2 12l10 5 10-5" />
+              </svg>
+            </div>
+            <h3 data-i18n="school.card3Title">Prática no Ecossistema</h3>
+            <p data-i18n="school.card3Text">Crianças gerenciam hortas escolares de forma ativa, coletando métricas reais de insetos e clima, aplicando a matemática no solo vivo.</p>
+          </div>
+        </div>
+
+        <!-- Coluna Central: Imagem Ilustrativa -->
+        <div class="school-center-col">
+          <div class="school-image-wrapper">
+            <img src="./school_illustration.png" alt="Crianças, professor e robô cultivando a terra" class="school-main-image" loading="lazy">
+          </div>
+        </div>
+
+        <!-- Coluna Direita: Cartões 2 e 4 -->
+        <div class="school-right-col">
+          <!-- Quadrante 2 -->
+          <div class="school-card">
+            <div class="school-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                <circle cx="12" cy="10" r="3" />
+              </svg>
+            </div>
+            <h3 data-i18n="school.card2Title">Arquitetura Sem Carteiras</h3>
+            <p data-i18n="school.card2Text">Salas de aula sem paredes ou carteiras fixas. O aprendizado ocorre em círculos de conversa, em sessões de yoga, meditação e contato direto com a floresta.</p>
+          </div>
+
+          <!-- Quadrante 4 -->
+          <div class="school-card">
+            <div class="school-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                <circle cx="9" cy="7" r="4" />
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+              </svg>
+            </div>
+            <h3 data-i18n="school.card4Title">Educador como Mentor</h3>
+            <p data-i18n="school.card4Text">Facilitadores de aprendizagem que caminham lado a lado, provocando a curiosidade intelectual em vez de impor respostas formatadas.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SEÇÃO 10: OS ARQUITETOS -->
+  <section id="team" class="section-padding">
+    <div class="container">
+      <div class="text-center">
+        <h2 class="section-title reveal" data-i18n="team.title">Os Arquitetos</h2>
+        <p class="section-subtitle reveal" data-i18n="team.subtitle">Mentes dedicadas a tecer a convergência entre o barro e o código.</p>
+      </div>
+
+      <!-- Painel Operacional Interativo do Time -->
+      <div class="team-dashboard">
+        <!-- Linha horizontal de avatares hexagonais -->
+        <div class="team-nav-container reveal">
+          <div class="team-avatar active" data-member="1" data-name="David Salomão">
+            <div class="hexagon-frame">
+              <div class="hexagon-inner">
+                <img src="./David Salomão.jpeg" alt="David Salomão" class="team-photo">
+              </div>
+            </div>
+          </div>
+          <div class="team-avatar" data-member="2" data-name="Igor Santana">
+            <div class="hexagon-frame">
+              <div class="hexagon-inner">
+                <img src="./Igor Santana.jpeg" alt="Igor Santana" class="team-photo">
+              </div>
+            </div>
+          </div>
+          <div class="team-avatar" data-member="3" data-name="Luis Hiluy">
+            <div class="hexagon-frame">
+              <div class="hexagon-inner">
+                <img src="./Luis hiluy.jpeg" alt="Luis Hiluy" class="team-photo">
+              </div>
+            </div>
+          </div>
+          <div class="team-avatar" data-member="4" data-name="Fernanda Lemos">
+            <div class="hexagon-frame">
+              <div class="hexagon-inner">
+                <img src="./Fernanda lemos.jpeg" alt="Fernanda Lemos" class="team-photo">
+              </div>
+            </div>
+          </div>
+          <div class="team-avatar" data-member="5" data-name="Riane Sol">
+            <div class="hexagon-frame">
+              <div class="hexagon-inner">
+                <img src="./Riane Sol.jpeg" alt="Riane Sol" class="team-photo">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Painel Descritivo de Vidro Centralizado -->
+        <div class="team-panel-card reveal">
+          <!-- Linhas estéticas de circuito do terminal -->
+          <div class="panel-scanner-line"></div>
+          <div class="panel-tech-corner top-left"></div>
+          <div class="panel-tech-corner top-right"></div>
+          <div class="panel-tech-corner bottom-left"></div>
+          <div class="panel-tech-corner bottom-right"></div>
+
+          <div class="team-panel-content">
+            <h3 class="team-panel-name">David Salomão</h3>
+            <h4 class="team-panel-role" data-i18n="team.member1Role">O Conector de Sistemas</h4>
+            <div class="panel-divider"></div>
+            <p class="team-panel-bio" data-i18n="team.member1Bio">20 anos projetando sistemas de TI complexos. Descobriu na permacultura prática da Escola da Natureza a chave para arquitetar o sistema operacional social da Kano.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SEÇÃO 11: CTA FINAL & FOOTER -->
+  <section id="cta-section" class="fullscreen-section text-center">
+    <div class="cta-bg" style="background-image: linear-gradient(to bottom, rgba(10, 61, 98, 0.7), rgba(27, 67, 50, 0.85)), url('./Foto modelo ecovilla.jpg');"></div>
+    <div class="cta-overlay"></div>
+    <div class="container reveal">
+      <h2 class="cta-title" data-i18n="cta.title">Pronto para habitar o futuro?</h2>
+      <p class="cta-subtitle" data-i18n="cta.subtitle">Mais que um espaço físico, a Kano Ecovilla é um protocolo aberto e abençoado para a prosperidade humana e ambiental no século XXI.</p>
+      <div class="cta-buttons">
+        <a href="#cta-section" class="btn btn-primary" data-i18n="cta.btnResident">Quero Ser Morador</a>
+        <a href="#cta-section" class="btn btn-secondary" data-i18n="cta.btnImmersion">Fazer uma Imersão</a>
+        <a href="#cta-section" class="btn btn-tertiary" data-i18n="cta.btnProject">Conhecer o Projeto</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer id="main-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="footer-logo">
+            <svg class="logo-svg" viewBox="0 0 100 100">
+              <polygon points="50,5 90,27.5 90,72.5 50,95 10,72.5 10,27.5" fill="none" stroke="var(--solar-gold)" stroke-width="4"/>
+              <path d="M50,20 C65,35 65,55 50,80 C35,55 35,35 50,20 Z" fill="none" stroke="var(--forest-green)" stroke-width="4"/>
+            </svg>
+            <span>Kano Ecovilla</span>
+          </div>
+          <p class="footer-desc" data-i18n="footer.desc">Um ecossistema regenerativo real localizado nas montanhas tropicais do Brasil.</p>
+        </div>
+        <div class="footer-links">
+          <h4>Navegação</h4>
+          <ul>
+            <li><a href="#system">O Modelo</a></li>
+            <li><a href="#ethics">Código de Ética</a></li>
+            <li><a href="#masterplan">Masterplan Radial</a></li>
+            <li><a href="#living">Zonas de Vivência</a></li>
+          </ul>
+        </div>
+        <div class="footer-links">
+          <h4>Tecnologia</h4>
+          <ul>
+            <li><a href="#tech">Pilha Tecnológica</a></li>
+            <li><a href="#governance">Governança Híbrida</a></li>
+            <li><a href="#economy">Economia Circular</a></li>
+            <li><a href="#school">Escola Kano</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p class="copyright" data-i18n="footer.copy">Kano Ecovilla © 2026 — Todos os recursos são integralmente revertidos à comunidade. Código Solarpunk aberto.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script type="module" src="./main.js"></script>
+</body>
+</html>

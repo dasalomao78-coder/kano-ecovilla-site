@@ -1,0 +1,185 @@
+Crie um website completo para a Kano Ecovilla, uma ecovila solarpunk 
+localizada no Brasil. O site deve equilibrar dois mundos: 
+FUTURISMO TECNOLÓGICO + ENRAIZAMENTO NA TERRA. Não é utopia vaga — 
+é um projeto real, com arquitetura, governança e economia definidas.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🎨 IDENTIDADE VISUAL & ESTÉTICA
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Estilo: Solarpunk realista. Não fantasy. Não genérico "eco".
+Pense: terminal de dados orgânico. Circuitos que viram raízes.
+Barro encontra fibra ótica. Textura de terra seca com luz solar 
+atravessando.
+
+Paleta de cores:
+- Primária: Verde floresta profundo (#1B4332) e dourado solar (#D4A017)
+- Secundária: Azul circuito (#0A3D62) e bege terra (#C4A882)  
+- Acento: Verde neon suave (#4ADE80) para elementos tech/dados
+- Fundo: Creme orgânico (#F5F0E8), não branco puro
+
+Tipografia:
+- Títulos: fonte com personalidade geométrica/orgânica (ex: Playfair 
+  Display ou similar com serifa moderna)
+- Corpo: fonte limpa e legível (ex: DM Sans ou Source Sans)
+- Dados/métricas: fonte monospace para parecer "sistema vivo"
+
+Elementos visuais únicos:
+- Padrão hexagonal sutil no fundo (referência ao logo da Kano)
+- Linhas de circuito que se transformam em galhos/raízes nas transições
+- Fotografia real de ecovila: ocas de bioconstrução, hortas, painéis 
+  solares, pessoas em comunidade, terra, bambu, adobe
+- Partículas de luz solar flutuando sutilmente (CSS animation, leve)
+- Textura de papel/terra levíssima sobre fundos sólidos
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  Material
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+PDF, Fotos no diretorio
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📐 ESTRUTURA DO SITE — SEÇÕES
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+[HERO — Fullscreen]
+Título impactante: "Kano Ecovilla"
+Subtítulo: "O Ecossistema Solarpunk: Um Sistema Operacional para 
+o Futuro da Habitação Humana."
+Background: foto real de ecovila ao pôr do sol + overlay dourado suave
+CTA duplo: [Conheça o Sistema] e [Quero Morar]
+Scroll indicator animado com ícone de folha
+
+[SEÇÃO 2 — O Sistema Operacional]
+Conceito do símbolo infinito (∞): lado esquerdo = Permacultura, 
+Bioconstrução, Atividades Holísticas. Centro = Kano Ecovilla. 
+Lado direito = IA, Robótica, Monitoramento de Dados.
+Frase-chave animada: "A IA como ferramenta de libertação humana 
+e regeneração ambiental."
+Layout: dois círculos que se unem com animação suave ao scroll.
+
+[SEÇÃO 3 — Código de Ética (3 colunas)]
+Cards com ícones orgânicos:
+- Filosofia de Vida: 100% Vegana, sem álcool comercial, 
+  zero pets (proteção da fauna local)
+- Hardware de Sustentabilidade: energia solar exclusiva, 
+  banheiros secos com compostagem, filtragem via bananeiras, 
+  produtos 100% biodegradáveis
+- Arquitetura de Propriedade: modelo de stewardship (gestão coletiva), 
+  zero propriedade privada, todo aluguel reverte para a ecovila
+Design: cards com borda hexagonal, ícones em dourado solar.
+
+[SEÇÃO 4 — Masterplan Radial (Interativo)]
+Mapa circular da ecovila em anéis:
+- Anel externo: Painéis Solares (Zona 2)
+- Segundo anel: Horta (Zona 1)  
+- Anéis internos: Moradores Comunitários e Privativos
+- Núcleo: Oca Principal (administrativo + comunitário)
+- Pontos de interesse: Escola da Natureza (Zona 4), 
+  Centro de Retiros (Zona 5)
+Ao hover em cada zona: descrição aparece. Deve parecer um 
+painel de controle vivo, não um mapa estático.
+
+[SEÇÃO 5 — Zonas de Vivência (Cards Horizontais)]
+3 cards com foto + descrição:
+- Núcleo Comunitário (Zona 3 & 6/7): aluguel de quartos/espaços 
+  privativos, conectado à Oca Principal
+- Escola da Natureza (Zona 4): gestão de resíduos, permacultura, 
+  bioconstrução, hospedagem própria
+- Centro de Retiros (Zona 5): turismo holístico, 3 ocas exclusivas, 
+  hospedagem para imersões
+
+[SEÇÃO 6 — Pilha Tecnológica]
+Título: "Ancestralidade Encontra Inovação"
+3 blocos verticais com ícone + texto:
+- Automação e Energia: painéis solares + Horta Vertical Automatizada 
+  (IA + robótica)
+- Saneamento Ecológico: banheiros secos integrados + reciclagem 
+  de água cinza na paisagem
+- Materiais Locais e Técnicas Ancestrais: bioconstrução via vivências, 
+  cursos e mutirões pedagógicos
+Visual: diagrama isométrico explodido mostrando as camadas do sistema
+
+[SEÇÃO 7 — Governança Híbrida]
+Título: "O Motor de Decisão"
+4 etapas em linha horizontal com animação de fluxo entre elas:
+1. Entrada de Dados → IA processa necessidades logísticas/hídricas/
+   energéticas e formula proposta
+2. Filtro Sociocrático → Comissão de Humanos (moradores por sorteio, 
+   mandatos de 3-4 meses) + Círculos de Especialidade
+3. Veto de Humanidade → Comissão aplica lente cultural/emocional. 
+   Veto absoluto se IA ignorar bem-estar humano
+4. Execução → Implementação no ecossistema Kano
+Estilo: pipeline de dados que respira. Cores alternando azul-tech 
+e verde-orgânico.
+
+[SEÇÃO 8 — Economia Circular]
+Diagrama circular animado com 3 nós:
+- Turismo de Experiência (capital externo): retiros holísticos, 
+  cursos de bioconstrução, vivências imersivas
+- Mercado Central (circulação interna): feira permanente de 
+  empreendedores locais
+- Modelo de Stewardship (reinvestimento): 100% do lucro revertido 
+  para manutenção, tecnologia e infraestrutura coletiva
+Animação: setas circulando entre os nós continuamente.
+
+[SEÇÃO 9 — Escola Kano]
+Título: "Treinando a Próxima Geração"
+4 quadrantes em grid 2x2:
+- Aprendizagem Adaptativa: currículo por centros de interesse
+- Arquitetura sem Carteiras: círculos de conversa, yoga, meditação
+- Prática no Ecossistema: crianças gerem horta escolar e 
+  executam projetos reais
+- Educador como Mentor: facilitador que estimula curiosidade 
+  e autodidatismo
+Visual: fotos de crianças em horta, ao ar livre, em roda.
+
+[SEÇÃO 10 — Os Arquitetos]
+3 cards de fundadores:
+- David Salomão — O Conector de Sistemas: 20 anos em TI e sistemas 
+  de gestão + vivência na Escola da Natureza e Pedra do Sabiá
+- Igor Santana — O Designer do Espaço: empresário imobiliário e 
+  designer de ecovilas, focado em moradia consciente
+- Luis Hiluy — A Mente Analítica: especialista em IA e tecnologias 
+  disruptivas, pesquisador itinerante de tendências globais
+Cards com borda hexagonal dourada, ícones únicos para cada perfil.
+
+[SEÇÃO 11 — CTA Final]
+Frase: "Mais que um espaço físico, a Kano Ecovilla é um protocolo 
+replicável para prosperarmos no século XXI."
+3 botões:
+[Quero Ser Morador] [Fazer uma Imersão] [Conhecer o Projeto]
+Background: foto aérea da ecovila ao entardecer, overlay escuro 
+com partículas de luz.
+
+[FOOTER]
+Logo Kano + links de navegação + contato + "Kano Ecovilla © 2025 — 
+Todos os recursos revertidos à comunidade"
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+⚡ COMPORTAMENTO & INTERAÇÕES
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+- Scroll suave entre seções (smooth scroll)
+- Elementos aparecem com fade-in ao entrar na viewport (Intersection 
+  Observer)
+- Navbar sticky com fundo que ganha opacidade ao scroll, com logo 
+  hexagonal dourado
+- Hover nos cards: leve elevação + brilho dourado na borda
+- Cursor customizado: pequeno hexágono dourado (desktop)
+- Mobile-first: tudo colapsa elegantemente em coluna única
+- Performance: lazy load nas imagens, animações respeitam 
+  prefers-reduced-motion
+- Sem autoplay de vídeo. Sem pop-ups. Sem cookies banner intrusivo.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📸 DIREÇÃO DE FOTOGRAFIA
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Use fotos reais de ecovilas que transmitam:
+- Bioconstrução: paredes de adobe/terra, estruturas de bambu, 
+  telhados vivos
+- Energia: painéis solares integrados à paisagem verde
+- Comunidade: pessoas diversas, de todas as idades, em atividade
+- Horta: mãos na terra, abundância vegetal, composteiras
+- Tecnologia discreta: tablets em espaços orgânicos, painéis 
+  de

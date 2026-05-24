@@ -1,0 +1,2291 @@
+/* ----------------------------------------------------------------
+   DESIGN SYSTEM & CUSTOM STYLING — KANO ECOVILLA (SOLARPUNK REALIST)
+   ---------------------------------------------------------------- */
+
+:root {
+  /* Cores Principais (Foco em Branco e Verdes da Natureza) */
+  --forest-green: #2B5B3F;
+  --forest-green-rgb: 43, 91, 63;
+  --forest-green-dark: #1e3f2c;
+  --solar-gold: #8CB163;
+  --solar-gold-rgb: 140, 177, 99;
+  --solar-gold-light: #a6c981;
+  --circuit-blue: #4A7C59;
+  --circuit-blue-rgb: 74, 124, 89;
+  --circuit-blue-light: #689f78;
+  --earth-beige: #EAE3CD;
+  --earth-beige-rgb: 234, 227, 205;
+  --neon-green: #73D263;
+  --neon-green-rgb: 115, 210, 99;
+  --cream-bg: #FFFFFF;
+  --cream-bg-rgb: 255, 255, 255;
+  --cream-bg-dark: #F7F5F0;
+  
+  --text-dark: #2F3E36;
+  --text-light: #FFFFFF;
+  --white: #ffffff;
+  
+  /* Glassmorphism & Shadow Tokens */
+  --glass-bg: rgba(255, 255, 255, 0.85);
+  --glass-border: rgba(43, 91, 63, 0.15);
+  --glass-bg-dark: rgba(247, 245, 240, 0.95);
+  --glass-border-dark: rgba(140, 177, 99, 0.3);
+  --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -2px rgba(0, 0, 0, 0.03);
+  --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  --shadow-glow: 0 0 20px rgba(74, 222, 128, 0.35);
+  --shadow-glow-gold: 0 0 20px rgba(212, 160, 23, 0.3);
+
+  /* Fonts */
+  --font-title: 'Playfair Display', Georgia, serif;
+  --font-body: 'DM Sans', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  
+  /* UI Transitions */
+  --transition-smooth: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+  --transition-fast: all 0.2s ease;
+}
+
+/* ----------------------------------------------------------------
+   ESTILOS GLOBAIS E RESET
+   ---------------------------------------------------------------- */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--cream-bg);
+  color: var(--text-dark);
+  overflow-x: hidden;
+  line-height: 1.6;
+  
+  /* Padrão hexagonal de fundo sutil */
+  background-image: 
+    radial-gradient(circle at 100% 150px, rgba(140, 177, 99, 0.05) 0%, transparent 60%),
+    radial-gradient(circle at 0% 800px, rgba(43, 91, 63, 0.04) 0%, transparent 50%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='93' viewBox='0 0 80 93'%3E%3Cpath d='M40 0 L80 23 L80 69 L40 92 L0 69 L0 23 Z' fill='none' stroke='rgba(43, 91, 63, 0.03)' stroke-width='1.5'/%3E%3C/svg%3E");
+  background-attachment: fixed;
+}
+
+/* Cursor customizado - Apenas em Desktop */
+#custom-cursor {
+  position: fixed;
+  width: 40px;
+  height: 40px;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  z-index: 9999;
+  transition: transform 0.1s ease-out, opacity 0.3s ease;
+  opacity: 0;
+}
+
+#custom-cursor.active {
+  opacity: 1;
+}
+
+.cursor-hexagon {
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  border: 2px solid var(--solar-gold);
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+  transition: var(--transition-smooth);
+}
+
+body:hover #custom-cursor {
+  opacity: 1;
+}
+
+/* Efeito de Cursor Expandido no Hover de links */
+.hover-link #custom-cursor .cursor-hexagon {
+  transform: scale(1.5) rotate(30deg);
+  border-color: var(--neon-green);
+  background-color: rgba(74, 222, 128, 0.1);
+  box-shadow: var(--shadow-glow);
+}
+
+/* Partículas de Luz Solar */
+#particles-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.particle {
+  position: absolute;
+  background: radial-gradient(circle, rgba(212, 160, 23, 0.6) 0%, rgba(212, 160, 23, 0) 70%);
+  border-radius: 50%;
+  pointer-events: none;
+  animation: floatParticle 8s infinite linear;
+}
+
+@keyframes floatParticle {
+  0% {
+    transform: translateY(105vh) translateX(0) scale(0.5);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.8;
+  }
+  90% {
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateY(-5vh) translateX(100px) scale(1.2);
+    opacity: 0;
+  }
+}
+
+/* ----------------------------------------------------------------
+   ESTILOS DE BOTÕES E ELEMENTOS COMUNS
+   ---------------------------------------------------------------- */
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  position: relative;
+  z-index: 2;
+}
+
+.section-padding {
+  padding: 8rem 0;
+}
+
+.accent-bg {
+  background-color: rgba(27, 67, 50, 0.03);
+  position: relative;
+}
+
+.accent-bg::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--earth-beige), transparent);
+}
+
+.section-title {
+  font-family: var(--font-title);
+  font-size: 3.2rem;
+  font-weight: 700;
+  color: var(--forest-green);
+  margin-bottom: 1.5rem;
+  line-height: 1.2;
+}
+
+.section-subtitle {
+  font-size: 1.25rem;
+  color: #55514b;
+  max-width: 700px;
+  margin: 0 auto 4rem auto;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.9rem 2.2rem;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 50px;
+  transition: var(--transition-smooth);
+  cursor: pointer;
+}
+
+.btn-primary {
+  background-color: var(--forest-green);
+  color: var(--cream-bg);
+  border: 1px solid var(--forest-green);
+}
+
+.btn-primary:hover {
+  background-color: var(--solar-gold);
+  border-color: var(--solar-gold);
+  color: var(--forest-green-dark);
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-glow-gold);
+}
+
+.btn-secondary {
+  background-color: transparent;
+  color: var(--forest-green);
+  border: 2.5px solid var(--forest-green);
+}
+
+.btn-secondary:hover {
+  background-color: var(--forest-green);
+  color: var(--cream-bg);
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+}
+
+.btn-tertiary {
+  background-color: transparent;
+  color: var(--cream-bg);
+  border: 2px solid var(--solar-gold);
+}
+
+.btn-tertiary:hover {
+  background-color: var(--solar-gold);
+  color: var(--forest-green-dark);
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-glow-gold);
+}
+
+.grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2.5rem;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-neon {
+  color: var(--neon-green) !important;
+  text-shadow: 0 0 10px var(--neon-green-glow);
+}
+
+.divider {
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--solar-gold), transparent);
+  margin: 1.5rem 0;
+}
+
+/* Animações de Scroll com Intersection Observer */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ----------------------------------------------------------------
+   NAVBAR STICKY E HEADER
+   ---------------------------------------------------------------- */
+
+#main-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  transition: var(--transition-smooth);
+  padding: 1.5rem 0;
+  /* Força a aceleração de hardware e estabiliza a renderização de elementos fixos no scroll mobile */
+  transform: translate3d(0, 0, 0);
+  will-change: transform;
+}
+
+#main-header.scrolled {
+  padding: 0.8rem 0;
+  background-color: var(--glass-bg);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border-bottom: 1px solid var(--glass-border);
+  box-shadow: var(--shadow-sm);
+}
+
+.header-container {
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo-link {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  text-decoration: none;
+  color: var(--forest-green);
+  font-family: var(--font-title);
+  font-weight: 800;
+  font-size: 1.8rem;
+  transition: var(--transition-smooth);
+}
+
+.logo-svg {
+  width: 42px;
+  height: 42px;
+  transition: var(--transition-smooth);
+}
+
+.logo-svg path {
+  transition: stroke 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.logo-link:hover .logo-svg {
+  transform: rotate(30deg) scale(1.1);
+}
+
+.logo-text {
+  background: linear-gradient(45deg, var(--forest-green), var(--solar-gold));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  transition: var(--transition-smooth);
+}
+
+.nav-menu {
+  display: flex;
+  list-style: none;
+  gap: 1.8rem;
+}
+
+.nav-menu a {
+  text-decoration: none;
+  color: var(--forest-green);
+  font-weight: 550;
+  font-size: 0.95rem;
+  transition: var(--transition-fast);
+  position: relative;
+  padding: 0.5rem 0;
+}
+
+.nav-menu a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: var(--solar-gold);
+  transition: var(--transition-fast);
+}
+
+.nav-menu a:hover {
+  color: var(--solar-gold);
+}
+
+.nav-menu a:hover::after {
+  width: 100%;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+}
+
+.btn-lang {
+  background: transparent;
+  border: 1px solid var(--glass-border);
+  padding: 0.5rem 0.9rem;
+  border-radius: 30px;
+  color: var(--forest-green);
+  font-family: var(--font-mono);
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  transition: var(--transition-fast);
+}
+
+.btn-lang:hover {
+  border-color: var(--solar-gold);
+  color: var(--solar-gold);
+  background-color: rgba(212, 160, 23, 0.05);
+}
+
+.lang-icon {
+  width: 16px;
+  height: 16px;
+}
+
+.btn-nav {
+  padding: 0.6rem 1.4rem;
+  font-size: 0.9rem;
+  transition: var(--transition-smooth);
+}
+
+/* --- ESTILOS DO HEADER NO ESTADO NÃO ROLADO (HERO / CONTRASTE ELEVADO) --- */
+#main-header:not(.scrolled) .logo-link {
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+}
+
+#main-header:not(.scrolled) .logo-svg path {
+  stroke: var(--solar-gold);
+}
+
+#main-header:not(.scrolled) .logo-text {
+  background: linear-gradient(45deg, #ffffff, var(--solar-gold));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+#main-header:not(.scrolled) .nav-menu a {
+  color: rgba(255, 255, 255, 0.95);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+}
+
+#main-header:not(.scrolled) .nav-menu a:hover {
+  color: var(--solar-gold);
+  text-shadow: 0 1px 8px rgba(140, 177, 99, 0.4);
+}
+
+#main-header:not(.scrolled) .btn-lang {
+  color: rgba(255, 255, 255, 0.95);
+  border-color: rgba(255, 255, 255, 0.35);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+}
+
+#main-header:not(.scrolled) .btn-lang:hover {
+  border-color: var(--solar-gold);
+  color: var(--solar-gold);
+  background-color: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 0 12px rgba(140, 177, 99, 0.2);
+}
+
+#main-header:not(.scrolled) .btn-nav {
+  background-color: var(--solar-gold);
+  border-color: var(--solar-gold);
+  color: var(--forest-green-dark);
+}
+
+#main-header:not(.scrolled) .btn-nav:hover {
+  background-color: var(--white);
+  border-color: var(--white);
+  color: var(--forest-green);
+  box-shadow: var(--shadow-glow-gold);
+  transform: translateY(-2px);
+}
+
+/* ----------------------------------------------------------------
+   SEÇÃO 1: HERO
+   ---------------------------------------------------------------- */
+
+.fullscreen-section {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  padding: 6rem 2rem;
+}
+
+.hero-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  z-index: 1;
+}
+
+.hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(180deg, 
+    rgba(27, 67, 50, 0.25) 0%, 
+    rgba(27, 67, 50, 0.02) 50%, 
+    rgba(245, 240, 232, 0.3) 85%, 
+    var(--cream-bg) 100%);
+  z-index: 2;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 3;
+  max-width: 900px;
+}
+
+.hero-title {
+  font-family: var(--font-title);
+  font-size: 5.5rem;
+  font-weight: 900;
+  color: var(--cream-bg);
+  text-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+  line-height: 1.1;
+  margin-bottom: 2rem;
+  letter-spacing: -1px;
+}
+
+.hero-subtitle {
+  font-size: 1.6rem;
+  font-weight: 400;
+  color: rgba(245, 240, 232, 0.9);
+  max-width: 750px;
+  margin: 0 auto 3.5rem auto;
+  line-height: 1.5;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.hero-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+/* Indicador de rolagem */
+.scroll-indicator {
+  position: absolute;
+  bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  color: rgba(27, 67, 50, 0.85);
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  z-index: 3;
+}
+
+.scroll-arrow {
+  width: 32px;
+  height: 32px;
+  animation: bounceArrow 2s infinite ease-in-out;
+}
+
+@keyframes bounceArrow {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-8px);
+  }
+  60% {
+    transform: translateY(-4px);
+  }
+}
+
+/* ----------------------------------------------------------------
+   SEÇÃO 2: O SISTEMA OPERACIONAL (∞)
+   ---------------------------------------------------------------- */
+
+.infinity-container {
+  position: relative;
+  max-width: 900px;
+  margin: 3rem auto 0 auto;
+}
+
+.infinity-svg {
+  width: 100%;
+  height: auto;
+}
+
+.infinity-path {
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 0;
+  transition: stroke-dashoffset 2s ease-in-out;
+}
+
+.infinity-path-glow {
+  stroke-dasharray: 200, 800;
+  animation: flowGlow 6s infinite linear;
+}
+
+@keyframes flowGlow {
+  0% {
+    stroke-dashoffset: 1000;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+.infinity-node {
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+.infinity-node circle {
+  transition: var(--transition-smooth);
+}
+
+.infinity-node:hover circle {
+  transform: scale(1.15);
+  stroke-width: 6px;
+}
+
+.infinity-node.active circle {
+  stroke-width: 6px;
+  stroke: var(--neon-green);
+}
+
+.infinity-node polygon, .infinity-node rect {
+  transform-origin: center;
+  transition: var(--transition-smooth);
+}
+
+.infinity-node:hover polygon, .infinity-node:hover rect {
+  transform: rotate(30deg) scale(1.1);
+}
+
+/* Descrição Dinâmica do Loop */
+.infinity-panel-box {
+  margin-top: 2rem;
+  background-color: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  padding: 2.5rem;
+  border-radius: 20px;
+  backdrop-filter: blur(10px);
+  min-height: 180px;
+  box-shadow: var(--shadow-md);
+  position: relative;
+  overflow: hidden;
+}
+
+.infinity-pane {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding: 2.5rem;
+  opacity: 0;
+  transform: scale(0.98);
+  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.infinity-pane.active {
+  opacity: 1;
+  transform: scale(1);
+  position: relative;
+  pointer-events: auto;
+}
+
+.infinity-pane h3 {
+  font-family: var(--font-title);
+  font-size: 1.8rem;
+  color: var(--forest-green);
+  margin-bottom: 0.8rem;
+}
+
+.infinity-pane p {
+  font-size: 1.1rem;
+  color: #444;
+}
+
+.quote-container {
+  margin-top: 5rem;
+}
+
+.system-quote {
+  font-family: var(--font-title);
+  font-size: 2.2rem;
+  font-style: italic;
+  font-weight: 500;
+  color: var(--forest-green);
+  max-width: 750px;
+  margin: 0 auto;
+  line-height: 1.4;
+  position: relative;
+}
+
+/* ----------------------------------------------------------------
+   SEÇÃO 3: CÓDIGO DE ÉTICA
+   ---------------------------------------------------------------- */
+
+.ethics-card {
+  background-color: var(--glass-bg);
+  border: 2px solid var(--glass-border);
+  border-radius: 20px;
+  padding: 3rem 2rem;
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition-smooth);
+  backdrop-filter: blur(10px);
+}
+
+.ethics-card:hover {
+  transform: translateY(-8px);
+  border-color: var(--solar-gold);
+  box-shadow: var(--shadow-glow-gold);
+}
+
+.ethics-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.ethics-icon {
+  width: 48px;
+  height: 48px;
+  background-color: rgba(212, 160, 23, 0.1);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--solar-gold);
+  flex-shrink: 0;
+}
+
+.ethics-icon svg {
+  width: 24px;
+  height: 24px;
+}
+
+.ethics-card-title {
+  font-family: var(--font-title);
+  font-size: 1.6rem;
+  color: var(--forest-green);
+}
+
+.ethics-card-desc {
+  font-size: 0.95rem;
+  color: #777;
+  margin-bottom: 1.5rem;
+  font-style: italic;
+}
+
+.ethics-list {
+  list-style: none;
+}
+
+.ethics-list li {
+  position: relative;
+  padding-left: 1.8rem;
+  margin-bottom: 1rem;
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+.ethics-list li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 6px;
+  width: 8px;
+  height: 8px;
+  background-color: var(--solar-gold);
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+}
+
+/* ----------------------------------------------------------------
+   SEÇÃO 4: MASTERPLAN RADIAL INTERATIVO
+   ---------------------------------------------------------------- */
+
+.masterplan-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 4rem;
+  margin-top: 3rem;
+}
+
+.masterplan-visual {
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+.masterplan-svg {
+  width: 100%;
+  max-width: 450px;
+  height: auto;
+}
+
+.radial-ring {
+  fill: transparent;
+  pointer-events: all;
+  stroke: rgba(43, 91, 63, 0.08);
+  stroke-width: 2px;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+.radial-ring:hover, .radial-ring.active {
+  filter: drop-shadow(0 0 12px var(--neon-green));
+}
+
+.radial-ring[data-zone="zone1"]:hover, .radial-ring[data-zone="zone1"].active {
+  stroke: var(--solar-gold);
+  stroke-width: 14px;
+  filter: drop-shadow(0 0 12px rgba(140, 177, 99, 0.8));
+}
+
+.radial-ring[data-zone="zone2"]:hover, .radial-ring[data-zone="zone2"].active {
+  stroke: var(--neon-green);
+  stroke-width: 12px;
+  filter: drop-shadow(0 0 12px rgba(115, 210, 99, 0.85));
+}
+
+.radial-ring[data-zone="zone3"]:hover, .radial-ring[data-zone="zone3"].active {
+  stroke: var(--circuit-blue);
+  stroke-width: 10px;
+  filter: drop-shadow(0 0 10px rgba(74, 124, 89, 0.8));
+}
+
+.radial-core {
+  fill: transparent;
+  stroke: rgba(140, 177, 99, 0.12);
+  stroke-width: 2px;
+}
+
+.radial-core:hover, .radial-core.active {
+  fill: rgba(140, 177, 99, 0.15);
+  stroke: var(--neon-green);
+  stroke-width: 6px;
+  filter: drop-shadow(0 0 15px rgba(115, 210, 99, 0.9));
+}
+
+.radial-satellite {
+  cursor: pointer;
+}
+
+.satellite-circle {
+  fill: var(--cream-bg);
+  stroke: var(--solar-gold);
+  stroke-width: 3px;
+  transition: var(--transition-smooth);
+}
+
+.radial-satellite:hover .satellite-circle, .radial-satellite.active .satellite-circle {
+  fill: var(--solar-gold);
+  stroke: var(--forest-green);
+  transform: scale(1.1);
+  transform-origin: center;
+}
+
+.satellite-text {
+  font-family: var(--font-title);
+  font-weight: bold;
+  font-size: 14px;
+  text-anchor: middle;
+  fill: var(--forest-green);
+  transition: var(--transition-smooth);
+}
+
+.radial-satellite:hover .satellite-text, .radial-satellite.active .satellite-text {
+  fill: var(--cream-bg);
+}
+
+.pulse-text {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  color: var(--solar-gold);
+  margin-top: 1rem;
+  animation: textPulse 2.5s infinite alternate;
+}
+
+@keyframes textPulse {
+  0% {
+    opacity: 0.6;
+    transform: scale(0.98);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.masterplan-details {
+  display: flex;
+}
+
+.details-card {
+  width: 100%;
+  background-color: var(--forest-green-dark);
+  color: var(--cream-bg);
+  border: 2px solid var(--solar-gold);
+  border-radius: 20px;
+  padding: 3rem;
+  box-shadow: var(--shadow-lg);
+  backdrop-filter: blur(10px);
+  position: relative;
+  overflow: hidden;
+}
+
+.details-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 5px;
+  background: linear-gradient(90deg, var(--solar-gold), var(--neon-green), var(--circuit-blue));
+}
+
+.tech-metric-header {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--solar-gold);
+  margin-bottom: 1.5rem;
+  letter-spacing: 1px;
+}
+
+.system-status {
+  padding-left: 12px;
+  position: relative;
+}
+
+.system-status::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 3px;
+  width: 6px;
+  height: 6px;
+  background-color: var(--neon-green);
+  border-radius: 50%;
+  box-shadow: 0 0 6px var(--neon-green);
+}
+
+.details-card h3 {
+  font-family: var(--font-title);
+  font-size: 2.2rem;
+  color: var(--white);
+  margin-bottom: 0.5rem;
+}
+
+.details-card p {
+  font-size: 1.05rem;
+  color: rgba(245, 240, 232, 0.85);
+  min-height: 120px;
+  line-height: 1.6;
+}
+
+.radial-tech-metrics {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2rem;
+  border-top: 1px solid rgba(196, 168, 130, 0.2);
+  padding-top: 2rem;
+}
+
+.metric {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.metric-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--earth-beige);
+  letter-spacing: 1px;
+}
+
+.metric-val {
+  font-family: var(--font-mono);
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: var(--solar-gold);
+}
+
+/* ----------------------------------------------------------------
+   SEÇÃO 5: ZONAS DE VIVÊNCIA
+   ---------------------------------------------------------------- */
+
+.living-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2.5rem;
+  margin-top: 2rem;
+}
+
+.living-card {
+  background-color: var(--cream-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition-smooth);
+}
+
+.living-card:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--solar-gold);
+}
+
+.living-img-container {
+  position: relative;
+  height: 240px;
+  overflow: hidden;
+}
+
+.living-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: var(--transition-smooth);
+}
+
+.living-card:hover .living-img {
+  transform: scale(1.08);
+}
+
+.living-tag {
+  position: absolute;
+  top: 1.2rem;
+  right: 1.2rem;
+  background-color: var(--forest-green);
+  color: var(--cream-bg);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  padding: 0.4rem 0.8rem;
+  border-radius: 30px;
+  border: 1px solid var(--solar-gold);
+  letter-spacing: 1px;
+}
+
+.living-body {
+  padding: 2.5rem 2rem;
+}
+
+.living-card-title {
+  font-family: var(--font-title);
+  font-size: 1.5rem;
+  color: var(--forest-green);
+  margin-bottom: 1rem;
+}
+
+.living-card-desc {
+  font-size: 0.95rem;
+  color: #555;
+  line-height: 1.5;
+}
+
+/* ----------------------------------------------------------------
+   SEÇÃO 6: PILHA TECNOLÓGICA (ISOMÉTRICA)
+   ---------------------------------------------------------------- */
+
+.tech-layout {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  align-items: center;
+  gap: 4rem;
+  margin-top: 3rem;
+}
+
+.tech-visual {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: var(--transition-smooth);
+}
+
+.tech-visual:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg), 0 0 35px rgba(43, 91, 63, 0.15) !important;
+}
+
+.tech-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.tech-svg-layer {
+  cursor: pointer;
+  transition: var(--transition-smooth);
+  stroke: transparent;
+  stroke-width: 0;
+}
+
+/* Efeito de "Acender" por Camada Isométrica no Hover/Ativo */
+.tech-svg-layer[data-target="0"]:hover, .tech-svg-layer[data-target="0"].active {
+  fill: rgba(140, 177, 99, 0.15); /* Brilho Dourado/Solar */
+  stroke: var(--solar-gold);
+  stroke-width: 4px;
+}
+
+.tech-svg-layer[data-target="1"]:hover, .tech-svg-layer[data-target="1"].active {
+  fill: rgba(115, 210, 99, 0.18); /* Brilho Verde Neon */
+  stroke: var(--neon-green);
+  stroke-width: 4px;
+}
+
+.tech-svg-layer[data-target="2"]:hover, .tech-svg-layer[data-target="2"].active {
+  fill: rgba(74, 124, 89, 0.15); /* Brilho Verde Sálvia */
+  stroke: var(--circuit-blue);
+  stroke-width: 4px;
+}
+
+/* Bloco de Informação à Direita */
+.tech-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.tech-info-block {
+  background-color: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  padding: 2rem;
+  border-radius: 16px;
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition-smooth);
+}
+
+.tech-info-block.active {
+  border-color: var(--solar-gold);
+  background-color: var(--white);
+  box-shadow: var(--shadow-md);
+  transform: translateX(-10px);
+}
+
+.tech-block-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.tech-block-header h3 {
+  font-family: var(--font-title);
+  font-size: 1.4rem;
+  color: var(--forest-green);
+}
+
+.tech-info-block.active .tech-block-header h3 {
+  color: var(--forest-green-dark);
+}
+
+.tech-info-block p {
+  font-size: 0.95rem;
+  color: #666;
+}
+
+.tech-info-block.active p {
+  color: #333;
+}
+
+/* ----------------------------------------------------------------
+   SEÇÃO 7: GOVERNANÇA HÍBRIDA (PIPELINE)
+   ---------------------------------------------------------------- */
+
+.pipeline-container {
+  position: relative;
+  margin-top: 5rem;
+  padding: 2rem 0;
+}
+
+/* Linha de fluxo do pipeline */
+.pipeline-flow-line {
+  position: absolute;
+  top: 50px;
+  left: 5%;
+  right: 5%;
+  height: 6px;
+  background-color: rgba(196, 168, 130, 0.2);
+  border-radius: 3px;
+  z-index: 1;
+}
+
+.pipeline-progress {
+  width: 33%;
+  height: 100%;
+  background: linear-gradient(90deg, var(--forest-green), var(--solar-gold), var(--circuit-blue));
+  border-radius: 3px;
+  transition: width 1.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.pipeline-steps {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  justify-content: space-between;
+}
+
+.pipeline-step {
+  width: 22%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.step-hexagon-wrapper {
+  width: 140px;
+  height: 155px;
+  margin-bottom: 2rem;
+  transition: var(--transition-smooth);
+  filter: drop-shadow(0 6px 15px rgba(0, 0, 0, 0.18));
+  position: relative;
+}
+
+.step-hexagon-border {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(43, 91, 63, 0.3), rgba(212, 160, 23, 0.3));
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition-smooth);
+}
+
+.step-hexagon-inner {
+  width: calc(100% - 4px);
+  height: calc(100% - 4px);
+  background: var(--glass-bg);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  transition: var(--transition-smooth);
+}
+
+.step-icon {
+  width: 80%;
+  height: 80%;
+  object-fit: contain;
+  transition: var(--transition-smooth);
+  filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.15));
+}
+
+/* Hover and active states */
+.pipeline-step.active .step-hexagon-border {
+  background: linear-gradient(135deg, var(--neon-green), var(--solar-gold));
+  transform: scale(1.1);
+  filter: drop-shadow(0 0 15px rgba(140, 177, 99, 0.6));
+}
+
+.pipeline-step.active .step-hexagon-inner {
+  background: rgba(245, 240, 232, 0.95);
+}
+
+.pipeline-step.active .step-icon {
+  transform: scale(1.05);
+  filter: drop-shadow(0 0 8px rgba(140, 177, 99, 0.5));
+}
+
+/* Veto step styling */
+.step-hexagon-wrapper.veto-step .step-hexagon-border {
+  background: linear-gradient(135deg, rgba(231, 76, 60, 0.3), rgba(212, 160, 23, 0.3));
+}
+
+.pipeline-step.active .veto-step .step-hexagon-border {
+  background: linear-gradient(135deg, #e74c3c, var(--solar-gold));
+  transform: scale(1.1);
+  filter: drop-shadow(0 0 20px rgba(231, 76, 60, 0.7));
+}
+
+.pipeline-step.active .veto-step .step-icon {
+  filter: drop-shadow(0 0 12px rgba(231, 76, 60, 0.6));
+}
+
+.step-body {
+  opacity: 0.65;
+  transition: var(--transition-smooth);
+}
+
+.pipeline-step.active .step-body {
+  opacity: 1;
+}
+
+.step-body h3 {
+  font-family: var(--font-title);
+  font-size: 1.25rem;
+  color: var(--forest-green);
+  margin-bottom: 0.8rem;
+}
+
+.pipeline-step.active .step-body h3 {
+  color: var(--forest-green-dark);
+}
+
+.step-body p {
+  font-size: 0.9rem;
+  color: #666;
+  line-height: 1.5;
+}
+
+/* ----------------------------------------------------------------
+   SEÇÃO 8: ECONOMIA CIRCULAR (SVG LOOP)
+   ---------------------------------------------------------------- */
+
+.economy-diagram-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 4rem;
+  min-height: 520px;
+}
+
+.economy-nodes-wrapper {
+  position: relative;
+  width: 500px;
+  height: 500px;
+}
+
+.economy-arrows-svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.flowing-arrow {
+  animation: dashFlow 20s infinite linear;
+}
+
+@keyframes dashFlow {
+  to {
+    stroke-dashoffset: -1000;
+  }
+}
+
+.economy-node-card {
+  position: absolute;
+  width: 240px;
+  background-color: var(--glass-bg);
+  border: 2px solid var(--glass-border);
+  padding: 1.8rem;
+  border-radius: 16px;
+  backdrop-filter: blur(10px);
+  box-shadow: var(--shadow-sm);
+  z-index: 2;
+  transition: var(--transition-smooth);
+  cursor: pointer;
+}
+
+.economy-node-card:hover {
+  background-color: var(--white);
+  transform: scale(1.05) translateY(-5px);
+  box-shadow: var(--shadow-lg);
+}
+
+.economy-icon-container {
+  width: 130px;
+  height: 130px;
+  margin: 0 auto 1.5rem auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(245, 240, 232, 0.4);
+  border: 1.5px solid rgba(43, 91, 63, 0.2);
+  border-radius: 20px;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.06);
+  transition: var(--transition-smooth);
+}
+
+.economy-icon {
+  width: 90%;
+  height: 90%;
+  object-fit: contain;
+  filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.12));
+  transition: var(--transition-smooth);
+}
+
+.economy-node-card:hover .economy-icon-container {
+  transform: translateY(-3px) scale(1.05);
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
+}
+
+.economy-node-card:hover .economy-icon {
+  transform: rotate(5deg) scale(1.1);
+}
+
+.e-node-1:hover { border-color: var(--solar-gold); box-shadow: var(--shadow-glow-gold); }
+.e-node-2:hover { border-color: var(--circuit-blue); box-shadow: 0 0 20px rgba(10, 61, 98, 0.25); }
+.e-node-3:hover { border-color: var(--forest-green); box-shadow: 0 0 20px rgba(27, 67, 50, 0.25); }
+
+/* Coordenadas absolutas em triângulo */
+.e-node-1 {
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.e-node-2 {
+  bottom: 40px;
+  right: -60px;
+}
+
+.e-node-3 {
+  bottom: 40px;
+  left: -60px;
+}
+
+.economy-node-card h3 {
+  font-family: var(--font-title);
+  font-size: 1.2rem;
+  color: var(--forest-green);
+  margin-bottom: 0.6rem;
+  line-height: 1.3;
+}
+
+.economy-node-card p {
+  font-size: 0.85rem;
+  color: #555;
+  line-height: 1.4;
+}
+
+/* ----------------------------------------------------------------
+   SEÇÃO 9: ESCOLA KANO (GRID)
+   ---------------------------------------------------------------- */
+
+.school-layout {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2.5rem;
+  margin-top: 3rem;
+}
+
+.school-left-col,
+.school-right-col {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+  width: 310px;
+  flex-shrink: 0;
+}
+
+.school-center-col {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.school-image-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 450px;
+  aspect-ratio: 1/1;
+  border-radius: 24px;
+  border: 3px solid rgba(43, 91, 63, 0.12);
+  background: var(--glass-bg);
+  box-shadow: var(--shadow-lg);
+  overflow: hidden;
+  transition: var(--transition-smooth);
+}
+
+.school-image-wrapper::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, rgba(43, 91, 63, 0.05), rgba(212, 160, 23, 0.05));
+  pointer-events: none;
+}
+
+.school-image-wrapper:hover {
+  transform: scale(1.02);
+  border-color: var(--solar-gold);
+  box-shadow: var(--shadow-glow-gold);
+}
+
+.school-main-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: var(--transition-smooth);
+}
+
+.school-card {
+  background-color: var(--glass-bg);
+  border: 1.5px solid var(--glass-border);
+  padding: 1.4rem;
+  border-radius: 16px;
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition-smooth);
+  position: relative;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  max-width: 310px;
+}
+
+.school-card:hover {
+  background-color: var(--white);
+  border-color: var(--solar-gold);
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: var(--shadow-glow-gold);
+}
+
+.school-icon {
+  width: 40px;
+  height: 40px;
+  background-color: rgba(27, 67, 50, 0.08);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--forest-green);
+  margin-bottom: 1rem;
+  transition: var(--transition-smooth);
+}
+
+.school-icon svg {
+  width: 20px;
+  height: 20px;
+}
+
+.school-card:hover .school-icon {
+  background-color: var(--solar-gold);
+  color: var(--forest-green-dark);
+}
+
+.school-card h3 {
+  font-family: var(--font-title);
+  font-size: 1.25rem;
+  color: var(--forest-green);
+  margin-bottom: 0.6rem;
+  line-height: 1.3;
+}
+
+.school-card p {
+  font-size: 0.85rem;
+  color: #555;
+  line-height: 1.4;
+}
+
+/* ----------------------------------------------------------------
+   SEÇÃO 10: OS ARQUITETOS
+   ---------------------------------------------------------------- */
+
+.team-dashboard {
+  max-width: 900px;
+  margin: 3rem auto 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.team-nav-container {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-bottom: 2.5rem;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.team-avatar {
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+.team-avatar .hexagon-frame {
+  width: 90px;
+  height: 104px;
+  background-color: rgba(43, 91, 63, 0.2);
+  margin-bottom: 0;
+  transition: var(--transition-smooth);
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
+}
+
+.team-avatar .hexagon-inner {
+  width: 84px;
+  height: 97px;
+  background-color: var(--forest-green);
+  transition: var(--transition-smooth);
+}
+
+/* Avatar Hover State */
+.team-avatar:hover .hexagon-frame {
+  transform: scale(1.08);
+  background-color: var(--solar-gold);
+}
+
+.team-avatar:hover .hexagon-inner {
+  background-color: var(--forest-green-dark);
+}
+
+/* Avatar Active State */
+.team-avatar.active .hexagon-frame {
+  transform: scale(1.15) translateY(-5px);
+  background-color: var(--neon-green);
+  filter: drop-shadow(0 0 15px rgba(140, 177, 99, 0.6));
+}
+
+.team-avatar.active .hexagon-inner {
+  background-color: rgba(245, 240, 232, 0.95);
+}
+
+.team-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: var(--transition-smooth);
+}
+
+.team-avatar:hover .team-photo {
+  transform: scale(1.08);
+}
+
+/* --- PAINEL DESCRITIVO CENTRALIZADO --- */
+.team-panel-card {
+  position: relative;
+  width: 100%;
+  max-width: 750px;
+  min-height: 250px;
+  background-color: var(--glass-bg);
+  border: 1.5px solid var(--glass-border);
+  padding: 2.5rem 3rem;
+  border-radius: 24px;
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  box-shadow: var(--shadow-lg);
+  overflow: hidden;
+  transition: border-color 0.4s ease, box-shadow 0.4s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+/* Efeitos de circuito técnico (Biological Control Panel) */
+.panel-scanner-line {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--neon-green), transparent);
+  opacity: 0.15;
+  animation: panelScan 4s infinite linear;
+}
+
+@keyframes panelScan {
+  0% { top: 0; }
+  50% { top: 100%; }
+  100% { top: 0; }
+}
+
+.panel-tech-corner {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border: 2px solid rgba(43, 91, 63, 0.25);
+  transition: var(--transition-smooth);
+}
+
+.panel-tech-corner.top-left { top: 12px; left: 12px; border-right: none; border-bottom: none; }
+.panel-tech-corner.top-right { top: 12px; right: 12px; border-left: none; border-bottom: none; }
+.panel-tech-corner.bottom-left { bottom: 12px; left: 12px; border-right: none; border-top: none; }
+.panel-tech-corner.bottom-right { bottom: 12px; right: 12px; border-left: none; border-top: none; }
+
+.team-panel-card:hover {
+  border-color: var(--solar-gold);
+  box-shadow: var(--shadow-glow-gold);
+}
+
+.team-panel-card:hover .panel-tech-corner {
+  border-color: var(--solar-gold);
+}
+
+/* Conteúdo Interno */
+.team-panel-content {
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  opacity: 1;
+  transform: translateY(0);
+  width: 100%;
+}
+
+.team-panel-content.fade-out {
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+.team-panel-name {
+  font-family: var(--font-title);
+  font-size: 2.2rem;
+  color: var(--forest-green-dark);
+  margin-bottom: 0.5rem;
+  letter-spacing: -0.5px;
+}
+
+.team-panel-role {
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
+  color: var(--solar-gold);
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.panel-divider {
+  width: 80px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--forest-green), var(--solar-gold));
+  margin: 1.2rem auto;
+  border-radius: 2px;
+}
+
+.team-panel-bio {
+  font-size: 0.95rem;
+  color: #444;
+  line-height: 1.6;
+  max-width: 650px;
+  margin: 0 auto;
+}
+
+
+/* ----------------------------------------------------------------
+   SEÇÃO 11: CTA FINAL
+   ---------------------------------------------------------------- */
+
+#cta-section {
+  position: relative;
+  overflow: hidden;
+}
+
+.cta-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  z-index: 1;
+}
+
+.cta-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(180deg, 
+    rgba(10, 61, 98, 0.9) 0%, 
+    rgba(27, 67, 50, 0.9) 100%);
+  z-index: 2;
+}
+
+#cta-section .container {
+  position: relative;
+  z-index: 3;
+  max-width: 800px;
+}
+
+.cta-title {
+  font-family: var(--font-title);
+  font-size: 4rem;
+  font-weight: 800;
+  color: var(--white);
+  margin-bottom: 1.5rem;
+  line-height: 1.2;
+}
+
+.cta-subtitle {
+  font-size: 1.35rem;
+  color: rgba(245, 240, 232, 0.9);
+  margin-bottom: 3.5rem;
+  line-height: 1.6;
+}
+
+.cta-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+/* ----------------------------------------------------------------
+   FOOTER
+   ---------------------------------------------------------------- */
+
+#main-footer {
+  background-color: var(--forest-green-dark);
+  color: var(--cream-bg);
+  padding: 6rem 0 3rem 0;
+  position: relative;
+  z-index: 2;
+}
+
+#main-footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--solar-gold), transparent);
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 4rem;
+  margin-bottom: 4rem;
+}
+
+.footer-brand {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.footer-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  font-family: var(--font-title);
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: var(--white);
+}
+
+.footer-desc {
+  color: rgba(245, 240, 232, 0.7);
+  font-size: 0.95rem;
+  max-width: 400px;
+}
+
+.footer-links h4 {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--solar-gold);
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+  letter-spacing: 1px;
+}
+
+.footer-links ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.footer-links a {
+  text-decoration: none;
+  color: rgba(245, 240, 232, 0.7);
+  font-size: 0.95rem;
+  transition: var(--transition-fast);
+}
+
+.footer-links a:hover {
+  color: var(--solar-gold);
+  padding-left: 5px;
+}
+
+.footer-bottom {
+  border-top: 1px solid rgba(245, 240, 232, 0.1);
+  padding-top: 2rem;
+  text-align: center;
+}
+
+.copyright {
+  font-size: 0.85rem;
+  color: rgba(245, 240, 232, 0.5);
+}
+
+/* ----------------------------------------------------------------
+   MEDIA QUERIES (RESPONSIVIDADE - MOBILE-FIRST)
+   ---------------------------------------------------------------- */
+
+@media (max-width: 1024px) {
+  .section-title {
+    font-size: 2.8rem;
+  }
+  
+  .hero-title {
+    font-size: 4.5rem;
+  }
+  
+  .grid-3 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .living-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .masterplan-layout {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+  
+  .masterplan-visual {
+    order: 1;
+  }
+  
+  .masterplan-details {
+    order: 2;
+  }
+  
+  .tech-layout {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+}
+
+@media (max-width: 768px) {
+  html {
+    font-size: 15px;
+  }
+  
+  #custom-cursor {
+    display: none !important;
+  }
+  
+  #navbar {
+    display: none; /* Em um app real criaríamos um menu hambúrguer. Para o protótipo, focamos na rolagem e colapso responsivo */
+  }
+
+  /* Ajustes e correções de contraste e layout do cabeçalho principal no mobile */
+  #main-header {
+    padding: 0.8rem 0 !important; /* Menos padding vertical no scroll */
+  }
+  
+  .header-container {
+    padding: 0 1rem !important; /* Reduz espaçamento horizontal */
+  }
+  
+  .logo-link {
+    font-size: 1.45rem !important; /* Texto menor e proporcional */
+    gap: 0.5rem !important;
+  }
+  
+  .logo-svg {
+    width: 32px !important; /* Logo mais compacto */
+    height: 32px !important;
+  }
+  
+  .header-actions {
+    gap: 0.6rem !important; /* Espaçamento mais enxuto */
+  }
+  
+  .btn-lang {
+    padding: 0.4rem 0.7rem !important; /* Seletor de idioma menor */
+    font-size: 0.85rem !important;
+  }
+  
+  .btn-nav {
+    padding: 0.5rem 1.1rem !important; /* CTA compacto com ótimo encaixe */
+    font-size: 0.82rem !important;
+    white-space: nowrap; /* Evita que o texto quebre ou seja cortado */
+  }
+  
+  .section-padding {
+    padding: 5rem 0;
+  }
+  
+  .hero-title {
+    font-size: 3.5rem;
+  }
+  
+  .hero-subtitle {
+    font-size: 1.25rem;
+  }
+  
+  .hero-buttons, .cta-buttons {
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+    max-width: 320px;
+    margin: 0 auto;
+  }
+  
+  .grid-3, .living-grid, .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  
+  .school-layout {
+    flex-direction: column;
+    gap: 2.5rem;
+  }
+  
+  .school-left-col,
+  .school-right-col {
+    width: 100%;
+    gap: 2rem;
+  }
+  
+  .school-center-col {
+    order: -1; /* Coloca a imagem no topo no celular */
+    width: 100%;
+  }
+
+  .school-image-wrapper {
+    max-width: 320px;
+  }
+
+  .school-card {
+    max-width: 100%;
+  }
+  
+  .pipeline-flow-line {
+    display: none; /* Esconde a linha no mobile */
+  }
+  
+  .pipeline-steps {
+    flex-direction: column;
+    gap: 3rem;
+  }
+  
+  .pipeline-step {
+    width: 100%;
+    flex-direction: row;
+    text-align: left;
+    align-items: flex-start;
+    gap: 1.5rem;
+  }
+  
+  .step-hexagon-wrapper {
+    margin-bottom: 0;
+    flex-shrink: 0;
+  }
+  
+  .economy-diagram-container {
+    min-height: auto;
+    padding: 2rem 0;
+  }
+  
+  .economy-nodes-wrapper {
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+  
+  .economy-arrows-svg {
+    display: none; /* Esconde as setas SVG no mobile */
+  }
+  
+  .economy-node-card {
+    position: relative;
+    width: 100%;
+    top: auto !important;
+    left: auto !important;
+    right: auto !important;
+    transform: none !important;
+  }
+  
+  .cta-title {
+    font-size: 2.8rem;
+  }
+}
+
+/* ----------------------------------------------------------------
+   NOVOS COMPONENTES (REDESIGN VERDE/BRANCO)
+   ---------------------------------------------------------------- */
+
+/* Folha Parallax */
+section {
+  position: relative;
+  z-index: 2; /* Garante que as seções fiquem sobre a folha */
+}
+#parallax-leaf-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 1; /* Atrás dos containers de conteúdo */
+  overflow: visible;
+}
+
+#parallax-leaf {
+  position: absolute;
+  top: -120px;
+  left: 50%; /* Inicia na metade do site (centro da tela) */
+  margin-left: -180px; /* Centraliza a folha de 360px perfeitamente */
+  width: 360px; /* Dobro do tamanho original (180px * 2) */
+  height: auto;
+  opacity: 0.95;
+  filter: drop-shadow(0 20px 35px rgba(0,0,0,0.15));
+}
+
+/* Masterplan Updates */
+.masterplan-overlay {
+  transition: background 0.4s ease;
+}
+.masterplan-visual:hover .masterplan-overlay {
+  background: rgba(0,0,0,0.4);
+}
+.masterplan-visual:hover .masterplan-blueprint {
+  opacity: 1 !important; /* Revela o desenho original no hover */
+}
+.radial-ring {
+  fill: transparent;
+  stroke: transparent; /* Invisível por padrão */
+  stroke-width: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.radial-ring:hover, .radial-ring.active {
+  stroke: rgba(255, 255, 255, 0.8);
+  filter: drop-shadow(0 0 15px rgba(255,255,255,0.8));
+}
+
+/* Governança - Step Hexagon Imagem */
+.step-hexagon-wrapper {
+  padding: 0;
+  background: transparent;
+}
+
+/* Carrossel 3D (Vivências) */
+.carousel-3d-container {
+  position: relative;
+  width: 100%;
+  height: 500px;
+  perspective: 1000px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2rem;
+}
+
+.carousel-3d {
+  position: relative;
+  width: 320px;
+  height: 450px;
+  transform-style: preserve-3d;
+}
+
+.carousel-card {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 20px;
+  padding: 1rem;
+  box-shadow: var(--shadow-lg);
+  transition: transform 0.6s cubic-bezier(0.25, 0.8, 0.25, 1), opacity 0.6s ease;
+  cursor: pointer;
+}
+
+.carousel-img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 12px;
+  margin-bottom: 1rem;
+}
+
+.carousel-body {
+  padding: 0 0.5rem;
+}
+
+/* Posições do Carrossel */
+.carousel-card.active {
+  transform: translateX(0) scale(1) translateZ(0);
+  opacity: 1;
+  z-index: 3;
+}
+.carousel-card.prev {
+  transform: translateX(-60%) scale(0.85) translateZ(-100px) rotateY(15deg);
+  opacity: 0.7;
+  z-index: 2;
+}
+.carousel-card.next {
+  transform: translateX(60%) scale(0.85) translateZ(-100px) rotateY(-15deg);
+  opacity: 0.7;
+  z-index: 2;
+}
+.carousel-card:not(.active):not(.prev):not(.next) {
+  transform: translateX(0) scale(0.6) translateZ(-200px);
+  opacity: 0;
+  z-index: 1;
+}
+
+.carousel-controls {
+  position: absolute;
+  bottom: -40px;
+  display: flex;
+  gap: 1rem;
+}
+.carousel-btn {
+  background: var(--forest-green);
+  color: var(--cream-bg);
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+.carousel-btn:hover {
+  background: var(--solar-gold);
+  transform: scale(1.1);
+}
+
+/* Video Player Premium Solarpunk */
+.video-wrapper {
+  max-width: 850px;
+  width: 100%;
+  margin: 3rem auto 0 auto;
+  position: relative;
+  border-radius: 24px;
+  padding: 8px;
+  background: linear-gradient(135deg, rgba(140, 177, 99, 0.25), rgba(43, 91, 63, 0.1));
+  box-shadow: var(--shadow-lg), 0 0 25px rgba(115, 210, 99, 0.1);
+  transition: var(--transition-smooth);
+  z-index: 2;
+}
+
+.video-wrapper:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg), 0 0 35px rgba(115, 210, 99, 0.25);
+  background: linear-gradient(135deg, rgba(140, 177, 99, 0.4), rgba(43, 91, 63, 0.2));
+}
+
+.video-player-container {
+  width: 100%;
+  aspect-ratio: 16/9;
+  border-radius: 18px;
+  overflow: hidden;
+  position: relative;
+  background-color: #000;
+  box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.8);
+}
+
+.solarpunk-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
