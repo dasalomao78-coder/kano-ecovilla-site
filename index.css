@@ -60,6 +60,9 @@ html {
   scroll-behavior: smooth;
   font-size: 16px;
   -webkit-font-smoothing: antialiased;
+  /* Scroll Snapping para enquadramento perfeito das seções (Aparência de App de Luxo) */
+  scroll-snap-type: y proximity;
+  scroll-padding-top: 68px; /* Evita que o cabeçalho fixo cubra o conteúdo ao travar o scroll */
 }
 
 body {
@@ -512,9 +515,9 @@ body:hover #custom-cursor {
   width: 100%;
   height: 100%;
   background: linear-gradient(180deg, 
-    rgba(27, 67, 50, 0.25) 0%, 
-    rgba(27, 67, 50, 0.02) 50%, 
-    rgba(245, 240, 232, 0.3) 85%, 
+    rgba(27, 67, 50, 0.12) 0%, 
+    rgba(27, 67, 50, 0.01) 50%, 
+    rgba(245, 240, 232, 0.15) 85%, 
     var(--cream-bg) 100%);
   z-index: 2;
 }
@@ -552,25 +555,26 @@ body:hover #custom-cursor {
   gap: 1.5rem;
 }
 
-/* Indicador de rolagem */
+/* Indicador de rolagem (Escalado 100% maior para destaque visual) */
 .scroll-indicator {
   position: absolute;
   bottom: 2rem;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.5rem;
-  color: rgba(27, 67, 50, 0.85);
+  gap: 1rem;
+  color: rgba(27, 67, 50, 0.9);
   font-family: var(--font-mono);
-  font-size: 0.8rem;
+  font-size: 1.6rem;
   text-transform: uppercase;
-  letter-spacing: 2px;
+  letter-spacing: 4px;
   z-index: 3;
+  text-shadow: 0 2px 4px rgba(255, 255, 255, 0.8);
 }
 
 .scroll-arrow {
-  width: 32px;
-  height: 32px;
+  width: 64px;
+  height: 64px;
   animation: bounceArrow 2s infinite ease-in-out;
 }
 
@@ -1362,12 +1366,17 @@ body:hover #custom-cursor {
 }
 
 .flowing-arrow {
-  animation: dashFlow 20s infinite linear;
+  stroke-dasharray: 12, 6 !important;
+  stroke-dashoffset: 0;
+  animation: dashFlow 20s infinite linear !important;
 }
 
 @keyframes dashFlow {
+  from {
+    stroke-dashoffset: 0;
+  }
   to {
-    stroke-dashoffset: -1000;
+    stroke-dashoffset: -600;
   }
 }
 
@@ -1392,37 +1401,34 @@ body:hover #custom-cursor {
 }
 
 .economy-icon-container {
-  width: 130px;
-  height: 130px;
+  width: 100%;
+  height: 150px;
   margin: 0 auto 1.5rem auto;
   display: flex;
   align-items: center;
   justify-content: center;
   background: rgba(245, 240, 232, 0.4);
   border: 1.5px solid rgba(43, 91, 63, 0.2);
-  border-radius: 20px;
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  border-radius: 12px;
+  overflow: hidden;
   box-shadow: 0 6px 15px rgba(0, 0, 0, 0.06);
   transition: var(--transition-smooth);
 }
 
 .economy-icon {
-  width: 90%;
-  height: 90%;
-  object-fit: contain;
-  filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.12));
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
   transition: var(--transition-smooth);
 }
 
 .economy-node-card:hover .economy-icon-container {
-  transform: translateY(-3px) scale(1.05);
-  background: rgba(255, 255, 255, 0.9);
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.12);
 }
 
 .economy-node-card:hover .economy-icon {
-  transform: rotate(5deg) scale(1.1);
+  transform: scale(1.08);
 }
 
 .e-node-1:hover { border-color: var(--solar-gold); box-shadow: var(--shadow-glow-gold); }
@@ -1444,6 +1450,31 @@ body:hover #custom-cursor {
 .e-node-3 {
   bottom: 40px;
   left: -60px;
+}
+
+/* Estados Ativos / Selecionados (Ampliação e Brilho Especial) */
+.e-node-1.active {
+  transform: translateX(-50%) scale(1.15) translateY(-8px);
+  z-index: 10;
+  background-color: var(--white);
+  border-color: var(--solar-gold);
+  box-shadow: var(--shadow-glow-gold), 0 10px 25px rgba(140, 177, 99, 0.35);
+}
+
+.e-node-2.active {
+  transform: scale(1.15) translateY(-8px);
+  z-index: 10;
+  background-color: var(--white);
+  border-color: var(--circuit-blue);
+  box-shadow: 0 0 25px rgba(74, 124, 89, 0.35);
+}
+
+.e-node-3.active {
+  transform: scale(1.15) translateY(-8px);
+  z-index: 10;
+  background-color: var(--white);
+  border-color: var(--forest-green);
+  box-shadow: 0 0 25px rgba(43, 91, 63, 0.35);
 }
 
 .economy-node-card h3 {
@@ -1958,6 +1989,8 @@ body:hover #custom-cursor {
 @media (max-width: 768px) {
   html {
     font-size: 15px;
+    scroll-snap-type: y mandatory !important;
+    scroll-padding-top: 54px !important;
   }
   
   #custom-cursor {
@@ -1965,45 +1998,64 @@ body:hover #custom-cursor {
   }
   
   #navbar {
-    display: none; /* Em um app real criaríamos um menu hambúrguer. Para o protótipo, focamos na rolagem e colapso responsivo */
+    display: none;
   }
 
-  /* Ajustes e correções de contraste e layout do cabeçalho principal no mobile */
   #main-header {
-    padding: 0.8rem 0 !important; /* Menos padding vertical no scroll */
+    padding: 0.8rem 0 !important;
   }
   
   .header-container {
-    padding: 0 1rem !important; /* Reduz espaçamento horizontal */
+    padding: 0 1rem !important;
   }
   
   .logo-link {
-    font-size: 1.45rem !important; /* Texto menor e proporcional */
-    gap: 0.5rem !important;
+    font-size: 1.25rem !important;
+    gap: 0.4rem !important;
+  }
+  
+  .logo-text {
+    display: block !important;
+    font-size: 1.1rem !important;
+    font-weight: 750 !important;
+    color: var(--forest-green) !important;
   }
   
   .logo-svg {
-    width: 32px !important; /* Logo mais compacto */
+    width: 32px !important;
     height: 32px !important;
   }
   
+  .lang-icon {
+    display: none !important; /* Esconde globo para economizar espaço horizontal */
+  }
+
   .header-actions {
-    gap: 0.6rem !important; /* Espaçamento mais enxuto */
+    gap: 0.5rem !important;
   }
   
   .btn-lang {
-    padding: 0.4rem 0.7rem !important; /* Seletor de idioma menor */
-    font-size: 0.85rem !important;
+    padding: 0.4rem 0.6rem !important;
+    font-size: 0.82rem !important;
+    gap: 0 !important;
   }
   
   .btn-nav {
-    padding: 0.5rem 1.1rem !important; /* CTA compacto com ótimo encaixe */
-    font-size: 0.82rem !important;
-    white-space: nowrap; /* Evita que o texto quebre ou seja cortado */
+    padding: 0.45rem 0.9rem !important;
+    font-size: 0.8rem !important;
+    white-space: nowrap;
   }
-  
+
+  section {
+    min-height: calc(100vh - 54px) !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    scroll-snap-align: start !important;
+  }
+
   .section-padding {
-    padding: 5rem 0;
+    padding: 2.2rem 0 !important;
   }
   
   .hero-title {
@@ -2027,78 +2079,364 @@ body:hover #custom-cursor {
     gap: 2rem;
   }
   
+  /* SEÇÃO 4: MASTERPLAN (SUSTENTABILIDADE) NO MOBILE */
+  .masterplan-layout {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 1rem !important;
+    width: 100% !important;
+  }
+
+  .masterplan-visual {
+    width: 312px !important;
+    height: 312px !important;
+    max-width: 312px !important;
+    max-height: 312px !important;
+    margin: 0 auto !important;
+    aspect-ratio: 1/1 !important;
+    border-radius: 16px !important;
+    flex-shrink: 0 !important;
+  }
+
+  .masterplan-details {
+    width: 100% !important;
+  }
+
+  .details-card {
+    padding: 1rem !important;
+    min-height: auto !important;
+    border-radius: 14px !important;
+  }
+
+  .details-card h3 {
+    font-size: 1.2rem !important;
+    margin-bottom: 0.4rem !important;
+  }
+
+  .details-card p {
+    font-size: 0.85rem !important;
+    line-height: 1.4 !important;
+  }
+
+  .details-card .tech-metric-header,
+  .details-card .radial-tech-metrics {
+    display: none !important;
+  }
+
+  /* SEÇÃO 6: PILHA TECNOLÓGICA NO MOBILE */
+  .tech-layout {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 1rem !important;
+    width: 100% !important;
+  }
+
+  .tech-visual {
+    width: 312px !important;
+    height: 312px !important;
+    max-width: 312px !important;
+    max-height: 312px !important;
+    margin: 0 auto !important;
+    aspect-ratio: 1/1 !important;
+    border-radius: 16px !important;
+    flex-shrink: 0 !important;
+  }
+
+  .tech-info {
+    width: 100% !important;
+  }
+
+  .tech-info-block {
+    display: none !important;
+    padding: 1rem !important;
+    border-radius: 14px !important;
+    min-height: auto !important;
+  }
+
+  .tech-info-block.active {
+    display: block !important;
+  }
+
+  .tech-info-block h3 {
+    font-size: 1.15rem !important;
+  }
+
+  .tech-info-block p {
+    font-size: 0.85rem !important;
+    line-height: 1.4 !important;
+  }
+
+  /* SEÇÃO 7: GOVERNANÇA HÍBRIDA NO MOBILE (SWIPE CAROUSEL NATIVO COM HEXÁGONOS) */
+  .pipeline-container {
+    width: 100% !important;
+  }
+
+  .pipeline-flow-line {
+    display: none !important;
+  }
+  
+  .pipeline-steps {
+    display: flex !important;
+    flex-direction: row !important;
+    overflow-x: auto !important;
+    scroll-snap-type: x mandatory !important;
+    gap: 1.2rem !important;
+    padding: 1rem 0.5rem 2rem 0.5rem !important;
+    width: calc(100% + 2rem) !important;
+    margin-left: -1rem !important;
+    margin-right: -1rem !important;
+    scroll-behavior: smooth !important;
+    -webkit-overflow-scrolling: touch !important;
+    scrollbar-width: none !important;
+  }
+
+  .pipeline-steps::-webkit-scrollbar {
+    display: none !important;
+  }
+  
+  .pipeline-step {
+    flex: 0 0 85% !important;
+    width: 85% !important;
+    scroll-snap-align: center !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    background: var(--glass-bg) !important;
+    border: 1px solid var(--glass-border) !important;
+    border-radius: 20px !important;
+    padding: 1.4rem 1.2rem !important;
+    box-shadow: var(--shadow-md) !important;
+    text-align: center !important;
+    min-height: 290px !important;
+    justify-content: flex-start !important;
+    gap: 0.6rem !important;
+    opacity: 0.95 !important;
+  }
+  
+  .step-hexagon-wrapper {
+    margin-bottom: 0.2rem !important;
+    transform: scale(0.8) !important;
+    transform-origin: center center !important;
+    flex-shrink: 0 !important;
+  }
+
+  .step-body {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 0.4rem !important;
+    width: 100% !important;
+    text-align: center !important;
+  }
+
+  .step-body h3 {
+    font-family: var(--font-title) !important;
+    font-size: 1.15rem !important;
+    color: var(--forest-green) !important;
+    font-weight: 750 !important;
+    margin: 0 !important;
+    line-height: 1.3 !important;
+  }
+
+  .step-body p {
+    font-size: 0.84rem !important;
+    color: var(--text-dark) !important;
+    line-height: 1.45 !important;
+    margin: 0 !important;
+  }
+
+  /* SEÇÃO 8: ECONOMIA CIRCULAR NO MOBILE (LOOP COM SETAS EM ESCALA REDUZIDA) */
+  .economy-diagram-container {
+    min-height: 330px !important;
+    margin-top: 0.8rem !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    width: 100% !important;
+    overflow: visible !important;
+  }
+  
+  .economy-nodes-wrapper {
+    display: block !important;
+    width: 500px !important;
+    height: 500px !important;
+    transform: scale(0.62) !important;
+    transform-origin: center center !important;
+    margin: 0 auto !important;
+    flex-shrink: 0 !important;
+  }
+  
+  .economy-arrows-svg {
+    display: block !important;
+  }
+  
+  .economy-node-card {
+    position: absolute !important;
+    width: 240px !important;
+    margin: 0 !important;
+    padding: 1.3rem !important;
+    border-radius: 16px !important;
+  }
+
+  .economy-node-card h3 {
+    font-size: 1.05rem !important;
+    margin-bottom: 0.4rem !important;
+  }
+
+  .economy-node-card p {
+    font-size: 0.8rem !important;
+    line-height: 1.35 !important;
+  }
+
+  .economy-icon-container {
+    width: 100px !important;
+    height: 100px !important;
+    margin-bottom: 0.8rem !important;
+  }
+
+  /* Classes de posicionamento rotativo móvel (Economia Circular) */
+  .pos-1 {
+    top: 0 !important;
+    left: 50% !important;
+    right: auto !important;
+    bottom: auto !important;
+    transform: translateX(-50%) scale(1.08) !important;
+    z-index: 10 !important;
+    opacity: 1 !important;
+    box-shadow: var(--shadow-lg) !important;
+    background: var(--white) !important;
+  }
+  
+  .pos-2 {
+    bottom: 40px !important;
+    right: -60px !important;
+    top: auto !important;
+    left: auto !important;
+    transform: scale(0.85) !important;
+    z-index: 5 !important;
+    opacity: 0.65 !important;
+    background: var(--glass-bg) !important;
+  }
+  
+  .pos-3 {
+    bottom: 40px !important;
+    left: -60px !important;
+    top: auto !important;
+    right: auto !important;
+    transform: scale(0.85) !important;
+    z-index: 5 !important;
+    opacity: 0.65 !important;
+    background: var(--glass-bg) !important;
+  }
+
+  /* SEÇÃO 9: ESCOLA KANO NO MOBILE */
   .school-layout {
+    display: block !important;
     flex-direction: column;
-    gap: 2.5rem;
+    gap: 0 !important;
+    width: 100% !important;
   }
   
   .school-left-col,
   .school-right-col {
-    width: 100%;
-    gap: 2rem;
+    display: none !important;
   }
   
   .school-center-col {
-    order: -1; /* Coloca a imagem no topo no celular */
-    width: 100%;
+    display: block !important;
+    margin: 0 auto 1rem auto !important;
+    width: 100% !important;
+    text-align: center !important;
   }
 
   .school-image-wrapper {
-    max-width: 320px;
+    max-width: 200px !important;
+    margin: 0 auto !important;
   }
 
-  .school-card {
-    max-width: 100%;
+  .school-main-image {
+    width: 100% !important;
+    height: auto !important;
   }
   
-  .pipeline-flow-line {
-    display: none; /* Esconde a linha no mobile */
+  /* SEÇÃO 3: CÓDIGO DE ÉTICA NO MOBILE (ACCORDION DE PASTAS NATIVO) */
+  .ethics-grid {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 0.65rem !important;
+    height: auto !important;
+    position: relative !important;
+    margin-top: 1.2rem !important;
+    width: 100% !important;
+    overflow: visible !important;
   }
   
-  .pipeline-steps {
-    flex-direction: column;
-    gap: 3rem;
-  }
-  
-  .pipeline-step {
-    width: 100%;
-    flex-direction: row;
-    text-align: left;
-    align-items: flex-start;
-    gap: 1.5rem;
-  }
-  
-  .step-hexagon-wrapper {
-    margin-bottom: 0;
-    flex-shrink: 0;
-  }
-  
-  .economy-diagram-container {
-    min-height: auto;
-    padding: 2rem 0;
-  }
-  
-  .economy-nodes-wrapper {
-    width: 100%;
-    height: auto;
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-  }
-  
-  .economy-arrows-svg {
-    display: none; /* Esconde as setas SVG no mobile */
-  }
-  
-  .economy-node-card {
-    position: relative;
-    width: 100%;
-    top: auto !important;
+  .ethics-card {
+    position: relative !important;
+    width: 100% !important;
     left: auto !important;
-    right: auto !important;
-    transform: none !important;
+    top: auto !important;
+    margin: 0 !important;
+    padding: 1.1rem !important;
+    border-radius: 20px !important;
+    background: var(--white) !important;
+    border: 1px solid var(--glass-border) !important;
+    box-shadow: var(--shadow-sm) !important;
+    cursor: pointer !important;
+    overflow: hidden !important;
+    transition: all 0.35s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
+  }
+
+  .ethics-card:not(.active) {
+    height: 68px !important; /* Exibe apenas o cabeçalho do card */
+    opacity: 0.85 !important;
+  }
+
+  .ethics-card.active {
+    height: auto !important;
+    min-height: 270px !important;
+    border: 2px solid var(--forest-green) !important;
+    box-shadow: var(--shadow-md) !important;
+    opacity: 1 !important;
   }
   
+  .ethics-card .ethics-header {
+    margin-bottom: 0.6rem !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 0.8rem !important;
+  }
+
+  .ethics-card .ethics-icon {
+    width: 36px !important;
+    height: 36px !important;
+    border-radius: 10px !important;
+    flex-shrink: 0 !important;
+  }
+  
+  .ethics-card .ethics-card-title {
+    font-size: 1.2rem !important;
+    margin: 0 !important;
+  }
+  
+  .ethics-card .ethics-card-desc {
+    font-size: 0.84rem !important;
+    margin-bottom: 0.5rem !important;
+    line-height: 1.45 !important;
+  }
+  
+  .ethics-card .ethics-list {
+    margin-top: 0.4rem !important;
+    padding-left: 1.2rem !important;
+  }
+  
+  .ethics-card .ethics-list li {
+    font-size: 0.82rem !important;
+    margin-bottom: 0.3rem !important;
+    line-height: 1.45 !important;
+  }
+
   .cta-title {
     font-size: 2.8rem;
   }
@@ -2112,6 +2450,7 @@ body:hover #custom-cursor {
 section {
   position: relative;
   z-index: 2; /* Garante que as seções fiquem sobre a folha */
+  scroll-snap-align: start;
 }
 #parallax-leaf-container {
   position: fixed;
@@ -2288,4 +2627,110 @@ section {
   height: 100%;
   object-fit: cover;
   display: block;
+}
+
+/* ----------------------------------------------------------------
+   SISTEMA DE CARROSSEL MOBILE EXCLUSIVO (ANDROID & IPHONE)
+   ---------------------------------------------------------------- */
+
+/* Configurações padrão para Desktop (Oculta carrosséis mobile) */
+.mobile-carousel {
+  display: none !important;
+}
+
+.desktop-only {
+  display: block;
+}
+
+/* Ocultar elementos estruturais específicos que não são classes simples */
+div.desktop-only {
+  display: flex;
+}
+
+/* Configurações e estilos responsivos de luxo para Celulares */
+@media (max-width: 768px) {
+  .desktop-only {
+    display: none !important;
+  }
+
+  .mobile-carousel {
+    display: flex !important;
+    flex-direction: row !important;
+    overflow-x: auto !important;
+    scroll-snap-type: x mandatory !important;
+    gap: 1.2rem !important;
+    padding: 1rem 0.5rem 2rem 0.5rem !important;
+    width: calc(100% + 2rem) !important;
+    margin-left: -1rem !important;
+    margin-right: -1rem !important;
+    scroll-behavior: smooth !important;
+    -webkit-overflow-scrolling: touch !important;
+    scrollbar-width: none !important; /* Firefox */
+  }
+
+  .mobile-carousel::-webkit-scrollbar {
+    display: none !important; /* Chrome, Safari, Opera */
+  }
+
+  .mobile-carousel-card {
+    flex: 0 0 85% !important; /* Mostra 85% do card e uma prévia do seguinte */
+    scroll-snap-align: center !important;
+    background: var(--glass-bg) !important;
+    border: 1px solid var(--glass-border) !important;
+    border-radius: 20px !important;
+    padding: 1.6rem 1.4rem !important;
+    box-shadow: var(--shadow-md) !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 0.8rem !important;
+    text-align: left !important;
+    min-height: 240px !important;
+    justify-content: flex-start !important;
+    transition: transform 0.3s ease !important;
+  }
+
+  .mobile-carousel-card h3 {
+    font-family: var(--font-title) !important;
+    font-size: 1.25rem !important;
+    color: var(--forest-green) !important;
+    font-weight: 750 !important;
+    line-height: 1.3 !important;
+    margin: 0 !important;
+  }
+
+  .mobile-carousel-card p {
+    font-size: 0.88rem !important;
+    color: var(--text-dark) !important;
+    line-height: 1.5 !important;
+    margin: 0 !important;
+  }
+
+  .carousel-step-header {
+    display: flex !important;
+    align-items: center !important;
+    gap: 0.8rem !important;
+    margin-bottom: 0.2rem !important;
+  }
+
+  .carousel-step-icon {
+    width: 44px !important;
+    height: 44px !important;
+    object-fit: cover !important;
+    border: 2px solid var(--solar-gold) !important;
+    border-radius: 50% !important;
+    flex-shrink: 0 !important;
+  }
+
+  /* Reduções globais de títulos para caber perfeitamente no celular */
+  .section-title {
+    font-size: 2.1rem !important;
+    margin-bottom: 0.6rem !important;
+  }
+
+  .section-subtitle {
+    font-size: 0.95rem !important;
+    margin-bottom: 1.8rem !important;
+    padding: 0 1rem !important;
+    line-height: 1.5 !important;
+  }
 }

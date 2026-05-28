@@ -455,4 +455,68 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  // --- SEÇÃO 3: CÓDIGO DE ÉTICA (ACCORDION PASTAS NATIVO) ---
+  const ethicsCards = document.querySelectorAll(".ethics-card");
+  
+  if (ethicsCards.length > 0) {
+    ethicsCards.forEach((card, idx) => {
+      // Inicia o Card 0 como ativo no mobile por padrão
+      if (idx === 0 && !document.querySelector(".ethics-card.active")) {
+        card.classList.add("active");
+      }
+      
+      card.addEventListener("click", () => {
+        if (window.innerWidth <= 768) {
+          ethicsCards.forEach(c => c.classList.remove("active"));
+          card.classList.add("active");
+        }
+      });
+    });
+  }
+
+  // --- SEÇÃO 8: ECONOMIA CIRCULAR (LOOP ROTATIVO MOBILE) ---
+  const economyCards = document.querySelectorAll(".economy-node-card");
+  
+  if (economyCards.length > 0) {
+    // Inicializa as classes de posicionamento se não existirem
+    economyCards.forEach((card, idx) => {
+      card.classList.add(`pos-${idx + 1}`);
+    });
+    
+    economyCards.forEach((card) => {
+      card.addEventListener("click", () => {
+        if (window.innerWidth <= 768) {
+          // Só rotaciona se clicar num card inativo (pos-2 ou pos-3)
+          if (!card.classList.contains("pos-1")) {
+            const isPos2 = card.classList.contains("pos-2");
+            
+            const card1 = document.querySelector(".economy-node-card.pos-1");
+            const card2 = document.querySelector(".economy-node-card.pos-2");
+            const card3 = document.querySelector(".economy-node-card.pos-3");
+            
+            if (isPos2) {
+              // Rotaciona em sentido horário (Card 2 vai pra frente)
+              card2.classList.replace("pos-2", "pos-1");
+              card1.classList.replace("pos-1", "pos-3");
+              card3.classList.replace("pos-3", "pos-2");
+            } else {
+              // Rotaciona em sentido anti-horário (Card 3 vai pra frente)
+              card3.classList.replace("pos-3", "pos-1");
+              card1.classList.replace("pos-1", "pos-2");
+              card2.classList.replace("pos-2", "pos-3");
+            }
+          }
+        } else {
+          // Desktop/Tablet: Alterna estado ativo para ampliação do card selecionado
+          const isActive = card.classList.contains("active");
+          economyCards.forEach(c => c.classList.remove("active"));
+          if (!isActive) {
+            card.classList.add("active");
+          }
+        }
+      });
+    });
+  }
+
 });
+

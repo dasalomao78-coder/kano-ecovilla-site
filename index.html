@@ -2,7 +2,7 @@
 <html lang="pt">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Kano Ecovilla — Ecossistema Solarpunk</title>
   
   <!-- SEO Meta Tags -->
@@ -306,7 +306,7 @@
 
           <!-- Card 2: Escola da Natureza -->
           <div class="carousel-card next" data-index="1">
-            <img src="./escola_natureza.png" alt="Escola da Natureza" class="carousel-img" loading="lazy">
+            <img src="./escola_natureza.jpg" alt="Escola da Natureza" class="carousel-img" loading="lazy">
             <div class="carousel-body">
               <div class="living-tag">ZONA 4</div>
               <h3 class="living-card-title" data-i18n="living.schoolTitle">Escola da Natureza</h3>
@@ -498,7 +498,7 @@
           <!-- Nó 1: Turismo -->
           <div class="economy-node-card e-node-1" data-node="node1">
             <div class="economy-icon-container">
-              <img src="./eco_step1.png" alt="Turismo de Experiência" class="economy-icon">
+              <img src="./eco_step1_new.png" alt="Turismo de Experiência" class="economy-icon">
             </div>
             <h3 data-i18n="economy.node1Title">Turismo de Experiência (Capital Externo)</h3>
             <p data-i18n="economy.node1Text">Entrada de recursos através de retiros, imersões holísticas, cursos práticos de permacultura e venda de excedentes agroecológicos premium.</p>
@@ -507,7 +507,7 @@
           <!-- Nó 2: Mercado Interno -->
           <div class="economy-node-card e-node-2" data-node="node2">
             <div class="economy-icon-container">
-              <img src="./eco_step2.png" alt="Mercado Central" class="economy-icon">
+              <img src="./eco_step2_new.png" alt="Mercado Central" class="economy-icon">
             </div>
             <h3 data-i18n="economy.node2Title">Mercado Central (Circulação Interna)</h3>
             <p data-i18n="economy.node2Text">Troca livre de serviços e feira de comércio permanente fortalecendo a economia interna e os empreendimentos gerados pelos próprios moradores.</p>
@@ -516,9 +516,9 @@
           <!-- Nó 3: Stewardship -->
           <div class="economy-node-card e-node-3" data-node="node3">
             <div class="economy-icon-container">
-              <img src="./eco_step3.png" alt="Modelo Stewardship" class="economy-icon">
+              <img src="./eco_step3_new.png" alt="Modelo Stewardship" class="economy-icon">
             </div>
-            <h3 data-i18n="economy.node3Text">Modelo Stewardship (Reinvestimento)</h3>
+            <h3 data-i18n="economy.node3Title">Modelo Stewardship (Reinvestimento)</h3>
             <p data-i18n="economy.node3Text">100% do saldo de moradias coletivas e superávits institucionais retornam ao fundo comum para financiar projetos científicos e infraestrutura ecológica.</p>
           </div>
           
@@ -607,6 +607,65 @@
             <h3 data-i18n="school.card4Title">Educador como Mentor</h3>
             <p data-i18n="school.card4Text">Facilitadores de aprendizagem que caminham lado a lado, provocando a curiosidade intelectual em vez de impor respostas formatadas.</p>
           </div>
+        </div>
+      </div>
+
+      <!-- Carrossel Mobile para Escola Kano -->
+      <div class="mobile-carousel reveal">
+        <!-- Card 1 -->
+        <div class="mobile-carousel-card">
+          <div class="carousel-step-header">
+            <div class="tech-icon" style="color: var(--solar-gold); width: 32px; height: 32px;">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
+                <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
+              </svg>
+            </div>
+            <h3 data-i18n="school.card1Title" style="margin-left: 0.5rem;">Aprendizagem Adaptativa</h3>
+          </div>
+          <p data-i18n="school.card1Text">Um currículo livre construído com base nas afinidades e ritmos de cada criança, estimulando talentos natos e a liderança colaborativa.</p>
+        </div>
+        <!-- Card 2 -->
+        <div class="mobile-carousel-card">
+          <div class="carousel-step-header">
+            <div class="tech-icon" style="color: var(--solar-gold); width: 32px; height: 32px;">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                <circle cx="12" cy="10" r="3" />
+              </svg>
+            </div>
+            <h3 data-i18n="school.card2Title" style="margin-left: 0.5rem;">Arquitetura Sem Carteiras</h3>
+          </div>
+          <p data-i18n="school.card2Text">Salas de aula sem paredes ou carteiras fixas. O aprendizado ocorre em círculos de conversa, em sessões de yoga, meditação e contato direto com a floresta.</p>
+        </div>
+        <!-- Card 3 -->
+        <div class="mobile-carousel-card">
+          <div class="carousel-step-header">
+            <div class="tech-icon" style="color: var(--solar-gold); width: 32px; height: 32px;">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 2L2 7l10 5 10-5-10-5z" />
+                <path d="M2 17l10 5 10-5" />
+                <path d="M2 12l10 5 10-5" />
+              </svg>
+            </div>
+            <h3 data-i18n="school.card3Title" style="margin-left: 0.5rem;">Prática no Ecossistema</h3>
+          </div>
+          <p data-i18n="school.card3Text">Crianças gerenciam hortas escolares de forma ativa, coletando métricas reais de insetos e clima, aplicando a matemática no solo vivo.</p>
+        </div>
+        <!-- Card 4 -->
+        <div class="mobile-carousel-card">
+          <div class="carousel-step-header">
+            <div class="tech-icon" style="color: var(--solar-gold); width: 32px; height: 32px;">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                <circle cx="9" cy="7" r="4" />
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+              </svg>
+            </div>
+            <h3 data-i18n="school.card4Title" style="margin-left: 0.5rem;">Educador como Mentor</h3>
+          </div>
+          <p data-i18n="school.card4Text">Facilitadores de aprendizagem que caminham lado a lado, provocando a curiosidade intelectual em vez de impor respostas formatadas.</p>
         </div>
       </div>
     </div>
