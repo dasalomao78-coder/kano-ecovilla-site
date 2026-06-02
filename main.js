@@ -42,36 +42,7 @@ document.addEventListener("DOMContentLoaded", () => {
   
   spawnParticles();
 
-  // --- CURSOR CUSTOMIZADO EM DESKTOP ---
-  const cursor = document.getElementById("custom-cursor");
-  
-  if (cursor) {
-    // Detecta se é dispositivo touchscreen para não mostrar o cursor customizado
-    const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
-    
-    if (!isTouchDevice) {
-      cursor.classList.add("active");
-      
-      document.addEventListener("mousemove", (e) => {
-        cursor.style.left = `${e.clientX}px`;
-        cursor.style.top = `${e.clientY}px`;
-      });
-      
-      // Adiciona classe expandida em todos os links e botões interativos
-      const interactiveElements = document.querySelectorAll("a, button, .radial-ring, .radial-satellite, .iso-layer, .pipeline-step, .economy-node-card, .infinity-node");
-      
-      interactiveElements.forEach((el) => {
-        el.addEventListener("mouseenter", () => {
-          document.body.classList.add("hover-link");
-        });
-        el.addEventListener("mouseleave", () => {
-          document.body.classList.remove("hover-link");
-        });
-      });
-    } else {
-      cursor.style.display = "none";
-    }
-  }
+
 
   // --- NAV BAR TRANSIÇÃO AO ROLAR ---
   const header = document.getElementById("main-header");

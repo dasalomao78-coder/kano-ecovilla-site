@@ -72,7 +72,7 @@ export const translations = {
           desc: "O coração social e administrativo da Kano. Um domo de bioconstrução majestoso para assembleias sociocráticas, refeições comunitárias, celebrações e a central de dados."
         },
         zone5: {
-          title: "Anexo Oeste: Escola da Natureza (Zona 4)",
+          title: "Anexo Oeste: Universidade da Natureza (Zona 4)",
           desc: "Laboratório prático de ecologia profunda e bioconstrução. Área dedicada ao aprendizado ativo e oficinas de capacitação para moradores e visitantes do mundo inteiro."
         },
         zone6: {
@@ -86,8 +86,8 @@ export const translations = {
       subtitle: "Espaços projetados para coexistir, aprender e se regenerar.",
       coreTitle: "Núcleo Comunitário (Zona 3 & 6/7)",
       coreDesc: "Aluguel de quartos e chalés privativos totalmente integrados à Oca Principal. O espaço ideal para vivenciar o cotidiano comunitário, participar de jantares coletivos e compartilhar saberes.",
-      schoolTitle: "Escola da Natureza (Zona 4)",
-      schoolDesc: "Um ecossistema de aprendizado dinâmico. Gerencia o processamento ecológico de resíduos, abriga laboratórios de permacultura avançada, oficinas de bioconstrução e oferece alojamento para voluntários.",
+      schoolTitle: "Universidade da Natureza (Zona 4)",
+      schoolDesc: "Cursos imersivos de permacultura, agrofloresta e bioconstrução. Um polo acadêmico vivo onde a teoria e a prática se fundem para regenerar a terra e a comunidade.",
       retreatTitle: "Centro de Retiros (Zona 5)",
       retreatDesc: "Nosso polo de turismo holístico regenerativo. Conta com 3 ocas exclusivas imersas na mata atlântica nativa, projetadas para retiros individuais ou vivências de autoconhecimento coletivas."
     },
@@ -148,7 +148,7 @@ export const translations = {
       title: "Os Arquitetos",
       subtitle: "Mentes dedicadas a tecer a convergência entre o barro e o código.",
       member1Role: "O Conector de Sistemas",
-      member1Bio: "20 anos projetando sistemas de TI complexos. Descobriu na permacultura prática da Escola da Natureza a chave para arquitetar o sistema operacional social da Kano.",
+      member1Bio: "20 anos projetando sistemas de TI complexos. Descobriu na permacultura prática da Universidade da Natureza a chave para arquitetar o sistema operacional social da Kano.",
       member2Role: "O Designer do Espaço",
       member2Bio: "Empresário imobiliário que rompeu com o modelo convencional para se especializar em ecovilas. Traduz ideais ecológicos em estruturas habitacionais tangíveis.",
       member3Role: "A Mente Analítica",
@@ -243,7 +243,7 @@ export const translations = {
           desc: "The social and administrative heart of Kano. A majestic bioconstruction dome for sociocratic assemblies, communal meals, celebrations, and the database hub."
         },
         zone5: {
-          title: "West Wing: Nature School (Zone 4)",
+          title: "West Wing: Nature University (Zone 4)",
           desc: "Practical deep ecology and bioconstruction lab. Area dedicated to active learning and training workshops for residents and visitors from around the world."
         },
         zone6: {
@@ -257,8 +257,8 @@ export const translations = {
       subtitle: "Spaces designed for coexisting, learning, and regenerating.",
       coreTitle: "Community Core (Zone 3 & 6/7)",
       coreDesc: "Rental of rooms and private cottages fully integrated into the Main Oca. The ideal space to experience daily community life, participate in communal dinners, and share knowledge.",
-      schoolTitle: "Nature School (Zone 4)",
-      schoolDesc: "A dynamic learning ecosystem. Manages ecological waste processing, houses advanced permaculture labs, bioconstruction workshops, and offers volunteer housing.",
+      schoolTitle: "Nature University (Zone 4)",
+      schoolDesc: "Immersive courses in permaculture, agroforestry, and bioconstruction. A living academic hub where theory and practice merge to regenerate the earth and the community.",
       retreatTitle: "Retreat Center (Zone 5)",
       retreatDesc: "Our regenerative holistic tourism hub. Features 3 exclusive ocas immersed in the native Atlantic forest, designed for individual retreats or collective self-knowledge experiences."
     },
@@ -319,7 +319,7 @@ export const translations = {
       title: "The Architects",
       subtitle: "Minds dedicated to weaving the convergence of clay and code.",
       member1Role: "The System Connector",
-      member1Bio: "20 years designing complex IT systems. Found in practical permaculture at the Nature School the key to architecture Kano's social operating system.",
+      member1Bio: "20 years designing complex IT systems. Found in practical permaculture at the Nature University the key to architecture Kano's social operating system.",
       member2Role: "The Space Designer",
       member2Bio: "Real estate entrepreneur who broke with the conventional model to specialize in ecovillas. Translates ecological ideals into tangible housing structures.",
       member3Role: "The Analytical Mind",
