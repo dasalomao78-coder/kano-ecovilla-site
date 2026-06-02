@@ -2268,35 +2268,39 @@ body:hover #custom-cursor {
   }
   
   .economy-nodes-wrapper {
-    display: block !important;
-    width: 500px !important;
-    height: 500px !important;
-    transform: scale(0.62) !important;
-    transform-origin: center center !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 1.5rem !important;
+    width: 100% !important;
+    height: auto !important;
+    transform: none !important;
     margin: 0 auto !important;
-    flex-shrink: 0 !important;
   }
   
   .economy-arrows-svg {
-    display: block !important;
+    display: none !important;
   }
   
   .economy-node-card {
-    position: absolute !important;
-    width: 240px !important;
+    position: relative !important;
+    width: 90% !important;
+    max-width: 380px !important;
     margin: 0 !important;
-    padding: 1.3rem !important;
+    padding: 1.5rem !important;
     border-radius: 16px !important;
+    opacity: 1 !important;
+    transform: none !important;
   }
 
   .economy-node-card h3 {
-    font-size: 1.05rem !important;
+    font-size: 1.1rem !important;
     margin-bottom: 0.4rem !important;
   }
 
   .economy-node-card p {
-    font-size: 0.8rem !important;
-    line-height: 1.35 !important;
+    font-size: 0.9rem !important;
+    line-height: 1.4 !important;
   }
 
   .economy-icon-container {
@@ -2305,38 +2309,15 @@ body:hover #custom-cursor {
     margin-bottom: 0.8rem !important;
   }
 
-  /* Classes de posicionamento rotativo móvel (Economia Circular) */
-  .pos-1 {
-    top: 0 !important;
-    left: 50% !important;
-    right: auto !important;
-    bottom: auto !important;
-    transform: translateX(-50%) scale(1.08) !important;
-    z-index: 10 !important;
-    opacity: 1 !important;
-    box-shadow: var(--shadow-lg) !important;
-    background: var(--white) !important;
-  }
-  
-  .pos-2 {
-    bottom: 40px !important;
-    right: -60px !important;
+  /* Neutralize rotation classes since we are stacking them */
+  .pos-1, .pos-2, .pos-3 {
     top: auto !important;
     left: auto !important;
-    transform: scale(0.85) !important;
-    z-index: 5 !important;
-    opacity: 0.65 !important;
-    background: var(--glass-bg) !important;
-  }
-  
-  .pos-3 {
-    bottom: 40px !important;
-    left: -60px !important;
-    top: auto !important;
     right: auto !important;
-    transform: scale(0.85) !important;
-    z-index: 5 !important;
-    opacity: 0.65 !important;
+    bottom: auto !important;
+    transform: none !important;
+    z-index: auto !important;
+    opacity: 1 !important;
     background: var(--glass-bg) !important;
   }
 
