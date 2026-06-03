@@ -500,162 +500,83 @@ body:hover #custom-cursor {
 }
 
 /* ----------------------------------------------------------------
-   SEÇÃO 1: HERO (SLIDER ESTILO ALET AGENCY)
+   SEÇÃO 1: HERO
    ---------------------------------------------------------------- */
 
-#hero {
-  background-color: var(--forest-green);
-  position: relative;
+.fullscreen-section {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  position: relative;
+  padding: 6rem 2rem;
   overflow: hidden;
-  padding-top: 68px; /* header offset */
 }
 
-/* Header hiding class for the first section */
-#main-header {
-  transition: transform 0.3s ease, opacity 0.3s ease;
-}
-
-#main-header.hidden-on-hero {
-  transform: translateY(-100%);
-  opacity: 0;
-  pointer-events: none;
-}
-
-.hero-floating-title {
+.hero-bg {
   position: absolute;
-  top: 2rem;
-  left: 2rem;
-  z-index: 10;
-  pointer-events: none;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-size: cover;
+  background-position: center;
+  transform: scale(1.25);
+  z-index: 1;
 }
 
-.hero-logo-large {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  text-decoration: none;
-  pointer-events: auto; /* Allow clicking on the logo */
-}
-
-.hero-logo-large .logo-svg {
-  width: 90px;
-  height: 90px;
-}
-
-/* Força os traços do SVG para uma cor clara e elegante que contraste com o fundo escuro */
-.hero-logo-large .logo-svg polygon,
-.hero-logo-large .logo-svg path,
-.hero-logo-large .logo-svg line {
-  stroke: var(--cream-bg) !important;
-}
-
-.hero-logo-large .logo-svg circle {
-  fill: var(--cream-bg) !important;
-}
-
-.hero-logo-large .logo-text {
-  font-family: var(--font-title);
-  font-size: 3.5rem;
-  font-weight: 700;
-  color: var(--cream-bg);
-  letter-spacing: 2px;
-}
-
-.hero-floating-desc {
+.hero-overlay {
   position: absolute;
-  bottom: 8%;
+  top: 0;
   left: 0;
   width: 100%;
-  text-align: center;
-  z-index: 1;
-  pointer-events: none;
-  padding: 0 1rem;
+  height: 100%;
+  background: linear-gradient(180deg, 
+    rgba(27, 67, 50, 0.12) 0%, 
+    rgba(27, 67, 50, 0.01) 100%);
+  z-index: 2;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 3;
+  max-width: 900px;
 }
 
 .hero-title {
   font-family: var(--font-title);
   font-size: 5.5rem;
-  font-weight: 400;
+  font-weight: 900;
   color: var(--cream-bg);
-  letter-spacing: 0.5rem;
-  margin-bottom: 1rem;
-  text-transform: uppercase;
-  opacity: 0.9;
+  text-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+  line-height: 1.1;
+  margin-bottom: 2rem;
+  letter-spacing: -1px;
 }
 
 .hero-subtitle {
-  font-size: 1.2rem;
-  font-weight: 300;
-  color: var(--cream-bg);
-  opacity: 0.7;
-  max-width: 600px;
-  margin: 0 auto;
-}
-
-.hero-slider-container {
-  position: relative;
-  z-index: 2;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 60vh;
-  perspective: 1200px; /* Habilita o espaço 3D */
-  overflow: hidden; /* Nada de scroll nativo agora */
-  cursor: grab;
-  transform-style: preserve-3d;
-}
-
-.hero-slider-container:active {
-  cursor: grabbing;
-}
-
-.hero-slide {
-  position: absolute;
-  width: 85vw; 
-  height: 45vh; 
-  background-size: cover;
-  background-position: center;
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-  text-decoration: none;
-  overflow: hidden;
-  box-shadow: 0 15px 40px rgba(0,0,0,0.5);
-  will-change: transform, opacity;
-  border-radius: 4px;
-}
-
-@media (min-width: 769px) {
-  .hero-slide {
-    width: 35vw; 
-    height: 50vh; 
-  }
-}
-
-.slide-overlay {
-  position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: linear-gradient(to bottom, rgba(0,0,0,0) 50%, rgba(0,0,0,0.7) 100%);
-  z-index: 1;
-}
-
-.slide-title {
-  position: relative;
-  z-index: 2;
-  color: var(--cream-bg);
-  font-family: var(--font-title);
-  font-size: 1.5rem;
+  font-size: 1.6rem;
   font-weight: 400;
-  margin-bottom: 2rem;
-  opacity: 0.9;
-  text-transform: uppercase;
-  letter-spacing: 2px;
+  color: rgba(245, 240, 232, 0.9);
+  max-width: 750px;
+  margin: 0 auto 3.5rem auto;
+  line-height: 1.5;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.hero-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  width: 100%;
+}
+
+.hero-main-btn {
+  width: 100%;
+  max-width: 450px;
+  font-size: 1.15rem;
+  padding: 1.1rem 2.5rem;
 }
 
 /* Indicador de rolagem (Escalado 100% maior para destaque visual) */

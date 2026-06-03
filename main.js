@@ -47,11 +47,23 @@ document.addEventListener("DOMContentLoaded", () => {
   // --- NAV BAR TRANSIÇÃO AO ROLAR ---
   const header = document.getElementById("main-header");
   
+  // Esconde o header inicialmente na seção Hero (se não houver rolagem)
+  if(window.scrollY < window.innerHeight * 0.3) {
+    header.classList.add("hidden-on-hero");
+  }
+  
   window.addEventListener("scroll", () => {
     if (window.scrollY > 50) {
       header.classList.add("scrolled");
     } else {
       header.classList.remove("scrolled");
+    }
+
+    // Exibe o cabeçalho global apenas quando o usuário passar do Hero
+    if (window.scrollY < window.innerHeight * 0.3) {
+      header.classList.add("hidden-on-hero");
+    } else {
+      header.classList.remove("hidden-on-hero");
     }
   });
 
@@ -445,40 +457,99 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // --- SEÇÃO 8: ECONOMIA CIRCULAR (LOOP ROTATIVO MOBILE) ---
+  // --- CARROSSÉIS COM PONTOS (GOVERNANÇA E ESCOLA) ---
+  function initDotCarousel(containerSelector, dotsSelector, itemSelector) {
+    const container = document.querySelector(containerSelector);
+    const dotsContainer = document.querySelector(dotsSelector);
+    if (!container || !dotsContainer) return;
+
+    const dots = dotsContainer.querySelectorAll(".dot");
+    const items = container.querySelectorAll(itemSelector);
+    if (dots.length === 0 || items.length === 0) return;
+
+    // Atualiza os pontos baseados no scroll
+    container.addEventListener("scroll", () => {
+      const scrollPos = container.scrollLeft;
+      // Usar a largura de scroll total / numero de itens para ser mais preciso
+      const itemWidth = container.scrollWidth / items.length;
+      let index = Math.round(scrollPos / itemWidth);
+      if (index >= dots.length) index = dots.length - 1;
+      if (index < 0) index = 0;
+      
+      dots.forEach(d => d.classList.remove("active"));
+      dots[index].classList.add("active");
+    });
+
+    // Permite clicar nos pontos
+    dots.forEach((dot, index) => {
+      dot.addEventListener("click", () => {
+        const itemWidth = container.scrollWidth / items.length;
+        container.scrollTo({ left: index * itemWidth, behavior: 'smooth' });
+      });
+    });
+
+    // Rotação automática a cada 3 segundos
+    setInterval(() => {
+      if (window.innerWidth > 768) return; // Só roda no mobile
+      const scrollPos = container.scrollLeft;
+      const itemWidth = container.scrollWidth / items.length;
+      let currentIndex = Math.round(scrollPos / itemWidth);
+      
+      let nextIndex = currentIndex + 1;
+      if (nextIndex >= dots.length) {
+        nextIndex = 0;
+      }
+      container.scrollTo({ left: nextIndex * itemWidth, behavior: 'smooth' });
+    }, 3000);
+  }
+
+  // Inicializa para ambos
+  initDotCarousel(".pipeline-steps", ".carousel-dots-gov", ".pipeline-step");
+  initDotCarousel(".mobile-carousel", ".carousel-dots-school", ".mobile-carousel-card");
+
+  // --- SEÇÃO 8: ECONOMIA CIRCULAR (ACCORDION + NAV CIRCULAR MOBILE) ---
   const economyCards = document.querySelectorAll(".economy-node-card");
+  const mobileNavNodes = document.querySelectorAll(".mobile-nav-node");
   
   if (economyCards.length > 0) {
-    // Inicializa as classes de posicionamento se não existirem
-    economyCards.forEach((card, idx) => {
-      card.classList.add(`pos-${idx + 1}`);
+    // Inicializa o primeiro card como ativo no mobile
+    if (window.innerWidth <= 768) {
+      if (!document.querySelector(".economy-node-card.active")) {
+        economyCards[0].classList.add("active");
+        if(mobileNavNodes[0]) mobileNavNodes[0].classList.add("active");
+      }
+    }
+
+    // Clique na Navegação Circular (Mobile)
+    mobileNavNodes.forEach((node, idx) => {
+      node.addEventListener("click", () => {
+        if (window.innerWidth <= 768) {
+          economyCards.forEach(c => c.classList.remove("active"));
+          mobileNavNodes.forEach(n => n.classList.remove("active"));
+          
+          node.classList.add("active");
+          if(economyCards[idx]) {
+            economyCards[idx].classList.add("active");
+          }
+        }
+      });
     });
     
-    economyCards.forEach((card) => {
+    // Clique no próprio Cartão
+    economyCards.forEach((card, idx) => {
       card.addEventListener("click", () => {
         if (window.innerWidth <= 768) {
-          // Só rotaciona se clicar num card inativo (pos-2 ou pos-3)
-          if (!card.classList.contains("pos-1")) {
-            const isPos2 = card.classList.contains("pos-2");
-            
-            const card1 = document.querySelector(".economy-node-card.pos-1");
-            const card2 = document.querySelector(".economy-node-card.pos-2");
-            const card3 = document.querySelector(".economy-node-card.pos-3");
-            
-            if (isPos2) {
-              // Rotaciona em sentido horário (Card 2 vai pra frente)
-              card2.classList.replace("pos-2", "pos-1");
-              card1.classList.replace("pos-1", "pos-3");
-              card3.classList.replace("pos-3", "pos-2");
-            } else {
-              // Rotaciona em sentido anti-horário (Card 3 vai pra frente)
-              card3.classList.replace("pos-3", "pos-1");
-              card1.classList.replace("pos-1", "pos-2");
-              card2.classList.replace("pos-2", "pos-3");
-            }
+          // Comportamento Accordion no Mobile
+          const isActive = card.classList.contains("active");
+          economyCards.forEach(c => c.classList.remove("active"));
+          mobileNavNodes.forEach(n => n.classList.remove("active"));
+          
+          if (!isActive) {
+            card.classList.add("active");
+            if(mobileNavNodes[idx]) mobileNavNodes[idx].classList.add("active");
           }
         } else {
-          // Desktop/Tablet: Alterna estado ativo para ampliação do card selecionado
+        // Desktop/Tablet: Alterna estado ativo para ampliação do card selecionado
           const isActive = card.classList.contains("active");
           economyCards.forEach(c => c.classList.remove("active"));
           if (!isActive) {
@@ -489,5 +560,151 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-});
+  // --- HERO 3D Z-AXIS CAROUSEL (ESTILO UNVEIL.FR) ---
+  const heroSlider = document.querySelector('.hero-slider-container');
+  const slides = document.querySelectorAll('.hero-slide');
+  
+  if (heroSlider && slides.length > 0) {
+    let targetProgress = 0;
+    let currentProgress = 0;
+    const maxProgress = slides.length - 1;
+    
+    // Variáveis de Interação
+    let isDragging = false;
+    let startX = 0;
+    let startProgress = 0;
+    
+    // Arrays para interpolar o hover
+    let hoveredIndex = -1;
+    const hoverProgress = Array(slides.length).fill(0);
 
+    slides.forEach((slide, i) => {
+      slide.addEventListener('mouseenter', () => { hoveredIndex = i; });
+      slide.addEventListener('mouseleave', () => { if (hoveredIndex === i) hoveredIndex = -1; });
+    });
+    
+    // Função de Lerp para suavizar movimentos
+    const lerp = (start, end, factor) => start + (end - start) * factor;
+
+    const render3D = () => {
+      // Interpola suavemente o progresso atual até o alvo
+      currentProgress = lerp(currentProgress, targetProgress, 0.08);
+
+      const vw = window.innerWidth;
+      const vh = window.innerHeight;
+      const isMobile = vw <= 768;
+
+      slides.forEach((slide, i) => {
+        const d = i - currentProgress; 
+        
+        // Suavização do estado de hover
+        const targetHover = (hoveredIndex === i) ? 1 : 0;
+        hoverProgress[i] = lerp(hoverProgress[i], targetHover, 0.15);
+        const h = hoverProgress[i];
+
+        let x = 0, y = 0, scale = 1, opacity = 1;
+        
+        // Cartas viradas de lado, MAS a carta principal (d = 0) fica totalmente de frente
+        // Usamos Math.min(1, Math.abs(d)) para criar uma transição suave:
+        // Quando a carta chega no centro, a rotação zera. Quando sai, volta a inclinar.
+        const rotFactor = Math.min(1, Math.abs(d));
+        let rotY = 25 * rotFactor; 
+        let rotX = 5 * rotFactor;
+
+        if (d < 0) {
+          x = d * (vw * 0.4); 
+          y = d * (vh * -0.4);
+          scale = 1 + Math.abs(d * 0.5); 
+          opacity = 1 + (d * 0.8); 
+        } else {
+          x = d * (isMobile ? vw * 0.3 : vw * 0.22);
+          y = d * (isMobile ? vh * -0.15 : vh * -0.22);
+          scale = 1 - (d * 0.15); 
+          opacity = 1 - (d * 0.1); 
+        }
+
+        // --- HOVER POP-OUT EFFECT ---
+        x -= h * 50; 
+        y -= h * 50; 
+        scale += h * 0.08; 
+        rotY = rotY * (1 - h); 
+        rotX = rotX * (1 - h);
+
+        if (opacity <= 0 && h < 0.01) {
+          slide.style.visibility = 'hidden';
+        } else {
+          slide.style.visibility = 'visible';
+          let zIndex = 100 - Math.round(Math.abs(d) * 10);
+          if (h > 0) zIndex += Math.round(h * 200); // Traz pra frente no hover
+          
+          slide.style.transform = `translate3d(${x}px, ${y}px, 0) scale(${scale}) rotateY(${rotY}deg) rotateX(${rotX}deg)`;
+          slide.style.opacity = opacity;
+          slide.style.zIndex = zIndex;
+        }
+      });
+
+      requestAnimationFrame(render3D);
+    };
+
+    render3D();
+
+    // --- LÓGICA DE DRAG / WHEEL / CLICK ---
+    const handleDragStart = (x) => {
+      isDragging = true;
+      startX = x;
+      startProgress = targetProgress;
+      heroSlider.style.cursor = 'grabbing';
+    };
+
+    const handleDragMove = (x) => {
+      if (!isDragging) return;
+      const diffX = x - startX;
+      const sensitivity = window.innerWidth * 0.6; 
+      let newProgress = startProgress - (diffX / sensitivity) * 3; 
+      targetProgress = Math.max(0, Math.min(maxProgress, newProgress));
+    };
+
+    const handleDragEnd = () => {
+      isDragging = false;
+      heroSlider.style.cursor = 'grab';
+      targetProgress = Math.round(targetProgress);
+    };
+
+    heroSlider.addEventListener('mousedown', (e) => { e.preventDefault(); handleDragStart(e.clientX); });
+    window.addEventListener('mousemove', (e) => { handleDragMove(e.clientX); });
+    window.addEventListener('mouseup', () => { if(isDragging) handleDragEnd(); });
+
+    heroSlider.addEventListener('touchstart', (e) => { handleDragStart(e.touches[0].clientX); });
+    window.addEventListener('touchmove', (e) => {
+      if(isDragging) handleDragMove(e.touches[0].clientX);
+    }, {passive: false});
+    window.addEventListener('touchend', () => { if(isDragging) handleDragEnd(); });
+
+    slides.forEach((slide, i) => {
+      slide.addEventListener('click', (e) => {
+        if (Math.round(targetProgress) !== i) {
+          e.preventDefault();
+          targetProgress = i;
+        } else {
+          e.preventDefault();
+          const targetId = slide.getAttribute('href');
+          if (targetId && targetId.startsWith('#')) {
+            const targetSection = document.querySelector(targetId);
+            if (targetSection) targetSection.scrollIntoView({ behavior: 'smooth' });
+          }
+        }
+      });
+    });
+
+    // Rodinha do mouse
+    heroSlider.addEventListener('wheel', (e) => {
+      e.preventDefault();
+      const delta = Math.sign(e.deltaY) * 0.3;
+      targetProgress = Math.max(0, Math.min(maxProgress, targetProgress + delta));
+      clearTimeout(heroSlider.wheelSnapTimeout);
+      heroSlider.wheelSnapTimeout = setTimeout(() => {
+        targetProgress = Math.round(targetProgress);
+      }, 150);
+    }, { passive: false });
+  }
+});

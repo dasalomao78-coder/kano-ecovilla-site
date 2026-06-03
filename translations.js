@@ -125,11 +125,11 @@ export const translations = {
     economy: {
       title: "Economia Circular",
       subtitle: "Um ciclo fechado de geração, circulação e reinvestimento de valor real.",
-      node1Title: "Turismo de Experiência (Capital Externo)",
+      node1Title: "Turismo de Experiência",
       node1Text: "Entrada de recursos através de retiros, imersões holísticas, cursos práticos de permacultura e venda de excedentes agroecológicos premium.",
-      node2Title: "Mercado Central (Circulação Interna)",
+      node2Title: "Mercado Central",
       node2Text: "Troca livre de serviços e feira de comércio permanente fortalecendo a economia interna e os empreendimentos gerados pelos próprios moradores.",
-      node3Title: "Modelo Stewardship (Reinvestimento)",
+      node3Title: "Lucros Reinvestidos",
       node3Text: "100% do saldo de moradias coletivas e superávits institucionais retornam ao fundo comum para financiar projetos científicos e infraestrutura ecológica."
     },
     school: {

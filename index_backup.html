@@ -77,71 +77,18 @@
     </div>
   </header>
 
-  <!-- SEÇÃO 1: HERO (SLIDER INTERATIVO) -->
-  <section id="hero" class="fullscreen-section" style="padding: 0;">
-    
-    <!-- Título Principal Fixo no Topo Esquerdo -->
-    <div class="hero-floating-title">
-      <a href="#hero" class="logo-link hero-logo-large">
-        <svg class="logo-svg" viewBox="0 0 100 100">
-          <!-- Hexágono externo dourado -->
-          <polygon points="50,5 90,27.5 90,72.5 50,95 10,72.5 10,27.5" fill="none" stroke="var(--solar-gold)" stroke-width="4"/>
-          <!-- Símbolo orgânico interno - Folha estilizada em circuito -->
-          <path d="M50,20 C65,35 65,55 50,80 C35,55 35,35 50,20 Z" fill="none" stroke="var(--forest-green)" stroke-width="4"/>
-          <!-- Linhas de circuito ligando à folha -->
-          <line x1="50" y1="20" x2="50" y2="8" stroke="var(--neon-green)" stroke-width="2"/>
-          <line x1="50" y1="80" x2="50" y2="92" stroke="var(--neon-green)" stroke-width="2"/>
-          <circle cx="50" cy="20" r="3" fill="var(--neon-green)"/>
-          <circle cx="50" cy="80" r="3" fill="var(--neon-green)"/>
-        </svg>
-        <span class="logo-text">Kano</span>
-      </a>
+  <!-- SEÇÃO 1: HERO -->
+  <section id="hero" class="fullscreen-section">
+    <div class="hero-bg" style="background-image: url('./Imagem da ecovilla de cima.jpg');"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content text-center reveal">
+      <h1 class="hero-title" data-i18n="hero.title">Kano Ecovilla</h1>
+      <p class="hero-subtitle" data-i18n="hero.subtitle">O Ecossistema Solarpunk: Um Modelo Vivo para o Futuro da Habitação Humana.</p>
+      <div class="hero-buttons">
+        <a href="#system" class="btn btn-primary hero-main-btn" data-i18n="hero.ctaPrimary">Conheça o Projeto</a>
+      </div>
     </div>
 
-    <!-- Slider Horizontal Interativo -->
-    <div class="hero-slider-container">
-      
-      <a href="#system" class="hero-slide" style="background-image: url('./Imagem da ecovilla de cima.jpg');">
-        <div class="slide-overlay"></div>
-        <h3 class="slide-title">Entenda o Modelo</h3>
-      </a>
-      
-      <a href="#ethics" class="hero-slide" style="background-image: url('./Folha.png');">
-        <div class="slide-overlay"></div>
-        <h3 class="slide-title">Código de Ética</h3>
-      </a>
-      
-      <a href="#living" class="hero-slide" style="background-image: url('./Casas da ecovilla.jfif');">
-        <div class="slide-overlay"></div>
-        <h3 class="slide-title">Zonas de Vivências</h3>
-      </a>
-      
-      <a href="#tech" class="hero-slide" style="background-image: url('./tech_isometric.png');">
-        <div class="slide-overlay"></div>
-        <h3 class="slide-title">Pilha Tecnológica</h3>
-      </a>
-      
-      <a href="#governance" class="hero-slide" style="background-image: url('./gov_step4.png');">
-        <div class="slide-overlay"></div>
-        <h3 class="slide-title">Governança Híbrida</h3>
-      </a>
-      
-      <a href="#economy" class="hero-slide" style="background-image: url('./centro_retiros.png');">
-        <div class="slide-overlay"></div>
-        <h3 class="slide-title">Economia Circular</h3>
-      </a>
-      
-      <a href="#school" class="hero-slide" style="background-image: url('./Escola_natureza_Imagem pelo Gemini.jpg');">
-        <div class="slide-overlay"></div>
-        <h3 class="slide-title">Escola Kano</h3>
-      </a>
-      
-      <a href="#team" class="hero-slide" style="background-image: url('./Gemini_Generated_Image_.png');">
-        <div class="slide-overlay"></div>
-        <h3 class="slide-title">Os Arquitetos</h3>
-      </a>
-
-    </div>
   </section>
 
   <!-- SEÇÃO 2: ENTENDA O MODELO -->
