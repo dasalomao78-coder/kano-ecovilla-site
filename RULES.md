@@ -26,5 +26,9 @@
     > **`@Viraremprodução`**
   * *Observação: Se o usuário esquecer a palavra-chave, a IA pode relembrá-lo, pois o objetivo deste código é puramente evitar ações acidentais em produção.*
 
-## 5. Histórico de Alterações (Changelog)
+## 5. Prevenção de "Pulos" Automáticos (Safe Scrolling)
+* **Ações Automáticas e Scroll:** É estritamente proibido o uso de `scrollIntoView()`, `scrollTo()`, ou forçar o foco de elementos (`.focus()`) dentro de laços automáticos, `setInterval`, `setTimeout` ou geradores de `AutoPlay`.
+* **Trava Obrigatória:** Sempre que for animar ou rolar a página em resposta a um clique/toque, a IA deve validar se o evento foi gerado legitimamente pelo usuário utilizando a verificação de segurança nativa do navegador: `if (e && e.isTrusted)`. Isso garante que o usuário não perca sua posição de leitura caso a tela sofra atualizações autônomas no plano de fundo.
+
+## 6. Histórico de Alterações (Changelog)
 * **Registro de Atualizações:** Sempre que realizar qualquer atualização, modificação ou correção no projeto (seja visual ou lógica), a IA deve obrigatoriamente criar ou atualizar um arquivo na raiz do projeto chamado `CHANGELOG.md`. Esse arquivo deve conter a data, a hora e o resumo detalhado das alterações que foram efetivamente executadas (documentando de forma similar a um diário de bordo tudo o que já foi concluído no desenvolvimento).

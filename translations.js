@@ -17,11 +17,13 @@ export const translations = {
       subtitle: "O Ecossistema Solarpunk: Um Sistema Operacional para o Futuro da Habitação Humana.",
       ctaPrimary: "Conheça o Projeto",
       ctaSecondary: "Quero Morar",
-      scroll: "Rolar para explorar"
+      scroll: "Rolar para explorar",
+      more: "Mais"
     },
     system: {
-      title: "Entenda o Modelo",
+      title: "Entenda o Projeto",
       subtitle: "Assista à apresentação completa da Kano Ecovilla e compreenda nosso protocolo de regeneração.",
+      carouselDesc: "Uma visão imersiva do protocolo de regeneração.",
       quote: "A IA como ferramenta de libertação humana e regeneração ambiental.",
       permacultureTitle: "Permacultura & Ancestralidade",
       permacultureText: "Lado esquerdo (∞): Bioconstrução com terra e bambu, hortas circulares, e atividades holísticas de conexão. O enraizamento na terra como base existencial.",
@@ -33,6 +35,7 @@ export const translations = {
     ethics: {
       title: "Código de Ética",
       subtitle: "Nossos princípios fundamentais de coexistência, regeneração e infraestrutura.",
+      carouselDesc: "Nossos princípios inegociáveis de respeito a todas as formas de vida, guiando nossas ações e decisões diárias no ecossistema.",
       philosophyTitle: "Filosofia de Vida",
       philosophyDesc: "Estilo de vida consciente e integrado com a natureza circundante.",
       philosophyItem1: "100% Vegana (respeito irrestrito a todas as formas de vida)",
@@ -53,6 +56,7 @@ export const translations = {
     masterplan: {
       title: "Sustentabilidade",
       subtitle: "O design geométrico concêntrico que otimiza o fluxo de energia, água e convivência social.",
+      carouselDesc: "O design geométrico concêntrico que otimiza o fluxo de energia, água e convivência social (Masterplan).",
       instruction: "Passe o mouse ou toque nos anéis para inspecionar os subsistemas do ecossistema.",
       zones: {
         zone1: {
@@ -84,16 +88,18 @@ export const translations = {
     living: {
       title: "Zonas de Vivência",
       subtitle: "Espaços projetados para coexistir, aprender e se regenerar.",
-      coreTitle: "Núcleo Comunitário (Zona 3 & 6/7)",
+      carouselDesc: "Espaços projetados para maximizar as interações humanas e a simbiose com a natureza de forma orgânica e fluida.",
+      coreTitle: "Núcleo Comunitário",
       coreDesc: "Aluguel de quartos e chalés privativos totalmente integrados à Oca Principal. O espaço ideal para vivenciar o cotidiano comunitário, participar de jantares coletivos e compartilhar saberes.",
-      schoolTitle: "Universidade da Natureza (Zona 4)",
+      schoolTitle: "Universidade da Natureza",
       schoolDesc: "Cursos imersivos de permacultura, agrofloresta e bioconstrução. Um polo acadêmico vivo onde a teoria e a prática se fundem para regenerar a terra e a comunidade.",
-      retreatTitle: "Centro de Retiros (Zona 5)",
+      retreatTitle: "Centro de Retiros",
       retreatDesc: "Nosso polo de turismo holístico regenerativo. Conta com 3 ocas exclusivas imersas na mata atlântica nativa, projetadas para retiros individuais ou vivências de autoconhecimento coletivas."
     },
     tech: {
-      title: "Pilha Tecnológica: Ancestralidade & Inovação",
+      title: "Tecnologia",
       subtitle: "Uma infraestrutura de baixo impacto ambiental controlada por inteligência sutil.",
+      carouselDesc: "Infraestrutura invisível e descentralizada, garantindo soberania energética, hídrica e alimentar com base em dados em tempo real.",
       diagramTitle: "Esquema Isométrico das Camadas do Sistema",
       layer1Title: "Automação e Energia",
       layer1Text: "Painéis solares acoplados a baterias estacionárias. Horta vertical automatizada equipada com sensores de umidade, temperatura e nutrientes, regulada de forma autônoma via IA.",
@@ -105,6 +111,7 @@ export const translations = {
     governance: {
       title: "Governança Híbrida",
       subtitle: "O Motor de Decisão: A união sinérgica entre a lógica de dados e a empatia humana.",
+      carouselDesc: "A união sinérgica entre a lógica analítica da IA e a empatia, intuição e veto ético humano.",
       step1: {
         title: "1. Entrada de Dados",
         desc: "A IA processa continuamente métricas ambientais (volume de água, consumo de energia, níveis de compostagem e umidade da terra) e sugere propostas operacionais."
@@ -125,6 +132,7 @@ export const translations = {
     economy: {
       title: "Economia Circular",
       subtitle: "Um ciclo fechado de geração, circulação e reinvestimento de valor real.",
+      carouselDesc: "Ciclo fechado de valor: retiros, mercado interno e lucro reinvestido.",
       node1Title: "Turismo de Experiência",
       node1Text: "Entrada de recursos através de retiros, imersões holísticas, cursos práticos de permacultura e venda de excedentes agroecológicos premium.",
       node2Title: "Mercado Central",
@@ -135,6 +143,7 @@ export const translations = {
     school: {
       title: "Escola Kano",
       subtitle: "Treinando a próxima geração para habitar a Terra com sabedoria, ciência e arte.",
+      carouselDesc: "Onde a próxima geração aprende cultivando a terra, reprogramando o futuro com sabedoria, ciência e arte aplicada.",
       card1Title: "Aprendizagem Adaptativa",
       card1Text: "Um currículo livre construído com base nas afinidades e ritmos de cada criança, estimulando talentos natos e a liderança colaborativa.",
       card2Title: "Arquitetura Sem Carteiras",
@@ -147,6 +156,7 @@ export const translations = {
     team: {
       title: "Os Arquitetos",
       subtitle: "Mentes dedicadas a tecer a convergência entre o barro e o código.",
+      carouselDesc: "Mentes dedicadas a tecer a convergência entre o barro, o código, o design socioambiental e a espiritualidade.",
       member1Role: "O Conector de Sistemas",
       member1Bio: "20 anos projetando sistemas de TI complexos. Descobriu na permacultura prática da Universidade da Natureza a chave para arquitetar o sistema operacional social da Kano.",
       member2Role: "O Designer do Espaço",
@@ -188,11 +198,13 @@ export const translations = {
       subtitle: "The Solarpunk Ecosystem: An Operating System for the Future of Human Habitation.",
       ctaPrimary: "Explore the Project",
       ctaSecondary: "Apply to Live",
-      scroll: "Scroll to explore"
+      scroll: "Scroll to explore",
+      more: "More"
     },
     system: {
-      title: "Understand the Model",
+      title: "Understand the Project",
       subtitle: "Watch the full presentation of Kano Ecovilla and understand our regeneration protocol.",
+      carouselDesc: "An immersive view of the regeneration protocol.",
       quote: "AI as a tool for human liberation and environmental regeneration.",
       permacultureTitle: "Permaculture & Ancestry",
       permacultureText: "Left side (∞): Bioconstruction with earth and bamboo, circular gardens, and holistic activities. Grounding in the earth as an existential base.",
@@ -204,6 +216,7 @@ export const translations = {
     ethics: {
       title: "Code of Ethics",
       subtitle: "Our core principles of coexistence, regeneration, and infrastructure.",
+      carouselDesc: "Our non-negotiable principles of respect for all forms of life, guiding our daily actions and decisions in the ecosystem.",
       philosophyTitle: "Life Philosophy",
       philosophyDesc: "Conscious lifestyle integrated with the surrounding natural ecosystem.",
       philosophyItem1: "100% Vegan (unrestricted respect for all forms of life)",
@@ -222,8 +235,9 @@ export const translations = {
       propertyItem3: "100% of rent is reinvested in improvements and maintenance of the village"
     },
     masterplan: {
-      title: "Interactive Radial Masterplan",
+      title: "Sustainability",
       subtitle: "Concentric geometric design optimizing energy, water flows, and social coexistence.",
+      carouselDesc: "The concentric geometric design that optimizes the flow of energy, water, and social coexistence (Masterplan).",
       instruction: "Hover or tap on the rings to inspect the subsystems of the ecosystem.",
       zones: {
         zone1: {
@@ -255,16 +269,18 @@ export const translations = {
     living: {
       title: "Living Zones",
       subtitle: "Spaces designed for coexisting, learning, and regenerating.",
-      coreTitle: "Community Core (Zone 3 & 6/7)",
+      carouselDesc: "Spaces designed to maximize human interactions and symbiosis with nature in an organic and fluid way.",
+      coreTitle: "Community Core",
       coreDesc: "Rental of rooms and private cottages fully integrated into the Main Oca. The ideal space to experience daily community life, participate in communal dinners, and share knowledge.",
-      schoolTitle: "Nature University (Zone 4)",
+      schoolTitle: "Nature University",
       schoolDesc: "Immersive courses in permaculture, agroforestry, and bioconstruction. A living academic hub where theory and practice merge to regenerate the earth and the community.",
-      retreatTitle: "Retreat Center (Zone 5)",
+      retreatTitle: "Retreat Center",
       retreatDesc: "Our regenerative holistic tourism hub. Features 3 exclusive ocas immersed in the native Atlantic forest, designed for individual retreats or collective self-knowledge experiences."
     },
     tech: {
-      title: "Tech Stack: Ancestry & Innovation",
+      title: "Technology",
       subtitle: "A low-impact environmental infrastructure controlled by subtle intelligence.",
+      carouselDesc: "Invisible and decentralized infrastructure ensuring energy, water, and food sovereignty based on real-time data.",
       diagramTitle: "Isometric Diagram of System Layers",
       layer1Title: "Automation and Energy",
       layer1Text: "Photovoltaic solar panels connected to stationary batteries. Automated vertical garden equipped with moisture, temperature, and nutrient sensors, autonomously regulated via AI.",
@@ -276,6 +292,7 @@ export const translations = {
     governance: {
       title: "Hybrid Governance",
       subtitle: "The Decision Engine: Synergistic union between data logic and human empathy.",
+      carouselDesc: "The synergistic union between AI's analytical logic and human empathy, intuition, and ethical veto.",
       step1: {
         title: "1. Data Input",
         desc: "AI continuously processes environmental metrics (water volume, energy consumption, composting levels, and soil moisture) and suggests operational proposals."
@@ -296,6 +313,7 @@ export const translations = {
     economy: {
       title: "Circular Economy",
       subtitle: "A closed loop of generation, circulation, and reinvestment of real value.",
+      carouselDesc: "Closed value loop: retreats, internal market, and reinvested profits.",
       node1Title: "Experience Tourism (External Capital)",
       node1Text: "Inflow of resources through retreats, holistic immersions, practical permaculture courses, and the sale of premium organic surpluses.",
       node2Title: "Central Market (Internal Circulation)",
@@ -306,6 +324,7 @@ export const translations = {
     school: {
       title: "Kano School",
       subtitle: "Training the next generation to inhabit the Earth with wisdom, science, and art.",
+      carouselDesc: "Where the next generation learns by cultivating the earth, reprogramming the future with wisdom, science, and applied art.",
       card1Title: "Adaptive Learning",
       card1Text: "A free curriculum built on each child's unique affinities and pace, encouraging innate talents and collaborative leadership.",
       card2Title: "Deskless Architecture",
@@ -318,6 +337,7 @@ export const translations = {
     team: {
       title: "The Architects",
       subtitle: "Minds dedicated to weaving the convergence of clay and code.",
+      carouselDesc: "Minds dedicated to weaving the convergence between clay, code, socio-environmental design, and spirituality.",
       member1Role: "The System Connector",
       member1Bio: "20 years designing complex IT systems. Found in practical permaculture at the Nature University the key to architecture Kano's social operating system.",
       member2Role: "The Space Designer",

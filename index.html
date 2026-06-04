@@ -18,9 +18,26 @@
   <!-- Estilos Globais -->
   <link rel="stylesheet" href="./index.css">
 </head>
-<body>
+<body class="loading">
 
-
+  <!-- Splash Screen / Preloader -->
+  <div id="preloader">
+    <!-- Fundo de folhas -->
+    <div id="preloader-nature"></div>
+    
+    <!-- Símbolo Kano -->
+    <div class="preloader-content">
+      <svg class="preloader-logo-svg" viewBox="0 0 100 100">
+        <polygon class="draw-polygon" points="50,5 90,27.5 90,72.5 50,95 10,72.5 10,27.5" fill="none" stroke="var(--solar-gold)" stroke-width="2"/>
+        <path class="draw-path" d="M50,20 C65,35 65,55 50,80 C35,55 35,35 50,20 Z" fill="none" stroke="var(--forest-green)" stroke-width="2"/>
+        <line class="draw-line" x1="50" y1="20" x2="50" y2="8" stroke="var(--neon-green)" stroke-width="1.5"/>
+        <line class="draw-line" x1="50" y1="80" x2="50" y2="92" stroke="var(--neon-green)" stroke-width="1.5"/>
+        <circle class="draw-circle" cx="50" cy="20" r="3" fill="var(--neon-green)"/>
+        <circle class="draw-circle" cx="50" cy="80" r="3" fill="var(--neon-green)"/>
+      </svg>
+      <div class="preloader-text">KANO ECOVILLA</div>
+    </div>
+  </div>
 
   <!-- Partículas de Luz Solar -->
   <div id="particles-container"></div>
@@ -80,6 +97,16 @@
   <!-- SEÇÃO 1: HERO (SLIDER INTERATIVO) -->
   <section id="hero" class="fullscreen-section" style="padding: 0;">
     
+    <!-- Botão de Idioma Fixo no Hero -->
+    <button id="hero-lang-toggle" class="btn-lang" aria-label="Alterar idioma" style="position: absolute; top: 3.5rem; right: 2rem; z-index: 100; border-color: #fff; color: #fff; pointer-events: auto;">
+      <span class="lang-text" style="color: #fff;">EN</span>
+      <svg class="lang-icon" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2">
+        <circle cx="12" cy="12" r="10"/>
+        <line x1="2" y1="12" x2="22" y2="12"/>
+        <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+      </svg>
+    </button>
+
     <!-- Título Principal Fixo no Topo Esquerdo -->
     <div class="hero-floating-title">
       <a href="#hero" class="logo-link hero-logo-large">
@@ -95,6 +122,7 @@
           <circle cx="50" cy="80" r="3" fill="var(--neon-green)"/>
         </svg>
         <span class="logo-text">Kano</span>
+        <img src="./folha.png" id="hero-balancing-leaf" alt="">
       </a>
     </div>
 
@@ -103,51 +131,75 @@
       
       <a href="#system" class="hero-slide" style="background-image: url('./Imagem da ecovilla de cima.jpg');">
         <div class="slide-overlay"></div>
-        <h3 class="slide-title">Entenda o Modelo</h3>
+        <h3 class="slide-title" data-i18n="system.title">Entenda o Projeto</h3>
       </a>
       
-      <a href="#ethics" class="hero-slide" style="background-image: url('./Folha.png');">
+      <a href="#ethics" class="hero-slide" style="background-image: url('./folha.png');">
         <div class="slide-overlay"></div>
-        <h3 class="slide-title">Código de Ética</h3>
+        <h3 class="slide-title" data-i18n="ethics.title">Código de Ética</h3>
+      </a>
+      
+      <a href="#masterplan" class="hero-slide" style="background-image: url('./Fotos da Mão.png');">
+        <div class="slide-overlay"></div>
+        <h3 class="slide-title" data-i18n="masterplan.title">Sustentabilidade</h3>
       </a>
       
       <a href="#living" class="hero-slide" style="background-image: url('./Casas da ecovilla.jfif');">
         <div class="slide-overlay"></div>
-        <h3 class="slide-title">Zonas de Vivências</h3>
+        <h3 class="slide-title" data-i18n="living.title">Zonas de Vivências</h3>
       </a>
       
       <a href="#tech" class="hero-slide" style="background-image: url('./tech_isometric.png');">
         <div class="slide-overlay"></div>
-        <h3 class="slide-title">Pilha Tecnológica</h3>
+        <h3 class="slide-title" data-i18n="tech.title">Tecnologia</h3>
       </a>
       
       <a href="#governance" class="hero-slide" style="background-image: url('./gov_step4.png');">
         <div class="slide-overlay"></div>
-        <h3 class="slide-title">Governança Híbrida</h3>
+        <h3 class="slide-title" data-i18n="governance.title">Governança Híbrida</h3>
       </a>
       
-      <a href="#economy" class="hero-slide" style="background-image: url('./centro_retiros.png');">
+      <a href="#economy" class="hero-slide" style="background-image: url('./eco_step2_new.png');">
         <div class="slide-overlay"></div>
-        <h3 class="slide-title">Economia Circular</h3>
+        <h3 class="slide-title" data-i18n="economy.title">Economia Circular</h3>
       </a>
       
       <a href="#school" class="hero-slide" style="background-image: url('./Escola_natureza_Imagem pelo Gemini.jpg');">
         <div class="slide-overlay"></div>
-        <h3 class="slide-title">Escola Kano</h3>
+        <h3 class="slide-title" data-i18n="school.title">Escola Kano</h3>
       </a>
       
-      <a href="#team" class="hero-slide" style="background-image: url('./Gemini_Generated_Image_.png');">
+      <a href="#team" class="hero-slide" style="background-image: url('./eco_step1_new.png');">
         <div class="slide-overlay"></div>
-        <h3 class="slide-title">Os Arquitetos</h3>
+        <h3 class="slide-title" data-i18n="team.title">Os Arquitetos</h3>
       </a>
-
     </div>
+
+    <!-- Tooltip 3D de detalhe (Injetado e controlado pelo JS) -->
+    <div id="hero-detail-tooltip" class="hero-detail-tooltip">
+       <svg class="tooltip-connector" viewBox="0 0 100 200">
+          <path d="M50,0 L50,200" class="tooltip-line"></path>
+       </svg>
+       <div class="tooltip-content-card">
+          <h4 id="tooltip-title" class="tooltip-title">Título</h4>
+          <p id="tooltip-desc" class="tooltip-desc">Descrição do slide.</p>
+          <a href="#" id="tooltip-more-link" class="tooltip-more-link"><span class="more-text" data-i18n="hero.more">Mais</span> <span class="arrow">↓</span></a>
+       </div>
+    </div>
+
+    <!-- Indicador de Rolagem Mais elegante -->
+    <a href="#system" class="hero-scroll-more">
+      <span class="scroll-more-text" data-i18n="hero.more">Mais</span>
+      <svg class="scroll-more-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M12 5v14M19 12l-7 7-7-7"/>
+      </svg>
+    </a>
   </section>
 
   <!-- SEÇÃO 2: ENTENDA O MODELO -->
   <section id="system" class="section-padding">
     <div class="container text-center">
-      <h2 class="section-title reveal" data-i18n="system.title">Entenda o Modelo</h2>
+      <h2 class="section-title reveal" data-i18n="system.title">Entenda o Projeto</h2>
       <p class="section-subtitle reveal" data-i18n="system.subtitle">Assista à apresentação completa da Kano Ecovilla e compreenda nosso protocolo de regeneração e habitação consciente.</p>
 
       <div class="video-wrapper reveal">
@@ -281,17 +333,7 @@
             <!-- Núcleo - Oca Comunitária -->
             <circle cx="250" cy="250" r="50" class="radial-ring radial-core" data-zone="zone4" fill="transparent" pointer-events="all"/>
             
-            <!-- Anexos Circulares (Escola da Natureza e Centro de Retiros) -->
-            <!-- Oeste: Escola -->
-            <g class="radial-satellite" data-zone="zone5">
-              <circle cx="80" cy="250" r="25" class="satellite-circle" fill="transparent" stroke="var(--solar-gold)" stroke-width="4"/>
-              <text x="80" y="255" class="satellite-text" text-anchor="middle" fill="var(--solar-gold)" font-weight="bold">E</text>
-            </g>
-            <!-- Leste: Retiros -->
-            <g class="radial-satellite" data-zone="zone6">
-              <circle cx="420" cy="250" r="25" class="satellite-circle" fill="transparent" stroke="var(--solar-gold)" stroke-width="4"/>
-              <text x="420" y="255" class="satellite-text" text-anchor="middle" fill="var(--solar-gold)" font-weight="bold">R</text>
-            </g>
+            <!-- Anexos Circulares (Escola da Natureza e Centro de Retiros) removidos a pedido do usuário -->
           </svg>
         </div>
 
@@ -375,7 +417,7 @@
   <section id="tech" class="section-padding">
     <div class="container">
       <div class="text-center">
-        <h2 class="section-title reveal" data-i18n="tech.title">Pilha Tecnológica: Ancestralidade & Inovação</h2>
+        <h2 class="section-title reveal" data-i18n="tech.title">Tecnologia</h2>
         <p class="section-subtitle reveal" data-i18n="tech.subtitle">Nossa infraestrutura combina bioconstrução milenar com automação descentralizada.</p>
       </div>
 
@@ -525,7 +567,6 @@
           <div class="dot" data-index="1"></div>
           <div class="dot" data-index="2"></div>
           <div class="dot" data-index="3"></div>
-          <div class="dot" data-index="4"></div>
         </div>
       </div>
     </div>

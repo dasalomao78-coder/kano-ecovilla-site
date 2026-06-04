@@ -4,6 +4,62 @@ document.addEventListener("DOMContentLoaded", () => {
   // --- INICIALIZAÇÃO DE IDIOMA DE PREFERÊNCIA ---
   let currentLang = "pt"; // Padrão PT
   
+  // --- SPLASH SCREEN / PRELOADER LOGIC ---
+  const preloader = document.getElementById('preloader');
+  const preloaderNature = document.getElementById('preloader-nature');
+  const heroSliderCont = document.querySelector('.hero-slider-container');
+  const heroTitle = document.querySelector('.hero-floating-title');
+  
+  if (preloader) {
+    // Desabilita interações do usuário durante a animação inicial
+    document.body.style.pointerEvents = 'none';
+    
+    // 1. Injetar as folhas caindo (Fase 1)
+    if (preloaderNature) {
+       const heroLeaf = document.getElementById('hero-balancing-leaf');
+       const leafSrc = heroLeaf ? heroLeaf.src : './folha.png';
+       for (let i = 0; i < 20; i++) {
+          const leaf = document.createElement('img');
+          leaf.src = leafSrc;
+          leaf.className = 'intro-leaf';
+          leaf.style.left = `${Math.random() * 100}vw`;
+          const size = Math.random() * 20 + 95; // ~105px (tamanho gigante)
+          leaf.style.width = `${size}px`;
+          leaf.style.animationDuration = `${Math.random() * 1.5 + 1.5}s`;
+          leaf.style.animationDelay = `${Math.random() * 0.5}s`;
+          leaf.style.transform = `rotate(${Math.random() * 360}deg)`;
+          preloaderNature.appendChild(leaf);
+       }
+    }
+
+    // 2. Remover todo o preloader e revelar carrossel
+    setTimeout(() => {
+      preloader.classList.add('fade-out');
+      
+      setTimeout(() => {
+        document.body.classList.remove('loading');
+        document.body.style.pointerEvents = 'auto'; // Reativa interações
+        if (heroSliderCont) heroSliderCont.classList.add('show');
+        if (heroTitle) heroTitle.classList.add('show');
+        const heroLeaf = document.getElementById('hero-balancing-leaf');
+        if (heroLeaf) heroLeaf.classList.add('show');
+      }, 500); 
+      
+      setTimeout(() => {
+        preloader.remove();
+      }, 1000);
+      
+    }, 3200);
+  } else {
+    // Caso não exista preloader por algum motivo
+    document.body.classList.remove('loading');
+    document.body.style.pointerEvents = 'auto';
+    if (heroSliderCont) heroSliderCont.classList.add('show');
+    if (heroTitle) heroTitle.classList.add('show');
+    const heroLeaf = document.getElementById('hero-balancing-leaf');
+    if (heroLeaf) heroLeaf.classList.add('show');
+  }
+  
   // --- GERADOR DE PARTÍCULAS DE LUZ SOLAR ---
   const spawnParticles = () => {
     const container = document.getElementById("particles-container");
@@ -88,7 +144,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // --- SISTEMA DE TRADUÇÃO (PT / EN) ---
   const langToggle = document.getElementById("lang-toggle");
-  const langText = langToggle ? langToggle.querySelector(".lang-text") : null;
+  const heroLangToggle = document.getElementById("hero-lang-toggle");
+  
+  const updateLangTexts = (lang) => {
+    const textToSet = lang === "pt" ? "EN" : "PT";
+    if (langToggle) {
+       const text = langToggle.querySelector(".lang-text");
+       if (text) text.textContent = textToSet;
+    }
+    if (heroLangToggle) {
+       const text = heroLangToggle.querySelector(".lang-text");
+       if (text) text.textContent = textToSet;
+    }
+  };
   
   const translatePage = (lang) => {
     currentLang = lang;
@@ -96,10 +164,8 @@ document.addEventListener("DOMContentLoaded", () => {
     // Atualiza o atributo lang do HTML
     document.documentElement.lang = lang;
     
-    // Atualiza o texto do botão
-    if (langText) {
-      langText.textContent = lang === "pt" ? "EN" : "PT";
-    }
+    // Atualiza os textos dos botões
+    updateLangTexts(lang);
     
     // Busca todos os elementos com data-i18n
     const translateElements = document.querySelectorAll("[data-i18n]");
@@ -132,11 +198,16 @@ document.addEventListener("DOMContentLoaded", () => {
     return path.split('.').reduce((acc, part) => acc && acc[part], obj);
   };
   
+  const toggleLang = () => {
+    const newLang = currentLang === "pt" ? "en" : "pt";
+    translatePage(newLang);
+  };
+
   if (langToggle) {
-    langToggle.addEventListener("click", () => {
-      const newLang = currentLang === "pt" ? "en" : "pt";
-      translatePage(newLang);
-    });
+    langToggle.addEventListener("click", toggleLang);
+  }
+  if (heroLangToggle) {
+    heroLangToggle.addEventListener("click", toggleLang);
   }
 
   // --- SEÇÃO 2: INTERATIVIDADE DO INFINITO (∞) ---
@@ -201,7 +272,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const techBlocks = document.querySelectorAll(".tech-info-block");
   
   isoLayers.forEach((layer) => {
-    const handleLayerActivation = () => {
+    const handleLayerActivation = (e) => {
       const targetIdx = layer.getAttribute("data-target");
       
       // Destaca a camada isométrica
@@ -213,8 +284,8 @@ document.addEventListener("DOMContentLoaded", () => {
         block.classList.remove("active");
         if (block.getAttribute("data-index") === targetIdx) {
           block.classList.add("active");
-          // Rola suavemente até o bloco se em mobile
-          if (window.innerWidth <= 1024) {
+          // Rola suavemente até o bloco se em mobile (Apenas se for interação do usuário)
+          if (window.innerWidth <= 1024 && e && e.isTrusted) {
             block.scrollIntoView({ behavior: "smooth", block: "nearest" });
           }
         }
@@ -487,20 +558,6 @@ document.addEventListener("DOMContentLoaded", () => {
         container.scrollTo({ left: index * itemWidth, behavior: 'smooth' });
       });
     });
-
-    // Rotação automática a cada 3 segundos
-    setInterval(() => {
-      if (window.innerWidth > 768) return; // Só roda no mobile
-      const scrollPos = container.scrollLeft;
-      const itemWidth = container.scrollWidth / items.length;
-      let currentIndex = Math.round(scrollPos / itemWidth);
-      
-      let nextIndex = currentIndex + 1;
-      if (nextIndex >= dots.length) {
-        nextIndex = 0;
-      }
-      container.scrollTo({ left: nextIndex * itemWidth, behavior: 'smooth' });
-    }, 3000);
   }
 
   // Inicializa para ambos
@@ -565,37 +622,112 @@ document.addEventListener("DOMContentLoaded", () => {
   const slides = document.querySelectorAll('.hero-slide');
   
   if (heroSlider && slides.length > 0) {
+    let introProgress = 0; // 0 = Center, 1 = Formed Carousel
     let targetProgress = 0;
-    let currentProgress = 0;
-    const maxProgress = slides.length - 1;
+    let currentProgress = 0; 
+    const total = slides.length;
     
-    // Variáveis de Interação
+    // Variáveis de Interação e Auto-Lap (Fase 5)
+    let autoLapActive = false;
+    let autoLapCount = 0;
+    let autoLapInterval = null;
     let isDragging = false;
     let startX = 0;
     let startProgress = 0;
     
-    // Arrays para interpolar o hover
+    // Arrays para interpolar o hover e click
     let hoveredIndex = -1;
-    const hoverProgress = Array(slides.length).fill(0);
+    let clickedIndex = -1;
+    const hoverProgress = Array(total).fill(0);
+    const clickProgress = Array(total).fill(0);
 
-    slides.forEach((slide, i) => {
-      slide.addEventListener('mouseenter', () => { hoveredIndex = i; });
-      slide.addEventListener('mouseleave', () => { if (hoveredIndex === i) hoveredIndex = -1; });
-    });
-    
-    // Função de Lerp para suavizar movimentos
+    const tooltip = document.getElementById('hero-detail-tooltip');
+    const tooltipTitle = document.getElementById('tooltip-title');
+    const tooltipDesc = document.getElementById('tooltip-desc');
+
+    // --- OBSERVER TO RESET HERO WHEN SCROLLING BACK ---
+    const heroSection = document.getElementById('hero');
+    if (heroSection) {
+      const heroObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+             // Reset back to center when scrolling back up
+             if (targetProgress !== 0) {
+                targetProgress = 0;
+             }
+             if (clickedIndex !== -1) {
+                clickedIndex = -1;
+                if (tooltip) tooltip.classList.remove('active');
+             }
+          }
+        });
+      }, { threshold: 0.1 });
+      heroObserver.observe(heroSection);
+    }
+
+
+    // Funções utilitárias
+    const mod = (n, m) => ((n % m) + m) % m;
     const lerp = (start, end, factor) => start + (end - start) * factor;
 
+    const clearAutoLap = () => {
+      autoLapActive = false;
+      if (autoLapInterval) clearInterval(autoLapInterval);
+    };
+
+    slides.forEach((slide, i) => {
+      slide.addEventListener('mouseenter', () => { 
+        clearAutoLap();
+        hoveredIndex = i; 
+        
+        // Auto-scroll no hover se não for o central e não estiver arrastando
+        if (!isDragging && Math.abs(currentProgress - targetProgress) < 0.1) {
+          let diff = mod(i - targetProgress, total);
+          if (diff > total / 2) diff -= total;
+          
+          if (Math.abs(diff) > 0.1 && Math.round(diff) !== 0) {
+            targetProgress += Math.sign(Math.round(diff));
+            // Ao rodar, desativa o modo click
+            clickedIndex = -1;
+            if (tooltip) tooltip.classList.remove('active');
+          }
+        }
+      });
+      slide.addEventListener('mouseleave', () => { if (hoveredIndex === i) hoveredIndex = -1; });
+    });
+
     const render3D = () => {
-      // Interpola suavemente o progresso atual até o alvo
-      currentProgress = lerp(currentProgress, targetProgress, 0.08);
+      // Controle do progresso de introdução
+      if (!document.body.classList.contains('loading')) {
+         introProgress = lerp(introProgress, 1, 0.025); // Velocidade do voo
+         
+         // Inicia o Auto-Lap mais cedo (durante a expansão)
+         if (introProgress > 0.5 && !autoLapActive && autoLapCount === 0) {
+            autoLapActive = true;
+            autoLapInterval = setInterval(() => {
+              if (!autoLapActive) {
+                clearInterval(autoLapInterval);
+                return;
+              }
+              targetProgress++;
+              autoLapCount++;
+              if (autoLapCount >= total) {
+                clearAutoLap();
+              }
+            }, 400); // Dobro da velocidade (400ms)
+         }
+      }
+
+      // Interpolação super suave de giro até o alvo (ease-out longo)
+      currentProgress = lerp(currentProgress, targetProgress, 0.04);
 
       const vw = window.innerWidth;
       const vh = window.innerHeight;
       const isMobile = vw <= 768;
 
       slides.forEach((slide, i) => {
-        const d = i - currentProgress; 
+        let d = mod(i - currentProgress, total);
+        if (d > total / 2) d -= total;
         
         // Suavização do estado de hover
         const targetHover = (hoveredIndex === i) ? 1 : 0;
@@ -604,9 +736,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
         let x = 0, y = 0, scale = 1, opacity = 1;
         
-        // Cartas viradas de lado, MAS a carta principal (d = 0) fica totalmente de frente
-        // Usamos Math.min(1, Math.abs(d)) para criar uma transição suave:
-        // Quando a carta chega no centro, a rotação zera. Quando sai, volta a inclinar.
         const rotFactor = Math.min(1, Math.abs(d));
         let rotY = 25 * rotFactor; 
         let rotX = 5 * rotFactor;
@@ -629,19 +758,73 @@ document.addEventListener("DOMContentLoaded", () => {
         scale += h * 0.08; 
         rotY = rotY * (1 - h); 
         rotX = rotX * (1 - h);
+        
+        // --- CENTER ZOOM EXPANSION (Fase 4/5) ---
+        const finalX = x * introProgress;
+        const finalY = y * introProgress;
+        const finalScale = scale * Math.pow(introProgress, 2);
+        const finalOpacity = opacity * introProgress;
+        const finalRotX = rotX * introProgress;
+        const finalRotY = rotY * introProgress;
+        
+        // --- CLICK POP-OUT EFFECT (CENTRALIZATION) ---
+        let targetClick = (clickedIndex === i) ? 1 : 0;
+        clickProgress[i] = lerp(clickProgress[i], targetClick, 0.1); // Suave pull para o centro
+        let c = clickProgress[i];
+        
+        let renderX = lerp(finalX, 0, c);
+        let renderY = lerp(finalY, isMobile ? -30 : -50, c); // Sobe um pouquinho para dar espaço pro texto
+        let renderScale = lerp(finalScale, isMobile ? 1.4 : 1.3, c);
+        let renderRotX = lerp(finalRotX, 0, c);
+        let renderRotY = lerp(finalRotY, 0, c);
+        
+        // --- GRAYSCALE EFFECT ON CLICK ---
+        let isGrayscale = false;
+        if (clickedIndex !== -1 && clickedIndex !== i) {
+          isGrayscale = true;
+        }
+        
+        // Hover remove o grayscale
+        if (h > 0.05) {
+          isGrayscale = false;
+        }
 
-        if (opacity <= 0 && h < 0.01) {
+        // --- Z-INDEX DINÂMICO ---
+        let zIndex = 100 - Math.round(Math.abs(d) * 10);
+        if (h > 0) zIndex += Math.round(h * 200);
+        
+        if (clickedIndex !== -1) {
+           if (clickedIndex !== i) {
+              zIndex = 1; // joga pra trás
+           } else {
+              zIndex += 500; // selecionado pra super frente
+           }
+        }
+
+        // Aplica o transform combinado (Center Zoom -> Carousel -> Clicked Center)
+        if (finalOpacity <= 0.01) {
           slide.style.visibility = 'hidden';
         } else {
           slide.style.visibility = 'visible';
-          let zIndex = 100 - Math.round(Math.abs(d) * 10);
-          if (h > 0) zIndex += Math.round(h * 200); // Traz pra frente no hover
-          
-          slide.style.transform = `translate3d(${x}px, ${y}px, 0) scale(${scale}) rotateY(${rotY}deg) rotateX(${rotX}deg)`;
-          slide.style.opacity = opacity;
+          slide.style.transform = `translate3d(${renderX}px, ${renderY}px, 0) scale(${renderScale}) rotateY(${renderRotY}deg) rotateX(${renderRotX}deg)`;
+          slide.style.opacity = isGrayscale ? finalOpacity * 0.3 : finalOpacity;
+          slide.style.filter = isGrayscale ? 'grayscale(100%)' : 'grayscale(0%)';
           slide.style.zIndex = zIndex;
+          
+          // Oculta o título na imagem se o tooltip dela estiver aberto
+          const titleEl = slide.querySelector('.slide-title');
+          if (titleEl) {
+             titleEl.style.opacity = (clickedIndex === i) ? '0' : '0.9';
+          }
         }
       });
+
+      // Oculta indicador de scroll global se o tooltip estiver aberto
+      const scrollMore = document.querySelector('.hero-scroll-more');
+      if (scrollMore) {
+        scrollMore.style.opacity = (clickedIndex !== -1) ? '0' : '';
+        scrollMore.style.pointerEvents = (clickedIndex !== -1) ? 'none' : '';
+      }
 
       requestAnimationFrame(render3D);
     };
@@ -649,19 +832,40 @@ document.addEventListener("DOMContentLoaded", () => {
     render3D();
 
     // --- LÓGICA DE DRAG / WHEEL / CLICK ---
-    const handleDragStart = (x) => {
-      isDragging = true;
-      startX = x;
-      startProgress = targetProgress;
-      heroSlider.style.cursor = 'grabbing';
+    let startY = 0;
+
+    const triggerLeafDrop = () => {
+      const heroLeaf = document.getElementById('hero-balancing-leaf');
+      if (heroLeaf && !heroLeaf.classList.contains('falling')) {
+        heroLeaf.classList.add('falling');
+      }
     };
 
-    const handleDragMove = (x) => {
+    const handleDragStart = (x, y = 0) => {
+      triggerLeafDrop();
+      clearAutoLap();
+      isDragging = true;
+      startX = x;
+      startY = y;
+      startProgress = targetProgress;
+      heroSlider.style.cursor = 'grabbing';
+      clickedIndex = -1;
+      if (tooltip) tooltip.classList.remove('active');
+    };
+
+    const handleDragMove = (x, y = 0, isTouch = false) => {
       if (!isDragging) return;
       const diffX = x - startX;
+      const diffY = y - startY;
+      
+      let diff = diffX;
+      if (isTouch && Math.abs(diffY) > Math.abs(diffX)) {
+        diff = diffY;
+      }
+      
       const sensitivity = window.innerWidth * 0.6; 
-      let newProgress = startProgress - (diffX / sensitivity) * 3; 
-      targetProgress = Math.max(0, Math.min(maxProgress, newProgress));
+      // Invertido conforme solicitação: + invés de -
+      targetProgress = startProgress + (diff / sensitivity) * 3; 
     };
 
     const handleDragEnd = () => {
@@ -669,28 +873,92 @@ document.addEventListener("DOMContentLoaded", () => {
       heroSlider.style.cursor = 'grab';
       targetProgress = Math.round(targetProgress);
     };
-
-    heroSlider.addEventListener('mousedown', (e) => { e.preventDefault(); handleDragStart(e.clientX); });
-    window.addEventListener('mousemove', (e) => { handleDragMove(e.clientX); });
+    heroSlider.addEventListener('mousedown', (e) => { e.preventDefault(); handleDragStart(e.clientX, e.clientY); });
+    window.addEventListener('mousemove', (e) => { handleDragMove(e.clientX, e.clientY); });
     window.addEventListener('mouseup', () => { if(isDragging) handleDragEnd(); });
 
-    heroSlider.addEventListener('touchstart', (e) => { handleDragStart(e.touches[0].clientX); });
+    heroSlider.addEventListener('touchstart', (e) => { handleDragStart(e.touches[0].clientX, e.touches[0].clientY); }, { passive: false });
     window.addEventListener('touchmove', (e) => {
-      if(isDragging) handleDragMove(e.touches[0].clientX);
+      if(isDragging) {
+        e.preventDefault();
+        handleDragMove(e.touches[0].clientX, e.touches[0].clientY, true);
+      }
     }, {passive: false});
     window.addEventListener('touchend', () => { if(isDragging) handleDragEnd(); });
-
     slides.forEach((slide, i) => {
       slide.addEventListener('click', (e) => {
-        if (Math.round(targetProgress) !== i) {
+        clearAutoLap();
+        let diff = mod(i - targetProgress, total);
+        if (diff > total / 2) diff -= total;
+        
+        if (Math.round(diff) !== 0) {
           e.preventDefault();
-          targetProgress = i;
+          targetProgress += Math.round(diff);
+          clickedIndex = -1;
+          if (tooltip) tooltip.classList.remove('active');
         } else {
           e.preventDefault();
-          const targetId = slide.getAttribute('href');
-          if (targetId && targetId.startsWith('#')) {
-            const targetSection = document.querySelector(targetId);
-            if (targetSection) targetSection.scrollIntoView({ behavior: 'smooth' });
+          if (clickedIndex === i) {
+             // Desativa se clicar novamente
+             clickedIndex = -1;
+             if (tooltip) tooltip.classList.remove('active');
+          } else {
+             // Ativa a etiqueta
+             clickedIndex = i;
+             if (tooltip && tooltipTitle && tooltipDesc) {
+                // Usa o href da imagem para descobrir o ID da seção (ex: '#system' -> 'system')
+                const slideId = slides[i].getAttribute('href').replace('#', '');
+                
+                // Define os atributos data-i18n para que a função translatePage atualize-os automaticamente
+                tooltipTitle.setAttribute('data-i18n', `${slideId}.title`);
+                tooltipDesc.setAttribute('data-i18n', `${slideId}.carouselDesc`);
+                
+                // Busca o título e descrição na linguagem atual a partir do arquivo de traduções
+                const langData = translations[currentLang];
+                let titleText = '';
+                let descText = '';
+                
+                if (langData && langData[slideId]) {
+                   titleText = langData[slideId].title || '';
+                   descText = langData[slideId].carouselDesc || '';
+                }
+                
+                tooltipTitle.textContent = titleText;
+                tooltipDesc.textContent = descText;
+                
+                // Atualiza o texto do botão "Mais" sem apagar a seta
+                const moreTextSpan = tooltip.querySelector('#tooltip-more-link .more-text');
+                if (moreTextSpan) {
+                   moreTextSpan.setAttribute('data-i18n', 'hero.more');
+                   if (langData && langData.hero) {
+                      moreTextSpan.textContent = langData.hero.more || 'Mais';
+                   }
+                }
+                
+                const tooltipMoreLink = document.getElementById('tooltip-more-link');
+                const tooltipCard = tooltip.querySelector('.tooltip-content-card');
+                if (tooltipMoreLink) {
+                  const slideHref = slide.getAttribute('href');
+                  tooltipMoreLink.href = slideHref || '#';
+                  
+                  // Make the entire card clickable
+                  if (tooltipCard) {
+                    tooltipCard.onclick = (ev) => {
+                       if (slideHref && slideHref.startsWith('#')) {
+                          ev.preventDefault();
+                          const targetSection = document.querySelector(slideHref);
+                          if (targetSection) targetSection.scrollIntoView({ behavior: 'smooth' });
+                       }
+                    };
+                  }
+                  
+                  tooltipMoreLink.onclick = (ev) => {
+                     ev.preventDefault();
+                  };
+                }
+                
+                tooltip.classList.add('active');
+             }
           }
         }
       });
@@ -699,12 +967,180 @@ document.addEventListener("DOMContentLoaded", () => {
     // Rodinha do mouse
     heroSlider.addEventListener('wheel', (e) => {
       e.preventDefault();
+      triggerLeafDrop();
+      clearAutoLap();
       const delta = Math.sign(e.deltaY) * 0.3;
-      targetProgress = Math.max(0, Math.min(maxProgress, targetProgress + delta));
+      // Invertido conforme solicitação: - invés de +
+      targetProgress = targetProgress - delta;
+      
+      // Remove clicked mode on scroll
+      clickedIndex = -1;
+      if (tooltip) tooltip.classList.remove('active');
+      
       clearTimeout(heroSlider.wheelSnapTimeout);
       heroSlider.wheelSnapTimeout = setTimeout(() => {
         targetProgress = Math.round(targetProgress);
       }, 150);
     }, { passive: false });
   }
+
+  // --- GLOBAL AUTO-PLAY MANAGER (5s/20s) ---
+  class AutoPlayManager {
+    constructor(selector, triggerEvent = 'click') {
+      this.elements = Array.from(document.querySelectorAll(selector));
+      this.triggerEvent = triggerEvent;
+      this.currentIndex = 0;
+      this.timer = null;
+      this.pauseTimeout = null;
+      this.isPaused = false;
+      this.isIntersecting = false;
+      this.init();
+    }
+    
+    init() {
+      if (this.elements.length === 0) return;
+      
+      // Bind user interaction (pauses timer)
+      this.elements.forEach((el, idx) => {
+        el.addEventListener('mousedown', () => this.handleUserInteraction(idx));
+        el.addEventListener('touchstart', () => this.handleUserInteraction(idx), { passive: true });
+      });
+
+      // Also listen on the parent container to catch swipes or clicks on the cards
+      const container = this.elements[0].closest('.container') || this.elements[0].closest('.carousel-3d-container') || this.elements[0].parentElement;
+      if (container) {
+        container.addEventListener('mousedown', () => this.handleUserInteraction(this.currentIndex));
+        container.addEventListener('touchstart', () => this.handleUserInteraction(this.currentIndex), { passive: true });
+      }
+      
+      // Observe visibility to start/stop and reset to 0 when out of view
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            this.isIntersecting = true;
+            this.start();
+          } else {
+            this.isIntersecting = false;
+            this.stop();
+            // Reset to 0 when out of view (solves Issue: Arquitetos sempre começar com David Salomão)
+            if (this.currentIndex !== 0) {
+              this.currentIndex = 0;
+              const firstEl = this.elements[0];
+              if (this.triggerEvent === 'click') {
+                firstEl.click();
+              } else if (this.triggerEvent === 'mouseenter') {
+                firstEl.dispatchEvent(new Event('mouseenter'));
+              }
+            }
+          }
+        });
+      }, { threshold: 0.1 });
+      
+      const targetElement = this.elements[0].closest('section') || this.elements[0].parentElement;
+      observer.observe(targetElement);
+    }
+    
+    start() {
+      this.stop();
+      // Não inicia se estiver pausado pelo usuário ou se estiver fora da tela!
+      if (this.isPaused || !this.isIntersecting) return;
+      this.timer = setInterval(() => this.next(), 5000);
+    }
+    
+    stop() {
+      if (this.timer) clearInterval(this.timer);
+    }
+    
+    handleUserInteraction(idx) {
+      this.currentIndex = idx;
+      this.isPaused = true;
+      this.stop();
+      if (this.pauseTimeout) clearTimeout(this.pauseTimeout);
+      
+      this.pauseTimeout = setTimeout(() => {
+        this.isPaused = false;
+        // O start já verifica se a seção está visível (isIntersecting)
+        this.start();
+      }, 20000);
+    }
+    
+    next() {
+      if (this.elements.length === 0 || this.isPaused || !this.isIntersecting) return;
+      
+      // Trava de segurança rigorosa: Só roda se o elemento estiver de fato dentro do viewport.
+      const el = this.elements[this.currentIndex];
+      const rect = el.getBoundingClientRect();
+      const inView = (rect.bottom > 0 && rect.top < window.innerHeight);
+      if (!inView) {
+        this.stop();
+        return;
+      }
+
+      this.currentIndex = (this.currentIndex + 1) % this.elements.length;
+      
+      // Simulate interaction without pausing (since pause listens to mousedown/touchstart)
+      const nextEl = this.elements[this.currentIndex];
+      if (this.triggerEvent === 'click') {
+        nextEl.click();
+      } else if (this.triggerEvent === 'mouseenter') {
+        nextEl.dispatchEvent(new Event('mouseenter'));
+      }
+    }
+  }
+
+  // Initialize auto-play instances after a short delay
+  setTimeout(() => {
+    new AutoPlayManager('.ethics-card', 'click');
+    new AutoPlayManager('.team-avatar', 'mouseenter');
+    new AutoPlayManager('.tech-svg-layer', 'mouseenter');
+    new AutoPlayManager('.carousel-card', 'click');
+    new AutoPlayManager('.radial-ring', 'mouseenter'); // Funciona no mobile e no desktop
+    
+    // Comportamentos diferentes para Mobile vs Desktop
+    if (window.innerWidth <= 768) {
+      new AutoPlayManager('.mobile-nav-node', 'click'); // Mobile circular nav (Economia)
+      new AutoPlayManager('.carousel-dots-gov .dot', 'click'); // Mobile Gov
+      new AutoPlayManager('.carousel-dots-school .dot', 'click'); // Mobile School
+    } else {
+      new AutoPlayManager('.economy-node-card', 'click');
+      new AutoPlayManager('.pipeline-step', 'mouseenter');
+      new AutoPlayManager('.school-card', 'mouseenter'); // Desktop School
+    }
+  }, 1000);
+  
+  // Lógica ativação para .school-card (Desktop)
+  const schoolCards = document.querySelectorAll(".school-card");
+  schoolCards.forEach(card => {
+    card.addEventListener("mouseenter", () => {
+      schoolCards.forEach(c => c.classList.remove("active"));
+      card.classList.add("active");
+    });
+  });
+
+  // --- PAUSE VIDEO WHEN OUT OF VIEW ---
+  const modelVideo = document.getElementById('model-video');
+  if (modelVideo) {
+    const videoObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) {
+          modelVideo.pause();
+        }
+      });
+    }, { threshold: 0.1 });
+    videoObserver.observe(modelVideo);
+  }
+  
+  // Clicar fora da etiqueta para fechá-la
+  document.addEventListener('click', (e) => {
+    const tooltip = document.querySelector('.hero-center-tooltip');
+    if (tooltip && tooltip.classList.contains('active')) {
+      // Se clicar dentro do tooltip ou num card, não fecha aqui
+      if (tooltip.contains(e.target) || e.target.closest('.hero-slide') || e.target.closest('.hero-slider-container')) {
+        return;
+      }
+      // Reseta clickedIndex (variável global) emitindo um wheel fake ou acessando o estado se pudéssemos
+      // Mas podemos apenas fechar visualmente a etiqueta, e o drag/wheel vão resetar a classe naturalmente.
+      tooltip.classList.remove('active');
+    }
+  });
 });

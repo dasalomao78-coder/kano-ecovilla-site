@@ -79,6 +79,177 @@ body {
   background-attachment: fixed;
 }
 
+/* --- PRELOADER (SPLASH SCREEN) --- */
+body.loading {
+  overflow: hidden;
+  height: 100vh;
+}
+
+#preloader {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-color: var(--forest-green-dark);
+  z-index: 999999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: opacity 0.8s ease-out, visibility 0.8s ease-out;
+  overflow: hidden;
+}
+
+#preloader.fade-out {
+  opacity: 0;
+  visibility: hidden;
+}
+
+#preloader-nature {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.intro-leaf {
+  position: absolute;
+  top: -10%;
+  width: 40px;
+  height: auto;
+  opacity: 0.8;
+  animation: fallingLeaf linear forwards;
+  filter: drop-shadow(0 5px 5px rgba(0,0,0,0.1));
+}
+
+@keyframes fallingLeaf {
+  0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+  10% { opacity: 0.8; }
+  100% { transform: translateY(120vh) rotate(360deg); opacity: 0; }
+}
+
+.preloader-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
+
+.preloader-logo-svg {
+  width: 120px;
+  height: 120px;
+  overflow: visible;
+}
+
+/* SVG Line Drawing Animation */
+.draw-polygon {
+  stroke-dasharray: 300;
+  stroke-dashoffset: 300;
+  animation: drawLine 1.5s ease-in-out forwards;
+}
+
+.draw-path {
+  stroke-dasharray: 200;
+  stroke-dashoffset: 200;
+  animation: drawLine 1.5s ease-in-out forwards 0.5s;
+}
+
+.draw-line {
+  stroke-dasharray: 50;
+  stroke-dashoffset: 50;
+  animation: drawLine 1s ease-in-out forwards 1s;
+}
+
+.draw-circle {
+  opacity: 0;
+  transform-origin: center;
+  transform: scale(0);
+  animation: popIn 0.5s ease-out forwards 1.2s;
+}
+
+@keyframes drawLine {
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes popIn {
+  to { opacity: 1; transform: scale(1); }
+}
+
+.preloader-text {
+  font-family: var(--font-title);
+  font-size: 1.8rem;
+  letter-spacing: 4px;
+  color: var(--solar-gold);
+  opacity: 0;
+  transform: translateY(10px);
+  animation: textFadeIn 1s ease-out forwards 1.5s;
+}
+
+@keyframes textFadeIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    text-shadow: 0 0 10px rgba(140, 177, 99, 0.4);
+  }
+}
+
+/* Hero Intro Animations */
+.hero-slider-container {
+  opacity: 0;
+  transition: opacity 0.5s ease-in;
+}
+.hero-slider-container.show {
+  opacity: 1;
+}
+
+.hero-floating-title {
+  opacity: 0;
+  transition: opacity 1.5s ease-out 0.8s;
+}
+.hero-floating-title.show {
+  opacity: 1;
+}
+
+.hero-logo-large {
+  position: relative;
+}
+
+#hero-balancing-leaf {
+  position: absolute;
+  top: -35px; /* Ajuste para o novo tamanho (metade da distância percebida) */
+  right: -30px; 
+  width: 105px; /* O triplo do original (35 * 3) */
+  opacity: 0;
+  transition: opacity 1s ease-out;
+  animation: leafBalance 3s ease-in-out infinite;
+  transform-origin: center center;
+  z-index: 10;
+  pointer-events: none;
+  filter: drop-shadow(0 4px 4px rgba(0,0,0,0.15));
+}
+
+#hero-balancing-leaf.show {
+  opacity: 1;
+}
+
+#hero-balancing-leaf.falling {
+  animation: leafDropWind 6s ease-in forwards; /* 3x mais lento (era 2s) */
+}
+
+@keyframes leafBalance {
+  /* Folha "deitada" balanceando suavemente */
+  0%, 100% { transform: rotate(75deg); }
+  50% { transform: rotate(90deg); }
+}
+
+@keyframes leafDropWind {
+  0%   { transform: translate(0, 0) rotate(75deg); opacity: 1; }
+  15%  { transform: translate(30px, 15vh) rotate(110deg); opacity: 1; }
+  35%  { transform: translate(-40px, 35vh) rotate(50deg); opacity: 1; }
+  55%  { transform: translate(50px, 60vh) rotate(130deg); opacity: 1; }
+  75%  { transform: translate(-30px, 85vh) rotate(60deg); opacity: 0.8; }
+  100% { transform: translate(40px, 120vh) rotate(110deg); opacity: 0; }
+}
+
 /* Cursor customizado - Apenas em Desktop */
 #custom-cursor {
   position: fixed;
@@ -529,7 +700,9 @@ body:hover #custom-cursor {
 .hero-floating-title {
   position: absolute;
   top: 2rem;
-  left: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
   z-index: 10;
   pointer-events: none;
 }
@@ -562,7 +735,9 @@ body:hover #custom-cursor {
   font-family: var(--font-title);
   font-size: 3.5rem;
   font-weight: 700;
-  color: var(--cream-bg);
+  color: var(--white);
+  background: none;
+  -webkit-text-fill-color: var(--white);
   letter-spacing: 2px;
 }
 
@@ -617,8 +792,8 @@ body:hover #custom-cursor {
 
 .hero-slide {
   position: absolute;
-  width: 85vw; 
-  height: 45vh; 
+  width: 68vw; 
+  height: 32vh; 
   background-size: cover;
   background-position: center;
   display: flex;
@@ -648,14 +823,13 @@ body:hover #custom-cursor {
 .slide-title {
   position: relative;
   z-index: 2;
-  color: var(--cream-bg);
+  color: var(--white);
   font-family: var(--font-title);
-  font-size: 1.5rem;
-  font-weight: 400;
+  font-size: 1.4rem;
+  font-weight: 700;
   margin-bottom: 2rem;
   opacity: 0.9;
-  text-transform: uppercase;
-  letter-spacing: 2px;
+  transition: opacity 0.3s ease;
 }
 
 /* Indicador de rolagem (Escalado 100% maior para destaque visual) */
@@ -691,6 +865,143 @@ body:hover #custom-cursor {
   60% {
     transform: translateY(-4px);
   }
+}
+
+/* Indicador de Rolagem Mais */
+.hero-scroll-more {
+  position: absolute;
+  bottom: 2rem;
+  right: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--white);
+  z-index: 10;
+  cursor: pointer;
+  opacity: 0.8;
+  transition: var(--transition-smooth);
+  text-decoration: none;
+}
+
+.hero-scroll-more:hover {
+  opacity: 1;
+  transform: translateY(5px);
+}
+
+.scroll-more-text {
+  font-family: var(--font-title);
+  font-style: italic;
+  font-size: 1.2rem;
+  letter-spacing: 1px;
+}
+
+.scroll-more-icon {
+  width: 24px;
+  height: 24px;
+  animation: bounceArrowSmall 2s infinite ease-in-out;
+}
+
+@keyframes bounceArrowSmall {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(6px); }
+}
+
+/* Tooltip 3D e Grayscale (Hero Click Effect) */
+.hero-detail-tooltip {
+  position: absolute;
+  left: 50%;
+  top: 55%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 150;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.hero-detail-tooltip.active {
+  opacity: 1;
+  pointer-events: auto;
+  top: 60%;
+}
+
+.tooltip-connector {
+  width: 4px;
+  height: 60px;
+  overflow: visible;
+  margin-bottom: -10px;
+}
+
+.tooltip-line {
+  stroke: var(--neon-green);
+  stroke-width: 4;
+  stroke-dasharray: 4 4;
+  fill: none;
+  animation: marchDots 1s linear infinite;
+}
+
+@keyframes marchDots {
+  from { stroke-dashoffset: 8; }
+  to { stroke-dashoffset: 0; }
+}
+
+.tooltip-content-card {
+  background: var(--glass-bg-dark);
+  border: 1px solid var(--solar-gold);
+  padding: 1.5rem 2rem;
+  border-radius: 15px;
+  box-shadow: var(--shadow-lg), 0 10px 20px rgba(0,0,0,0.3);
+  text-align: center;
+  max-width: 400px;
+  backdrop-filter: blur(15px);
+  transform-style: preserve-3d;
+  transform: perspective(1000px) translateZ(40px) rotateX(5deg);
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.hero-detail-tooltip.active .tooltip-content-card:hover {
+  border-color: var(--neon-green);
+  box-shadow: var(--shadow-glow);
+  transform: perspective(1000px) translateZ(10px) rotateX(0deg) scale(1.02);
+}
+
+.hero-detail-tooltip.active .tooltip-content-card {
+  transform: perspective(1000px) translateZ(0px) rotateX(0deg);
+}
+
+.tooltip-title {
+  color: var(--forest-green-dark);
+  font-family: var(--font-title);
+  font-size: 1.4rem;
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+}
+
+.tooltip-desc {
+  font-size: 0.95rem;
+  color: var(--text-dark);
+  line-height: 1.5;
+}
+
+.tooltip-more-link {
+  display: inline-block;
+  margin-top: 1rem;
+  font-family: var(--font-title);
+  font-style: italic;
+  color: var(--forest-green);
+  text-decoration: none;
+  font-size: 1.1rem;
+  font-weight: bold;
+  transition: var(--transition-fast);
+}
+
+.tooltip-more-link:hover {
+  color: var(--solar-gold);
+  transform: translateY(2px);
 }
 
 /* ----------------------------------------------------------------
@@ -1667,7 +1978,7 @@ body:hover #custom-cursor {
   max-width: 310px;
 }
 
-.school-card:hover {
+.school-card:hover, .school-card.active {
   background-color: var(--white);
   border-color: var(--solar-gold);
   transform: translateY(-4px) scale(1.02);
@@ -1692,7 +2003,7 @@ body:hover #custom-cursor {
   height: 20px;
 }
 
-.school-card:hover .school-icon {
+.school-card:hover .school-icon, .school-card.active .school-icon {
   background-color: var(--solar-gold);
   color: var(--forest-green-dark);
 }
@@ -2133,9 +2444,21 @@ body:hover #custom-cursor {
   }
   
   .btn-lang {
-    padding: 0.4rem 0.6rem !important;
+    padding: 0 !important;
+    width: 34px !important;
+    height: 34px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
     font-size: 0.82rem !important;
     gap: 0 !important;
+    line-height: 1 !important;
+  }
+  
+  .lang-text {
+    line-height: 1;
+    display: block;
+    margin-top: 2px; /* Slight optical adjustment for better vertical centering */
   }
   
   .btn-nav {
@@ -2162,6 +2485,27 @@ body:hover #custom-cursor {
   
   .hero-subtitle {
     font-size: 1.25rem;
+  }
+  
+  .hero-floating-title {
+    top: 2rem !important;
+  }
+  
+  #hero-lang-toggle {
+    top: calc(2rem + 11px) !important; /* Perfect vertical alignment with the 60px logo */
+    right: 1.2rem !important;
+    width: 38px !important;
+    height: 38px !important;
+    font-size: 0.95rem !important;
+  }
+
+  .hero-logo-large .logo-svg {
+    width: 60px !important;
+    height: 60px !important;
+  }
+
+  .hero-logo-large .logo-text {
+    font-size: 2.1rem !important;
   }
   
   .cta-buttons {
@@ -2953,5 +3297,44 @@ div.desktop-only {
     margin-bottom: 1.8rem !important;
     padding: 0 1rem !important;
     line-height: 1.5 !important;
+  }
+
+  .hero-logo-large .logo-text {
+    font-size: 2.2rem;
+  }
+
+  .hero-logo-large .logo-svg {
+    width: 60px;
+    height: 60px;
+  }
+}
+
+/* Fix responsividade para caber em 1 tela */
+@media (min-width: 769px) {
+  .video-wrapper { max-height: 55vh; }
+  .solarpunk-video { width: 100%; max-height: 55vh; object-fit: cover; }
+  .section-subtitle { margin-bottom: 1rem; }
+  .infinity-container { max-height: 50vh; }
+}
+
+/* Ajustes Mobile Ética, Tooltip e Economia Circular */
+@media (max-width: 768px) {
+  .hero-detail-tooltip { width: 90vw !important; max-width: 350px !important; }
+  .tooltip-content-card { padding: 1rem 1.5rem !important; }
+  .tooltip-title { font-size: 1.2rem !important; }
+  .tooltip-desc { font-size: 0.85rem !important; margin-bottom: 0.5rem !important; }
+  
+  .ethics-card { display: flex !important; flex-direction: column !important; }
+  .ethics-icon { display: block !important; }
+  
+  .economy-nodes-wrapper {
+    display: flex !important;
+    flex-direction: column !important;
+  }
+  .economy-node-card {
+    order: 0;
+  }
+  .economy-node-card.active {
+    order: -1;
   }
 }
